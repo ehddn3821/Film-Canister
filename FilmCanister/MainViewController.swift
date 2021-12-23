@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Log.info("viewDidLoad")
         setupUI()
     }
 }
