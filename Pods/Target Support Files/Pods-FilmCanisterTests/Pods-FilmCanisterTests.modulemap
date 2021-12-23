@@ -1,0 +1,6 @@
+framework module Pods_FilmCanisterTests {
+  umbrella header "Pods-FilmCanisterTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

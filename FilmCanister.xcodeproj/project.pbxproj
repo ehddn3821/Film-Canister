@@ -1,0 +1,770 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		35EDC0BD27749C8E009436FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0BC27749C8E009436FD /* AppDelegate.swift */; };
+		35EDC0BF27749C8E009436FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0BE27749C8E009436FD /* SceneDelegate.swift */; };
+		35EDC0C127749C8E009436FD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0C027749C8E009436FD /* MainViewController.swift */; };
+		35EDC0C627749C90009436FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35EDC0C527749C90009436FD /* Assets.xcassets */; };
+		35EDC0D427749C91009436FD /* FilmCanisterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0D327749C91009436FD /* FilmCanisterTests.swift */; };
+		35EDC0DE27749C91009436FD /* FilmCanisterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0DD27749C91009436FD /* FilmCanisterUITests.swift */; };
+		35EDC0E027749C91009436FD /* FilmCanisterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0DF27749C91009436FD /* FilmCanisterUITestsLaunchTests.swift */; };
+		35EDC0F427749F1C009436FD /* MainViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0F327749F1C009436FD /* MainViewController+UI.swift */; };
+		35EDC0F72774AE20009436FD /* UIColor+HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0F62774AE20009436FD /* UIColor+HexColor.swift */; };
+		35EDC0FB2774AE74009436FD /* UI+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0F92774AE74009436FD /* UI+Color.swift */; };
+		35EDC0FC2774AE74009436FD /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC0FA2774AE74009436FD /* UI.swift */; };
+		4980591E6E577DB9181A20DF /* Pods_FilmCanisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8C4EB975A3E8BDD956F578 /* Pods_FilmCanisterTests.framework */; };
+		5196727A7064E9AD32A09262 /* Pods_FilmCanister_FilmCanisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */; };
+		B163AA608B3356BE8D50CB76 /* Pods_FilmCanister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034E9ACCF263F935405B28AF /* Pods_FilmCanister.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		35EDC0D027749C91009436FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35EDC0B127749C8E009436FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 35EDC0B827749C8E009436FD;
+			remoteInfo = FilmCanister;
+		};
+		35EDC0DA27749C91009436FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35EDC0B127749C8E009436FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 35EDC0B827749C8E009436FD;
+			remoteInfo = FilmCanister;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		034E9ACCF263F935405B28AF /* Pods_FilmCanister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmCanister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D2FA96608237BCA8DD9AD36 /* Pods-FilmCanister-FilmCanisterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanister-FilmCanisterUITests.debug.xcconfig"; path = "Target Support Files/Pods-FilmCanister-FilmCanisterUITests/Pods-FilmCanister-FilmCanisterUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		35EDC0B927749C8E009436FD /* FilmCanister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmCanister.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		35EDC0BC27749C8E009436FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		35EDC0BE27749C8E009436FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		35EDC0C027749C8E009436FD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		35EDC0C527749C90009436FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		35EDC0CA27749C90009436FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35EDC0CF27749C91009436FD /* FilmCanisterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilmCanisterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		35EDC0D327749C91009436FD /* FilmCanisterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCanisterTests.swift; sourceTree = "<group>"; };
+		35EDC0D927749C91009436FD /* FilmCanisterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilmCanisterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		35EDC0DD27749C91009436FD /* FilmCanisterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCanisterUITests.swift; sourceTree = "<group>"; };
+		35EDC0DF27749C91009436FD /* FilmCanisterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCanisterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		35EDC0F327749F1C009436FD /* MainViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+UI.swift"; sourceTree = "<group>"; };
+		35EDC0F62774AE20009436FD /* UIColor+HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexColor.swift"; sourceTree = "<group>"; };
+		35EDC0F92774AE74009436FD /* UI+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UI+Color.swift"; sourceTree = "<group>"; };
+		35EDC0FA2774AE74009436FD /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmCanister_FilmCanisterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63F853F8941AC4479F3B74B5 /* Pods-FilmCanisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.release.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.release.xcconfig"; sourceTree = "<group>"; };
+		7475A9073C58ED7CCBDA1F0C /* Pods-FilmCanisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.debug.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A49ACD2EF8EFAA446420D4A2 /* Pods-FilmCanister.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanister.debug.xcconfig"; path = "Target Support Files/Pods-FilmCanister/Pods-FilmCanister.debug.xcconfig"; sourceTree = "<group>"; };
+		A883BB44C877BFB663533384 /* Pods-FilmCanister.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanister.release.xcconfig"; path = "Target Support Files/Pods-FilmCanister/Pods-FilmCanister.release.xcconfig"; sourceTree = "<group>"; };
+		C64A696CA951C82A0EBBA8A3 /* Pods-FilmCanister-FilmCanisterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanister-FilmCanisterUITests.release.xcconfig"; path = "Target Support Files/Pods-FilmCanister-FilmCanisterUITests/Pods-FilmCanister-FilmCanisterUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CB8C4EB975A3E8BDD956F578 /* Pods_FilmCanisterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmCanisterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		35EDC0B627749C8E009436FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B163AA608B3356BE8D50CB76 /* Pods_FilmCanister.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35EDC0CC27749C91009436FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4980591E6E577DB9181A20DF /* Pods_FilmCanisterTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35EDC0D627749C91009436FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5196727A7064E9AD32A09262 /* Pods_FilmCanister_FilmCanisterUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		35EDC0B027749C8E009436FD = {
+			isa = PBXGroup;
+			children = (
+				35EDC0BB27749C8E009436FD /* FilmCanister */,
+				35EDC0D227749C91009436FD /* FilmCanisterTests */,
+				35EDC0DC27749C91009436FD /* FilmCanisterUITests */,
+				35EDC0BA27749C8E009436FD /* Products */,
+				FFA2140595786F6F5CF57584 /* Pods */,
+				BCA84D2472FDA0C490ADF618 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		35EDC0BA27749C8E009436FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				35EDC0B927749C8E009436FD /* FilmCanister.app */,
+				35EDC0CF27749C91009436FD /* FilmCanisterTests.xctest */,
+				35EDC0D927749C91009436FD /* FilmCanisterUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		35EDC0BB27749C8E009436FD /* FilmCanister */ = {
+			isa = PBXGroup;
+			children = (
+				35EDC0F82774AE67009436FD /* Contants */,
+				35EDC0F52774AE0D009436FD /* Extension */,
+				35EDC0BC27749C8E009436FD /* AppDelegate.swift */,
+				35EDC0BE27749C8E009436FD /* SceneDelegate.swift */,
+				35EDC0C027749C8E009436FD /* MainViewController.swift */,
+				35EDC0F327749F1C009436FD /* MainViewController+UI.swift */,
+				35EDC0C527749C90009436FD /* Assets.xcassets */,
+				35EDC0CA27749C90009436FD /* Info.plist */,
+			);
+			path = FilmCanister;
+			sourceTree = "<group>";
+		};
+		35EDC0D227749C91009436FD /* FilmCanisterTests */ = {
+			isa = PBXGroup;
+			children = (
+				35EDC0D327749C91009436FD /* FilmCanisterTests.swift */,
+			);
+			path = FilmCanisterTests;
+			sourceTree = "<group>";
+		};
+		35EDC0DC27749C91009436FD /* FilmCanisterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				35EDC0DD27749C91009436FD /* FilmCanisterUITests.swift */,
+				35EDC0DF27749C91009436FD /* FilmCanisterUITestsLaunchTests.swift */,
+			);
+			path = FilmCanisterUITests;
+			sourceTree = "<group>";
+		};
+		35EDC0F52774AE0D009436FD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				35EDC0F62774AE20009436FD /* UIColor+HexColor.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		35EDC0F82774AE67009436FD /* Contants */ = {
+			isa = PBXGroup;
+			children = (
+				35EDC0FA2774AE74009436FD /* UI.swift */,
+				35EDC0F92774AE74009436FD /* UI+Color.swift */,
+			);
+			path = Contants;
+			sourceTree = "<group>";
+		};
+		BCA84D2472FDA0C490ADF618 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				034E9ACCF263F935405B28AF /* Pods_FilmCanister.framework */,
+				3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */,
+				CB8C4EB975A3E8BDD956F578 /* Pods_FilmCanisterTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FFA2140595786F6F5CF57584 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A49ACD2EF8EFAA446420D4A2 /* Pods-FilmCanister.debug.xcconfig */,
+				A883BB44C877BFB663533384 /* Pods-FilmCanister.release.xcconfig */,
+				2D2FA96608237BCA8DD9AD36 /* Pods-FilmCanister-FilmCanisterUITests.debug.xcconfig */,
+				C64A696CA951C82A0EBBA8A3 /* Pods-FilmCanister-FilmCanisterUITests.release.xcconfig */,
+				7475A9073C58ED7CCBDA1F0C /* Pods-FilmCanisterTests.debug.xcconfig */,
+				63F853F8941AC4479F3B74B5 /* Pods-FilmCanisterTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		35EDC0B827749C8E009436FD /* FilmCanister */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35EDC0E327749C91009436FD /* Build configuration list for PBXNativeTarget "FilmCanister" */;
+			buildPhases = (
+				73F051E1336AED5E152E2127 /* [CP] Check Pods Manifest.lock */,
+				35EDC0B527749C8E009436FD /* Sources */,
+				35EDC0B627749C8E009436FD /* Frameworks */,
+				35EDC0B727749C8E009436FD /* Resources */,
+				9003FEFA44FC5B1E87572B0B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FilmCanister;
+			productName = FilmCanister;
+			productReference = 35EDC0B927749C8E009436FD /* FilmCanister.app */;
+			productType = "com.apple.product-type.application";
+		};
+		35EDC0CE27749C91009436FD /* FilmCanisterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35EDC0E627749C91009436FD /* Build configuration list for PBXNativeTarget "FilmCanisterTests" */;
+			buildPhases = (
+				C39D7C6BACDD1AD6892A7A54 /* [CP] Check Pods Manifest.lock */,
+				35EDC0CB27749C91009436FD /* Sources */,
+				35EDC0CC27749C91009436FD /* Frameworks */,
+				35EDC0CD27749C91009436FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				35EDC0D127749C91009436FD /* PBXTargetDependency */,
+			);
+			name = FilmCanisterTests;
+			productName = FilmCanisterTests;
+			productReference = 35EDC0CF27749C91009436FD /* FilmCanisterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		35EDC0D827749C91009436FD /* FilmCanisterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35EDC0E927749C91009436FD /* Build configuration list for PBXNativeTarget "FilmCanisterUITests" */;
+			buildPhases = (
+				E8BE1723F4B39272E3EEDA29 /* [CP] Check Pods Manifest.lock */,
+				35EDC0D527749C91009436FD /* Sources */,
+				35EDC0D627749C91009436FD /* Frameworks */,
+				35EDC0D727749C91009436FD /* Resources */,
+				71E1DE2770FA4474DBFBC0D7 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				35EDC0DB27749C91009436FD /* PBXTargetDependency */,
+			);
+			name = FilmCanisterUITests;
+			productName = FilmCanisterUITests;
+			productReference = 35EDC0D927749C91009436FD /* FilmCanisterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		35EDC0B127749C8E009436FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					35EDC0B827749C8E009436FD = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					35EDC0CE27749C91009436FD = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 35EDC0B827749C8E009436FD;
+					};
+					35EDC0D827749C91009436FD = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 35EDC0B827749C8E009436FD;
+					};
+				};
+			};
+			buildConfigurationList = 35EDC0B427749C8E009436FD /* Build configuration list for PBXProject "FilmCanister" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 35EDC0B027749C8E009436FD;
+			productRefGroup = 35EDC0BA27749C8E009436FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				35EDC0B827749C8E009436FD /* FilmCanister */,
+				35EDC0CE27749C91009436FD /* FilmCanisterTests */,
+				35EDC0D827749C91009436FD /* FilmCanisterUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		35EDC0B727749C8E009436FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35EDC0C627749C90009436FD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35EDC0CD27749C91009436FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35EDC0D727749C91009436FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		71E1DE2770FA4474DBFBC0D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FilmCanister-FilmCanisterUITests/Pods-FilmCanister-FilmCanisterUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FilmCanister-FilmCanisterUITests/Pods-FilmCanister-FilmCanisterUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FilmCanister-FilmCanisterUITests/Pods-FilmCanister-FilmCanisterUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73F051E1336AED5E152E2127 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FilmCanister-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9003FEFA44FC5B1E87572B0B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FilmCanister/Pods-FilmCanister-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FilmCanister/Pods-FilmCanister-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FilmCanister/Pods-FilmCanister-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C39D7C6BACDD1AD6892A7A54 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FilmCanisterTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8BE1723F4B39272E3EEDA29 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FilmCanister-FilmCanisterUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		35EDC0B527749C8E009436FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35EDC0C127749C8E009436FD /* MainViewController.swift in Sources */,
+				35EDC0FC2774AE74009436FD /* UI.swift in Sources */,
+				35EDC0BD27749C8E009436FD /* AppDelegate.swift in Sources */,
+				35EDC0BF27749C8E009436FD /* SceneDelegate.swift in Sources */,
+				35EDC0F72774AE20009436FD /* UIColor+HexColor.swift in Sources */,
+				35EDC0F427749F1C009436FD /* MainViewController+UI.swift in Sources */,
+				35EDC0FB2774AE74009436FD /* UI+Color.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35EDC0CB27749C91009436FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35EDC0D427749C91009436FD /* FilmCanisterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35EDC0D527749C91009436FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35EDC0DE27749C91009436FD /* FilmCanisterUITests.swift in Sources */,
+				35EDC0E027749C91009436FD /* FilmCanisterUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		35EDC0D127749C91009436FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 35EDC0B827749C8E009436FD /* FilmCanister */;
+			targetProxy = 35EDC0D027749C91009436FD /* PBXContainerItemProxy */;
+		};
+		35EDC0DB27749C91009436FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 35EDC0B827749C8E009436FD /* FilmCanister */;
+			targetProxy = 35EDC0DA27749C91009436FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		35EDC0E127749C91009436FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		35EDC0E227749C91009436FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		35EDC0E427749C91009436FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A49ACD2EF8EFAA446420D4A2 /* Pods-FilmCanister.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LT5ZADXQMP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FilmCanister/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Film Canister";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwkang.FilmCanister;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		35EDC0E527749C91009436FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A883BB44C877BFB663533384 /* Pods-FilmCanister.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LT5ZADXQMP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FilmCanister/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Film Canister";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwkang.FilmCanister;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		35EDC0E727749C91009436FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7475A9073C58ED7CCBDA1F0C /* Pods-FilmCanisterTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LT5ZADXQMP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwkang.FilmCanisterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilmCanister.app/FilmCanister";
+			};
+			name = Debug;
+		};
+		35EDC0E827749C91009436FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63F853F8941AC4479F3B74B5 /* Pods-FilmCanisterTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LT5ZADXQMP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwkang.FilmCanisterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilmCanister.app/FilmCanister";
+			};
+			name = Release;
+		};
+		35EDC0EA27749C91009436FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D2FA96608237BCA8DD9AD36 /* Pods-FilmCanister-FilmCanisterUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LT5ZADXQMP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwkang.FilmCanisterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FilmCanister;
+			};
+			name = Debug;
+		};
+		35EDC0EB27749C91009436FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C64A696CA951C82A0EBBA8A3 /* Pods-FilmCanister-FilmCanisterUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LT5ZADXQMP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwkang.FilmCanisterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FilmCanister;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		35EDC0B427749C8E009436FD /* Build configuration list for PBXProject "FilmCanister" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35EDC0E127749C91009436FD /* Debug */,
+				35EDC0E227749C91009436FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		35EDC0E327749C91009436FD /* Build configuration list for PBXNativeTarget "FilmCanister" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35EDC0E427749C91009436FD /* Debug */,
+				35EDC0E527749C91009436FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		35EDC0E627749C91009436FD /* Build configuration list for PBXNativeTarget "FilmCanisterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35EDC0E727749C91009436FD /* Debug */,
+				35EDC0E827749C91009436FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		35EDC0E927749C91009436FD /* Build configuration list for PBXNativeTarget "FilmCanisterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35EDC0EA27749C91009436FD /* Debug */,
+				35EDC0EB27749C91009436FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 35EDC0B127749C8E009436FD /* Project object */;
+}
