@@ -7,13 +7,11 @@
 import UIKit
 
 struct UI {
-    static let dynamicWidth = UIScreen.main.bounds.width * 0.43
-    static let dynamicHeight = (UIScreen.main.bounds.width * 0.43) * 1.3
-    static var safeTopArea: CGFloat {
+    static var SAFE_AREA_TOP: CGFloat {
         get {
             var area: CGFloat = 0
             if #available(iOS 11.0, *) {
-                let window = UIApplication.shared.keyWindow
+                let window = UIApplication.shared.windows.first { $0.isKeyWindow }
                 if let padding = window?.safeAreaInsets.top {
                     area = padding
                 }
@@ -29,11 +27,11 @@ struct UI {
         }
     }
     
-    static var safeBottomArea: CGFloat {
+    static var SAFE_AREA_BOTTOM: CGFloat {
         get {
             var area: CGFloat = 0
             if #available(iOS 11.0, *) {
-                let window = UIApplication.shared.keyWindow
+                let window = UIApplication.shared.windows.first { $0.isKeyWindow }
                 if let padding = window?.safeAreaInsets.bottom {
                     area = padding
                 }
@@ -49,11 +47,11 @@ struct UI {
         }
     }
     
-    static var safeLeftArea: CGFloat {
+    static var SAFE_AREA_LEFT: CGFloat {
         get {
             var area: CGFloat = 0
             if #available(iOS 11.0, *) {
-                let window = UIApplication.shared.keyWindow
+                let window = UIApplication.shared.windows.first { $0.isKeyWindow }
                 if let padding = window?.safeAreaInsets.left {
                     area = padding
                 }

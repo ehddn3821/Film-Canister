@@ -7,9 +7,9 @@
 import Foundation
 
 extension UI {
-    enum HexColor : String {
+    enum HEX_COLOR : String {
         case mainText = "#1B1E25"
-        case mainBackground = "#E5E5E5"
+        case mainBackground = "#F9F9FA"
         case secondary = "#7581A6"
     }
 }

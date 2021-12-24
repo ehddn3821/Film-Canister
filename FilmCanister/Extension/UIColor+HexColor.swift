@@ -6,7 +6,7 @@
 
 import UIKit
 extension UIColor {
-    convenience init(hexColor: UI.HexColor, alpha: CGFloat = 1.0) {
+    convenience init(hexColor: UI.HEX_COLOR, alpha: CGFloat = 1.0) {
         
         if hexColor.rawValue.hasPrefix("#") {
             let start = hexColor.rawValue.index(hexColor.rawValue.startIndex, offsetBy: 1)
