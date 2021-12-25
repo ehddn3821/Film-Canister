@@ -13,18 +13,10 @@ class AddSampleCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setup() {
         contentView.backgroundColor = .systemBackground
         
         contentView.addSubview(addImageBtn)
-        addImageBtn.setImage(UIImage(named: "addImage"), for: .normal)
+        addImageBtn.setImage(UIImage(named: "add_image"), for: .normal)
         addImageBtn.snp.makeConstraints { make in
             make.size.equalTo(88)
             make.top.equalTo(16)
@@ -38,5 +30,9 @@ class AddSampleCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(16)
             make.bottom.equalTo(-16)
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

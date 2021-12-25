@@ -9,6 +9,7 @@ import SnapKit
 
 @objc protocol BaseViewControllerCustomizable {
     @objc optional func setupUI()
+    @objc optional func btnActions()
 }
 
 class BaseViewController: UIViewController {
@@ -25,6 +26,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         Log.info("\(type(of: self)): viewDidLoad")
         _setupViews()
+        _setupActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,5 +64,8 @@ class BaseViewController: UIViewController {
 extension BaseViewController: BaseViewControllerCustomizable {
     fileprivate func _setupViews() {
         (self as BaseViewControllerCustomizable).setupUI?()
+    }
+    fileprivate func _setupActions() {
+        (self as BaseViewControllerCustomizable).btnActions?()
     }
 }

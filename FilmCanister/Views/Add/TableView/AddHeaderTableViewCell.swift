@@ -12,14 +12,6 @@ class AddHeaderTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setup() {
         contentView.backgroundColor = .init(named: Constants.COLOR_MAIN_BACKGROUND)
         
         contentView.addSubview(titleLB)
@@ -31,5 +23,9 @@ class AddHeaderTableViewCell: UITableViewCell {
             make.trailing.equalTo(-16)
             make.bottom.equalTo(-17)
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

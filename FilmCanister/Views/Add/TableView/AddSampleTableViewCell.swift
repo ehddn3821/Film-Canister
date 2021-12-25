@@ -27,21 +27,11 @@ class AddSampleTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setup() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        photoPicker.delegate = self
-        
         collectionView.register(AddSampleCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cvCell")
         
+        photoPicker.delegate = self
         photoPicker.sourceType = .photoLibrary
         
         contentView.backgroundColor = .systemBackground
@@ -51,6 +41,10 @@ class AddSampleTableViewCell: UITableViewCell {
             make.height.equalTo(120)
             make.edges.equalToSuperview()
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

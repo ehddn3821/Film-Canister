@@ -15,9 +15,10 @@ struct Constants {
     
     // Color
     static let COLOR_SECONDARY = "secondary"
-    static let COLOR_MAIN_TEXT = "mainText"
-    static let COLOR_MAIN_BACKGROUND = "mainBackground"
-    static let COLOR_DIVIDE = "divide"
+    static let COLOR_MAIN_TEXT = "main_text"
+    static let COLOR_MAIN_BACKGROUND = "main_background"
+    static let COLOR_DIVIDER = "divider"
     static let COLOR_ENABLE = "enable"
     static let COLOR_DISABLE = "disable"
+    static let COLOR_MEMO_BORDER = "memo_border"
 }

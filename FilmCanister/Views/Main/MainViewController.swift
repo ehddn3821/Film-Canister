@@ -22,20 +22,19 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideIntro()
-        btnActions()
     }
     
     private func hideIntro() {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
             UIView.animate(withDuration: 0.3, animations: {
                 self.introView.alpha = 0
-            }) { (finished) in
+            }) { finished in
                 self.introView.isHidden = finished
             }
         }
     }
     
-    private func btnActions() {
+    func btnActions() {
         customNavigationBar.rightBtn.rx.tap
             .bind { [weak self] _ in
                 guard let this = self else { return }

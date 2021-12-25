@@ -8,7 +8,7 @@
 import UIKit
 
 class AddViewController: CustomNavigationBarViewController<UIView> {
-    let headerList = ["Title", "Sample", "Setting", "Memo"]
+    let headerList = ["Name", "Sample", "Setting", "Memo"]
     
     //MARK: - UI Propertys
     let tableView = UITableView()
@@ -18,9 +18,12 @@ class AddViewController: CustomNavigationBarViewController<UIView> {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AddHeaderTableViewCell.classForCoder(), forCellReuseIdentifier: "headerCell")
-        tableView.register(AddTitleTableViewCell.classForCoder(), forCellReuseIdentifier: "titleCell")
+        tableView.register(AddNameTableViewCell.classForCoder(), forCellReuseIdentifier: "nameCell")
         tableView.register(AddSampleTableViewCell.classForCoder(), forCellReuseIdentifier: "sampleCell")
+        tableView.register(AddSettingTableViewCell.classForCoder(), forCellReuseIdentifier: "settingCell")
+        tableView.register(AddMemoTableViewCell.classForCoder(), forCellReuseIdentifier: "memoCell")
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
     }
 }
 
@@ -52,9 +55,13 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             switch indexPath.section {
             case 0:
-                return tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as! AddTitleTableViewCell
+                return tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath) as! AddNameTableViewCell
             case 1:
                 return tableView.dequeueReusableCell(withIdentifier: "sampleCell", for: indexPath) as! AddSampleTableViewCell
+            case 2:
+                return tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! AddSettingTableViewCell
+            case 3:
+                return tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! AddMemoTableViewCell
             default:
                 return UITableViewCell()
             }

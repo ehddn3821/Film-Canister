@@ -45,7 +45,7 @@ class CustomNavigationBarViewController<T: UIView>: BaseViewController, Navigati
             make.leading.top.trailing.equalToSuperview()
         }
         
-        dividingLineView.backgroundColor = .init(named: Constants.COLOR_DIVIDE)
+        dividingLineView.backgroundColor = .init(named: Constants.COLOR_DIVIDER)
         dividingLineView.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.leading.trailing.equalToSuperview()
