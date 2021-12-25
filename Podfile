@@ -10,6 +10,7 @@ target 'FilmCanister' do
 	pod 'RxSwift', '6.2.0'
 	pod 'RxCocoa', '6.2.0'
 	pod 'IQKeyboardManagerSwift'
+	pod 'RealmSwift', '~>10'
 
   target 'FilmCanisterTests' do
     inherit! :search_paths

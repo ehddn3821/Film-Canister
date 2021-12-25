@@ -56,6 +56,11 @@ extension MainViewController {
         
         
         //MARK: - Body
+        bodyView.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         bodyView.addSubview(filmIV)
         bodyView.addSubview(emptySimulLB)
         
@@ -80,12 +85,12 @@ extension MainViewController {
 }
 
 
-#if DEBUG
-import SwiftUI
-@available(iOS 13, *)
-struct Preview: PreviewProvider {
-    static var previews: some View {
-        MainViewController().toPreview()
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//@available(iOS 13, *)
+//struct Preview: PreviewProvider {
+//    static var previews: some View {
+//        MainViewController().toPreview()
+//    }
+//}
+//#endif

@@ -12,34 +12,23 @@ import RxSwift
 class AddSettingModalViewController: BaseViewController {
     let bag = DisposeBag()
     let tapGesture = UITapGestureRecognizer()
-    var isSelectedItem = BehaviorSubject<String>(value: "")
-    
-    let filmSimulationList = [ "Provia",
-                               "Velvia",
-                               "Astia",
-                               "Classic Chrome",
-                               "PRO Neg.Hi",
-                               "Pro Neg. Std",
-                               "Classic Neg.",
-                               "Eterna",
-                               "Eterna Blenach Bypass",
-                               "Nostalgic Neg.",
-                               "Acros STD",
-                               "Acros Ye",
-                               "Acros R",
-                               "Acros G",
-                               "Monocrhome STD",
-                               "Monocrhome Ye",
-                               "Monocrhome R",
-                               "Monocrhome G",
-                               "Sepia" ]
     
     var selectedItem = PublishSubject<String>()
+    var settingList: [String] = []
     
     let dimmedView = UIView()
     let modalView = UIView()
     let tableView = UITableView()
     
+    
+    init(settingList: [String]) {
+        super.init()
+        self.settingList = settingList
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +50,13 @@ class AddSettingModalViewController: BaseViewController {
         modalView.layer.cornerRadius = 16
         modalView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
+            if settingList.count == 3 {
+                make.height.equalTo(272)
+            } else if settingList.count == 4 {
+                make.height.equalTo(340)
+            } else {
+                make.height.equalToSuperview().dividedBy(2)
+            }
         }
         
         modalView.addSubview(tableView)
@@ -100,12 +95,12 @@ class AddSettingModalViewController: BaseViewController {
 
 extension AddSettingModalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filmSimulationList.count
+        return settingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "modalCell", for: indexPath) as! AddSettingModalTableViewCell
-        cell.nameLB.text = filmSimulationList[indexPath.row]
+        cell.nameLB.text = settingList[indexPath.row]
         return cell
     }
     
@@ -114,7 +109,7 @@ extension AddSettingModalViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedItem.onNext(filmSimulationList[indexPath.row])
+        selectedItem.onNext(settingList[indexPath.row])
         dismissView()
     }
 }

@@ -6,9 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+import RealmSwift
 
 class AddViewController: CustomNavigationBarViewController<UIView> {
+    let bag = DisposeBag()
+    var realm = try! Realm()
+    
     let headerList = ["Name", "Sample", "Setting", "Memo"]
+    
     
     //MARK: - UI Propertys
     let tableView = UITableView()
@@ -24,6 +30,29 @@ class AddViewController: CustomNavigationBarViewController<UIView> {
         tableView.register(AddMemoTableViewCell.classForCoder(), forCellReuseIdentifier: "memoCell")
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
+    }
+    
+    func btnActions() {
+        customNavigationBar.rightBtn.rx.tap
+            .bind { [weak self] _ in
+                guard let this = self else { return }
+                let index = IndexPath(row: 1, section: 0)
+                let cell = this.tableView.cellForRow(at: index) as! AddNameTableViewCell
+                if let id = this.realm.objects(RecipeModel.self).last?.id {
+                    let recipe = RecipeModel(id: id + 1, name: cell.nameTextField.text!)
+                    try! this.realm.write {
+                        this.realm.add(recipe)
+                    }
+                    this.navigationController?.popViewController(animated: true)
+                } else {
+                    let recipe = RecipeModel(id: 0, name: cell.nameTextField.text!)
+                    try! this.realm.write {
+                        this.realm.add(recipe)
+                    }
+                    this.navigationController?.popViewController(animated: true)
+                }
+                
+            }.disposed(by: bag)
     }
 }
 

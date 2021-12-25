@@ -27,6 +27,115 @@ class AddSettingTableViewCell: UITableViewCell {
                         "Blue",
                         "Exposure Compensation" ]
     
+    let filmSimulationList = [ "Provia","Velvia","Astia","Classic Chrome","PRO Neg.Hi","Pro Neg. Std",
+                               "Classic Neg.","Eterna","Eterna Blenach Bypass","Nostalgic Neg.",
+                               "Acros STD","Acros Ye","Acros R","Acros G","Monocrhome STD","Monocrhome Ye",
+                               "Monocrhome R","Monocrhome G","Sepia" ]
+    
+    let dynamicRangeList = [ "Auto",
+                             "DR400",
+                             "DR200",
+                             "DR100" ]
+    
+    let highlightShadowList = [ "+4",
+                                "+3.5",
+                                "+3",
+                                "+2.5",
+                                "+2",
+                                "+1.5",
+                                "+1",
+                                "+0.5",
+                                "0",
+                                "-0.5",
+                                "-1",
+                                "-1.5",
+                                "-2" ]
+    
+    let colorNoiseSharpList = [ "+4",
+                                "+3",
+                                "+2",
+                                "+1",
+                                "0",
+                                "-1",
+                                "-2",
+                                "-3",
+                                "-4" ]
+    
+    let clarityList = [ "+5",
+                        "+4",
+                        "+3",
+                        "+2",
+                        "+1",
+                        "0",
+                        "-1",
+                        "-2",
+                        "-3",
+                        "-4",
+                        "+5" ]
+    
+    let grainEfectList = [ "Off",
+                           "Weak / Small",
+                           "Weak / Large",
+                           "Strong / Small",
+                           "Strong / Large" ]
+    
+    let colorChromeEfectList = [ "Off",
+                                 "Weak",
+                                 "Strong" ]
+    
+    let whiteBalanceList = [ "Auto",
+                             "Auto White",
+                             "Auto Ambience",
+                             "K",
+                             "Daylight",
+                             "Shade",
+                             "Fluorescent 1",
+                             "Fluorescent 2",
+                             "Fluorescent 3",
+                             "Incandescent",
+                             "Under Water" ]
+    
+    let redBlueList = [ "+9",
+                        "+8",
+                        "+7",
+                        "+6",
+                        "+5",
+                        "+4",
+                        "+3",
+                        "+2",
+                        "+1",
+                        "0",
+                        "-1",
+                        "-2",
+                        "-3",
+                        "-4",
+                        "-5",
+                        "-6",
+                        "-7",
+                        "-8",
+                        "-9" ]
+    
+    let exposureList = [ "+3.0",
+                         "+2.6",
+                         "+2.3",
+                         "+2.0",
+                         "+1.6",
+                         "+1.3",
+                         "+1.0",
+                         "+2",
+                         "+0.6",
+                         "+0.3",
+                         "0",
+                         "-0.3",
+                         "-0.6",
+                         "-1",
+                         "-1.3",
+                         "-1.6",
+                         "-2",
+                         "-2.3",
+                         "-2.6",
+                         "-3.0" ]
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -256,29 +365,96 @@ class AddSettingTableViewCell: UITableViewCell {
                 guard let this = self else { return }
                 
                 let topVC = UIApplication.topViewController()
-                let modalVC = AddSettingModalViewController()
-                modalVC.modalPresentationStyle = .overFullScreen
                 
                 if name == this.settingList[0] {
+                    let modalVC = AddSettingModalViewController(settingList: this.filmSimulationList)
+                    modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
                         .subscribe(onNext: { itemName in
                             valueLB.text = itemName
                     }).disposed(by: this.bag)
+                    
                 } else if name == this.settingList[1] {
-                } else if name == this.settingList[2] {
-                } else if name == this.settingList[3] {
-                } else if name == this.settingList[4] {
-                } else if name == this.settingList[5] {
-                } else if name == this.settingList[6] {
+                    let modalVC = AddSettingModalViewController(settingList: this.dynamicRangeList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+                    
+                } else if name == this.settingList[2] || name == this.settingList[3] {
+                    let modalVC = AddSettingModalViewController(settingList: this.highlightShadowList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+                    
+                } else if name == this.settingList[4] || name == this.settingList[5] || name == this.settingList[6] {
+                    let modalVC = AddSettingModalViewController(settingList: this.colorNoiseSharpList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+                    
                 } else if name == this.settingList[7] {
+                    let modalVC = AddSettingModalViewController(settingList: this.clarityList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+                    
                 } else if name == this.settingList[8] {
-                } else if name == this.settingList[9] {
-                } else if name == this.settingList[10] {
+                    let modalVC = AddSettingModalViewController(settingList: this.grainEfectList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+                    
+                } else if name == this.settingList[9] || name == this.settingList[10] {
+                    let modalVC = AddSettingModalViewController(settingList: this.colorChromeEfectList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+                    
                 } else if name == this.settingList[11] {
-                } else if name == this.settingList[12] {
-                } else if name == this.settingList[13] {
+                    let modalVC = AddSettingModalViewController(settingList: this.whiteBalanceList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+                    
+                } else if name == this.settingList[12] || name == this.settingList[13] {
+                    let modalVC = AddSettingModalViewController(settingList: this.redBlueList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
+
                 } else {
+                    let modalVC = AddSettingModalViewController(settingList: this.exposureList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            valueLB.text = itemName
+                    }).disposed(by: this.bag)
                     
                 }
             }.disposed(by: bag)
