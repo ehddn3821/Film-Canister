@@ -31,7 +31,7 @@ class AddMemoTableViewCell: UITableViewCell {
         memoView.addSubview(memoTextView)
         memoTextView.font = .init(name: Constants.MAIN_FONT_REGULAR, size: 14)
         memoTextView.text = "Please enter memo"
-        memoTextView.textColor = .init(hexColor: "#CCD3E5")
+        memoTextView.textColor = .init(named: Constants.COLOR_DISABLE)
         memoTextView.snp.makeConstraints { make in
             make.leading.equalTo(14)
             make.top.equalTo(10)
@@ -69,7 +69,7 @@ extension AddMemoTableViewCell: UITextViewDelegate {
             memoTextView.textColor = .init(named: Constants.COLOR_MAIN_TEXT)
         } else if memoTextView.text == "" {
             memoTextView.text = "Please enter memo"
-            memoTextView.textColor = .init(hexColor: "#CCD3E5")
+            memoTextView.textColor = .init(named: Constants.COLOR_DISABLE)
         }
     }
 }

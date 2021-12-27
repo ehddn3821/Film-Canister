@@ -76,7 +76,26 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
         cell.nameLB.text = realm.objects(RecipeModel.self)[indexPath.row].name
+        cell.simulNameLB.text = realm.objects(RecipeModel.self)[indexPath.row].simulName
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let recipe = realm.objects(RecipeModel.self)[indexPath.row]
+            try! realm.write {
+                Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
+                realm.delete(recipe)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.viewWillAppear(false)
+                }
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
 

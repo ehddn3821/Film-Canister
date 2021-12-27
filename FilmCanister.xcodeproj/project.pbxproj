@@ -41,6 +41,7 @@
 		35EDC14127779E38009436FD /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14027779E38009436FD /* RecipeModel.swift */; };
 		35EDC14427779FAC009436FD /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14327779FAC009436FD /* MainTableViewCell.swift */; };
 		35EDC1462777AEBB009436FD /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC1452777AEBB009436FD /* UITextField+Padding.swift */; };
+		35EDC1482779E8A9009436FD /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC1472779E8A9009436FD /* DetailImageViewController.swift */; };
 		4980591E6E577DB9181A20DF /* Pods_FilmCanisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8C4EB975A3E8BDD956F578 /* Pods_FilmCanisterTests.framework */; };
 		5196727A7064E9AD32A09262 /* Pods_FilmCanister_FilmCanisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */; };
 		B163AA608B3356BE8D50CB76 /* Pods_FilmCanister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034E9ACCF263F935405B28AF /* Pods_FilmCanister.framework */; };
@@ -104,6 +105,7 @@
 		35EDC14027779E38009436FD /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		35EDC14327779FAC009436FD /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		35EDC1452777AEBB009436FD /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
+		35EDC1472779E8A9009436FD /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
 		3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmCanister_FilmCanisterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F853F8941AC4479F3B74B5 /* Pods-FilmCanisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.release.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		7475A9073C58ED7CCBDA1F0C /* Pods-FilmCanisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.debug.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				35EDC0BE27749C8E009436FD /* SceneDelegate.swift */,
 				35EDC0C527749C90009436FD /* Assets.xcassets */,
 				35EDC0CA27749C90009436FD /* Info.plist */,
+				35EDC13F27779E2D009436FD /* Model */,
 				35EDC1052775492B009436FD /* Views */,
 				35EDC10427754918009436FD /* Custom */,
 				35EDC0FD2774B1F0009436FD /* Utils */,
@@ -239,9 +242,9 @@
 		35EDC1052775492B009436FD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35EDC13F27779E2D009436FD /* Model */,
 				35EDC1122775914A009436FD /* Main */,
 				35EDC11E2775B6B6009436FD /* Add */,
+				35EDC1472779E8A9009436FD /* DetailImageViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				35EDC12C2776C98C009436FD /* AddSettingTableViewCell.swift in Sources */,
 				35EDC1252775F80B009436FD /* AddSampleTableViewCell.swift in Sources */,
 				35EDC136277707D1009436FD /* AddMemoTableViewCell.swift in Sources */,
+				35EDC1482779E8A9009436FD /* DetailImageViewController.swift in Sources */,
 				35EDC10727754957009436FD /* BaseViewController.swift in Sources */,
 				35EDC0F72774AE20009436FD /* UIColor+HexColor.swift in Sources */,
 				35EDC109277558AB009436FD /* BaseNavigationBar.swift in Sources */,
@@ -764,7 +768,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LT5ZADXQMP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;
@@ -796,7 +800,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LT5ZADXQMP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;

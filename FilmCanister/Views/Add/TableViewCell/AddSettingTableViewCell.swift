@@ -11,6 +11,8 @@ import RxSwift
 class AddSettingTableViewCell: UITableViewCell {
     let bag = DisposeBag()
     
+    var selectedSimul = "Provia"
+    
     let settingList = [ "Film Simulation",
                         "Dynamic Range",
                         "Highlight",
@@ -373,6 +375,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     modalVC.selectedItem
                         .subscribe(onNext: { itemName in
                             valueLB.text = itemName
+                            this.selectedSimul = itemName
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[1] {

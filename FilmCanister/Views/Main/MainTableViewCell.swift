@@ -9,6 +9,7 @@ import UIKit
 
 class MainTableViewCell: UITableViewCell {
     let nameLB = UILabel()
+    let simulNameLB = UILabel()
     let divideView = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -20,10 +21,19 @@ class MainTableViewCell: UITableViewCell {
         nameLB.textColor = .init(named: Constants.COLOR_MAIN_TEXT)
         nameLB.font = .init(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
         nameLB.snp.makeConstraints { make in
+            make.height.equalTo(22)
             make.leading.equalToSuperview().offset(16)
             make.top.equalTo(18)
             make.trailing.equalTo(-108)
-            make.bottom.equalTo(-40)
+        }
+        
+        contentView.addSubview(simulNameLB)
+        simulNameLB.textColor = .init(named: Constants.COLOR_SECONDARY)
+        simulNameLB.font = .init(name: Constants.MAIN_FONT_REGULAR, size: 11)
+        simulNameLB.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.leading.equalToSuperview().offset(17)
+            make.top.equalTo(nameLB.snp.bottom).offset(2)
         }
         
         contentView.addSubview(divideView)

@@ -36,21 +36,17 @@ class AddViewController: CustomNavigationBarViewController<UIView> {
         customNavigationBar.rightBtn.rx.tap
             .bind { [weak self] _ in
                 guard let this = self else { return }
-                let index = IndexPath(row: 1, section: 0)
-                let cell = this.tableView.cellForRow(at: index) as! AddNameTableViewCell
-                if let id = this.realm.objects(RecipeModel.self).last?.id {
-                    let recipe = RecipeModel(id: id + 1, name: cell.nameTextField.text!)
-                    try! this.realm.write {
-                        this.realm.add(recipe)
-                    }
-                    this.navigationController?.popViewController(animated: true)
-                } else {
-                    let recipe = RecipeModel(id: 0, name: cell.nameTextField.text!)
-                    try! this.realm.write {
-                        this.realm.add(recipe)
-                    }
-                    this.navigationController?.popViewController(animated: true)
+                let nameCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! AddNameTableViewCell
+                let simulCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as! AddSettingTableViewCell
+                let id = UInt64((Date().timeIntervalSince1970) * 1000)
+                let recipe = RecipeModel(id: Int(id),
+                                         name: nameCell.nameTextField.text!,
+                                         simulName: simulCell.selectedSimul)
+                try! this.realm.write {
+                    this.realm.add(recipe)
+                    Log.info("Recipe [ \(nameCell.nameTextField.text!) ] 추가 완료")
                 }
+                this.navigationController?.popViewController(animated: true)
                 
             }.disposed(by: bag)
     }

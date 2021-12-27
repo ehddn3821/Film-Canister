@@ -70,19 +70,15 @@ extension AddSampleTableViewCell: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvCell", for: indexPath) as! AddSampleCollectionViewCell
         if indexPath.row == 0 {
-            cell.addImageBtn.isHidden = false
-            cell.selectedIV.isHidden = true
-            cell.addImageBtn.rx.tap
-                .bind { [weak self] _ in
-                    guard let this = self else { return }
-                    let topVC = UIApplication.topViewController()
-                    topVC?.present(this.photoPicker, animated: true, completion: nil)
-                }.disposed(by: bag)
+            cell.addIV.image = .init(named: "add_image")
+            cell.removeBtn.isHidden = true
         } else {
             if !selectedImageList.isEmpty {
-                cell.selectedIV.image = selectedImageList[indexPath.row - 1]
-                cell.addImageBtn.isHidden = true
-                cell.selectedIV.isHidden = false
+                cell.addIV.image = selectedImageList[indexPath.row - 1]
+                cell.removeBtn.isHidden = false
+                cell.removeBtn.tag = indexPath.row
+                cell.removeBtn.addTarget(self, action: #selector(deleteCell(sender:)), for: .touchUpInside)
+                
             }
         }
         return cell
@@ -90,5 +86,19 @@ extension AddSampleTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 88, height: 120)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let topVC = UIApplication.topViewController()
+        if indexPath.row == 0 {  // Sample 추가 버튼
+            topVC?.present(photoPicker, animated: true, completion: nil)
+        } else {  // Detail image view
+            topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: selectedImageList[indexPath.row - 1]), animated: true)
+        }
+    }
+    
+    @objc func deleteCell(sender: UIButton) {
+        selectedImageList.remove(at: sender.tag - 1)
+        collectionView.deleteItems(at: [IndexPath(row: sender.tag, section: 0)])
     }
 }
