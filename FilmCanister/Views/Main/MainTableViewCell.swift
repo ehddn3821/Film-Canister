@@ -10,6 +10,8 @@ import UIKit
 class MainTableViewCell: UITableViewCell {
     let nameLB = UILabel()
     let simulNameLB = UILabel()
+    let sampleIV = UIImageView()
+    let nextIV = UIImageView()
     let divideView = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -34,6 +36,24 @@ class MainTableViewCell: UITableViewCell {
             make.height.equalTo(20)
             make.leading.equalToSuperview().offset(17)
             make.top.equalTo(nameLB.snp.bottom).offset(2)
+        }
+        
+        contentView.addSubview(sampleIV)
+        sampleIV.contentMode = .scaleAspectFill
+        sampleIV.clipsToBounds = true
+        sampleIV.layer.cornerRadius = 12
+        sampleIV.snp.makeConstraints { make in
+            make.size.equalTo(48)
+            make.trailing.equalTo(-48)
+            make.centerY.equalToSuperview()
+        }
+        
+        contentView.addSubview(nextIV)
+        nextIV.image = .init(named: "next")
+        nextIV.snp.makeConstraints { make in
+            make.size.equalTo(24)
+            make.trailing.equalTo(-16)
+            make.centerY.equalToSuperview()
         }
         
         contentView.addSubview(divideView)

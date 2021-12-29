@@ -42,6 +42,7 @@
 		35EDC14427779FAC009436FD /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14327779FAC009436FD /* MainTableViewCell.swift */; };
 		35EDC1462777AEBB009436FD /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC1452777AEBB009436FD /* UITextField+Padding.swift */; };
 		35EDC1482779E8A9009436FD /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC1472779E8A9009436FD /* DetailImageViewController.swift */; };
+		35EDC14A277C863B009436FD /* RealmImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC149277C863B009436FD /* RealmImageManager.swift */; };
 		4980591E6E577DB9181A20DF /* Pods_FilmCanisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8C4EB975A3E8BDD956F578 /* Pods_FilmCanisterTests.framework */; };
 		5196727A7064E9AD32A09262 /* Pods_FilmCanister_FilmCanisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */; };
 		B163AA608B3356BE8D50CB76 /* Pods_FilmCanister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034E9ACCF263F935405B28AF /* Pods_FilmCanister.framework */; };
@@ -106,6 +107,7 @@
 		35EDC14327779FAC009436FD /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		35EDC1452777AEBB009436FD /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
 		35EDC1472779E8A9009436FD /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
+		35EDC149277C863B009436FD /* RealmImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmImageManager.swift; sourceTree = "<group>"; };
 		3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmCanister_FilmCanisterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F853F8941AC4479F3B74B5 /* Pods-FilmCanisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.release.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		7475A9073C58ED7CCBDA1F0C /* Pods-FilmCanisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.debug.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				35EDC11527759F67009436FD /* Font */,
 				35EDC0FE2774B214009436FD /* OSLog.swift */,
 				35EDC0FF2774B214009436FD /* PreViews.swift */,
+				35EDC149277C863B009436FD /* RealmImageManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				35EDC11127758E83009436FD /* AddViewController+UI.swift in Sources */,
 				35EDC10D27756DB6009436FD /* CommonConstants.swift in Sources */,
 				35EDC0C127749C8E009436FD /* MainViewController.swift in Sources */,
+				35EDC14A277C863B009436FD /* RealmImageManager.swift in Sources */,
 				35EDC1462777AEBB009436FD /* UITextField+Padding.swift in Sources */,
 				35EDC1302776EB80009436FD /* AddSettingModalViewController.swift in Sources */,
 				35EDC10F27758E3C009436FD /* AddViewController.swift in Sources */,
@@ -768,7 +772,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = LT5ZADXQMP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;
@@ -800,7 +804,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = LT5ZADXQMP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;

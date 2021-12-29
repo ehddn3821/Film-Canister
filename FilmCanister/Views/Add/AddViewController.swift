@@ -38,11 +38,22 @@ class AddViewController: CustomNavigationBarViewController<UIView> {
                 guard let this = self else { return }
                 let nameCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! AddNameTableViewCell
                 let simulCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as! AddSettingTableViewCell
+                var selectedImageList: [UIImage] = []
+                if let sampleCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 1)) as? AddSampleTableViewCell {
+                    selectedImageList = sampleCell.selectedImageList
+                }
+                
                 let id = UInt64((Date().timeIntervalSince1970) * 1000)
                 let recipe = RecipeModel(id: Int(id),
                                          name: nameCell.nameTextField.text!,
-                                         simulName: simulCell.selectedSimul)
+                                         simulName: simulCell.selectedSimul,
+                                         imageCount: selectedImageList.count)
                 try! this.realm.write {
+                    if !selectedImageList.isEmpty {
+                        for i in 0..<selectedImageList.count {
+                            RealmImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id)_\(i+1).png", image: selectedImageList[i])
+                        }
+                    }
                     this.realm.add(recipe)
                     Log.info("Recipe [ \(nameCell.nameTextField.text!) ] 추가 완료")
                 }

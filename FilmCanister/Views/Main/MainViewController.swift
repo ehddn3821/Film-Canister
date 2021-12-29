@@ -77,6 +77,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
         cell.nameLB.text = realm.objects(RecipeModel.self)[indexPath.row].name
         cell.simulNameLB.text = realm.objects(RecipeModel.self)[indexPath.row].simulName
+        let imageName = realm.objects(RecipeModel.self)[indexPath.row].id
+        cell.sampleIV.image = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName)_1")
         return cell
     }
     
@@ -84,6 +86,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let recipe = realm.objects(RecipeModel.self)[indexPath.row]
             try! realm.write {
+                if recipe.imageCount != 0 {
+                    for i in 0..<recipe.imageCount {
+                        RealmImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+                    }
+                }
                 Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
                 realm.delete(recipe)
                 tableView.deleteRows(at: [indexPath], with: .fade)
