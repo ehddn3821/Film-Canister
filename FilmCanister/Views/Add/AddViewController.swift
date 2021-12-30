@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RealmSwift
+import Toast_Swift
 
 class AddViewController: CustomNavigationBarViewController<UIView> {
     let bag = DisposeBag()
@@ -57,7 +58,15 @@ class AddViewController: CustomNavigationBarViewController<UIView> {
                     this.realm.add(recipe)
                     Log.info("Recipe [ \(nameCell.nameTextField.text!) ] 추가 완료")
                 }
-                this.navigationController?.popViewController(animated: true)
+                
+                this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
+                    let mainVC = UIApplication.topViewController() as! MainViewController
+                    var toastStyle = ToastStyle()
+                    toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
+                    toastStyle.messageColor = .white
+                    toastStyle.imageSize = .init(width: 24, height: 24)
+                    mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "check"), style: toastStyle)
+                })
                 
             }.disposed(by: bag)
     }

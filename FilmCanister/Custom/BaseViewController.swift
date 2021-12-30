@@ -25,6 +25,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Log.info("\(type(of: self)): viewDidLoad")
+        view.backgroundColor = .systemBackground
         _setupViews()
         _setupActions()
     }

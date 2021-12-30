@@ -11,14 +11,18 @@ PODS:
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
+  - SideMenu (6.5.0)
   - SnapKit (5.0.1)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
   - RealmSwift (~> 10)
   - RxCocoa (= 6.2.0)
   - RxSwift (= 6.2.0)
+  - SideMenu (~> 6.0)
   - SnapKit (~> 5.0.0)
+  - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   trunk:
@@ -28,7 +32,9 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SideMenu
     - SnapKit
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
@@ -37,8 +43,10 @@ SPEC CHECKSUMS:
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 52ac8da4a22b9c190a5ff06c3d1c93c7c76adb5a
+PODFILE CHECKSUM: 159aa69f7f587049456a01d51faf5b89f51852c2
 
 COCOAPODS: 1.11.2

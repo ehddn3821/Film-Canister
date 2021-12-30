@@ -11,6 +11,8 @@ target 'FilmCanister' do
 	pod 'RxCocoa', '6.2.0'
 	pod 'IQKeyboardManagerSwift'
 	pod 'RealmSwift', '~>10'
+	pod 'Toast-Swift', '~> 5.0.1'
+	pod 'SideMenu', '~> 6.0'
 
   target 'FilmCanisterTests' do
     inherit! :search_paths

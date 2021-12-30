@@ -57,6 +57,7 @@ extension MainViewController {
         
         //MARK: - Body
         bodyView.addSubview(tableView)
+        tableView.backgroundColor = .init(named: Constants.COLOR_MAIN_BACKGROUND)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -80,6 +81,15 @@ extension MainViewController {
         emptySimulLB.snp.makeConstraints { make in
             make.top.equalTo(filmIV.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
+        }
+        
+        // sidemenu open 시 dimmedView
+        view.addSubview(dimmedView)
+        dimmedView.backgroundColor = .init(hexColor: .dimmed)
+        dimmedView.alpha = 0.0
+        dimmedView.isHidden = true
+        dimmedView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
