@@ -1,6 +1,0 @@
-framework module Pods_FilmCanister_FilmCanisterUITests {
-  umbrella header "Pods-FilmCanister-FilmCanisterUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
