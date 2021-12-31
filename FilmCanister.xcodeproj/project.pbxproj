@@ -45,6 +45,7 @@
 		35EDC14A277C863B009436FD /* RealmImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC149277C863B009436FD /* RealmImageManager.swift */; };
 		35EDC14C277DCB59009436FD /* UINavigationController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14B277DCB59009436FD /* UINavigationController+Handler.swift */; };
 		35EDC14E277DE0D6009436FD /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14D277DE0D6009436FD /* SideMenuViewController.swift */; };
+		3DFDF38F277E9850008875D6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DFDF38E277E9850008875D6 /* Launch Screen.storyboard */; };
 		4980591E6E577DB9181A20DF /* Pods_FilmCanisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8C4EB975A3E8BDD956F578 /* Pods_FilmCanisterTests.framework */; };
 		5196727A7064E9AD32A09262 /* Pods_FilmCanister_FilmCanisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */; };
 		B163AA608B3356BE8D50CB76 /* Pods_FilmCanister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034E9ACCF263F935405B28AF /* Pods_FilmCanister.framework */; };
@@ -112,6 +113,7 @@
 		35EDC149277C863B009436FD /* RealmImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmImageManager.swift; sourceTree = "<group>"; };
 		35EDC14B277DCB59009436FD /* UINavigationController+Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Handler.swift"; sourceTree = "<group>"; };
 		35EDC14D277DE0D6009436FD /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		3DFDF38E277E9850008875D6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmCanister_FilmCanisterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F853F8941AC4479F3B74B5 /* Pods-FilmCanisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.release.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		7475A9073C58ED7CCBDA1F0C /* Pods-FilmCanisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.debug.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		35EDC1052775492B009436FD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3DFDF38E277E9850008875D6 /* Launch Screen.storyboard */,
 				35EDC1122775914A009436FD /* Main */,
 				35EDC11E2775B6B6009436FD /* Add */,
 				35EDC1472779E8A9009436FD /* DetailImageViewController.swift */,
@@ -462,6 +465,7 @@
 				35EDC11C2775A03E009436FD /* Inter-SemiBold.ttf in Resources */,
 				35EDC11B2775A03E009436FD /* Inter-Regular.ttf in Resources */,
 				35EDC11D2775A03E009436FD /* Inter-Bold.ttf in Resources */,
+				3DFDF38F277E9850008875D6 /* Launch Screen.storyboard in Resources */,
 				35EDC0C627749C90009436FD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -788,7 +792,8 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Sample 사진을 업로드 하기위해 포토 라이브러리 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Sample 사진을 업로드 하기위해 포토 라이브러리 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UIMainStoryboardFile = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -820,7 +825,8 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Sample 사진을 업로드 하기위해 포토 라이브러리 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Sample 사진을 업로드 하기위해 포토 라이브러리 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UIMainStoryboardFile = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
