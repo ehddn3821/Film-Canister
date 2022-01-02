@@ -76,7 +76,7 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
         customNavigationBar.rightBtn.rx.tap
             .bind { [weak self] _ in
                 guard let this = self else { return }
-                this.navigationController?.pushViewController(AddViewController(), animated: true)
+                this.navigationController?.pushViewController(RecipeViewController(viewType: .add), animated: true)
             }.disposed(by: bag)
     }
 }
@@ -125,6 +125,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recipeID = realm.objects(RecipeModel.self)[indexPath.row].id
+        let recipeVC = RecipeViewController(viewType: .main, recipeID: recipeID)
+        navigationController?.pushViewController(recipeVC, animated: true)
+    }
 }
 
 
@@ -133,7 +139,6 @@ extension MainViewController: SideMenuNavigationControllerDelegate {
 
     func sideMenuWillAppear(menu: SideMenuNavigationController, animated: Bool) {
         dimmedView.isHidden = false
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3, animations: {
                 self.dimmedView.alpha = 0.9

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddSettingModalTableViewCell: UITableViewCell {
+class RecipeSettingModalTableViewCell: UITableViewCell {
     let nameLB = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

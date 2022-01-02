@@ -1,5 +1,5 @@
 //
-//  AddSettingTableViewCell.swift
+//  RecipeSettingTableViewCell.swift
 //  FilmCanister
 //
 //  Created by dwKang on 2021/12/25.
@@ -7,9 +7,13 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
-class AddSettingTableViewCell: UITableViewCell {
+class RecipeSettingTableViewCell: UITableViewCell {
     let bag = DisposeBag()
+    var realm = try! Realm()
+    var viewType: ViewType = .add
+    var recipeID = 0
     
     var selectedSimul = "Provia"
     
@@ -288,7 +292,11 @@ class AddSettingTableViewCell: UITableViewCell {
         }
         
         if name == settingList[0] {
-            valueLB.text = "Provia"
+            if viewType == .add {
+                valueLB.text = "Provia"
+            } else {
+                valueLB.text = realm.object(ofType: RecipeModel.self, forPrimaryKey: recipeID)?.simulName
+            }
         } else if name == settingList[1] {
             valueLB.text = "Auto"
         } else if name == settingList[2] {
@@ -369,7 +377,7 @@ class AddSettingTableViewCell: UITableViewCell {
                 let topVC = UIApplication.topViewController()
                 
                 if name == this.settingList[0] {
-                    let modalVC = AddSettingModalViewController(settingList: this.filmSimulationList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.filmSimulationList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -379,7 +387,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[1] {
-                    let modalVC = AddSettingModalViewController(settingList: this.dynamicRangeList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.dynamicRangeList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -388,7 +396,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[2] || name == this.settingList[3] {
-                    let modalVC = AddSettingModalViewController(settingList: this.highlightShadowList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.highlightShadowList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -397,7 +405,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[4] || name == this.settingList[5] || name == this.settingList[6] {
-                    let modalVC = AddSettingModalViewController(settingList: this.colorNoiseSharpList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.colorNoiseSharpList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -406,7 +414,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[7] {
-                    let modalVC = AddSettingModalViewController(settingList: this.clarityList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.clarityList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -415,7 +423,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[8] {
-                    let modalVC = AddSettingModalViewController(settingList: this.grainEfectList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.grainEfectList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -424,7 +432,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[9] || name == this.settingList[10] {
-                    let modalVC = AddSettingModalViewController(settingList: this.colorChromeEfectList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.colorChromeEfectList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -433,7 +441,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[11] {
-                    let modalVC = AddSettingModalViewController(settingList: this.whiteBalanceList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.whiteBalanceList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -442,7 +450,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
                     
                 } else if name == this.settingList[12] || name == this.settingList[13] {
-                    let modalVC = AddSettingModalViewController(settingList: this.redBlueList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.redBlueList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
@@ -451,7 +459,7 @@ class AddSettingTableViewCell: UITableViewCell {
                     }).disposed(by: this.bag)
 
                 } else {
-                    let modalVC = AddSettingModalViewController(settingList: this.exposureList)
+                    let modalVC = RecipeSettingModalViewController(settingList: this.exposureList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem

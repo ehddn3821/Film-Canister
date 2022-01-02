@@ -1,5 +1,5 @@
 //
-//  AddMemoTableViewCell.swift
+//  RecipeMemoTableViewCell.swift
 //  FilmCanister
 //
 //  Created by dwKang on 2021/12/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddMemoTableViewCell: UITableViewCell {
+class RecipeMemoTableViewCell: UITableViewCell {
     let memoView = UIView()
     let memoTextView = UITextView()
     
@@ -45,7 +45,7 @@ class AddMemoTableViewCell: UITableViewCell {
     }
 }
 
-extension AddMemoTableViewCell: UITextViewDelegate {
+extension RecipeMemoTableViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         placeholderSetup()
     }

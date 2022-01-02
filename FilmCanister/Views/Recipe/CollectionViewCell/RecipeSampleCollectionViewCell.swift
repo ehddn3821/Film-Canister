@@ -7,26 +7,26 @@
 
 import UIKit
 
-class AddSampleCollectionViewCell: UICollectionViewCell {
-    let addIV = UIImageView()
+class RecipeSampleCollectionViewCell: UICollectionViewCell {
+    let sampleIV = UIImageView()
     let removeBtn = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.backgroundColor = .systemBackground
         
-        contentView.addSubview(addIV)
-        addIV.contentMode = .scaleAspectFill
-        addIV.layer.cornerRadius = 12
-        addIV.clipsToBounds = true
-        addIV.image = .init(named: "add_image")
-        addIV.snp.makeConstraints { make in
+        contentView.addSubview(sampleIV)
+        sampleIV.contentMode = .scaleAspectFill
+        sampleIV.layer.cornerRadius = 12
+        sampleIV.clipsToBounds = true
+        sampleIV.image = .init(named: "add_image")
+        sampleIV.snp.makeConstraints { make in
             make.size.equalTo(88)
             make.top.equalTo(16)
             make.bottom.equalTo(-16)
         }
         
-        addIV.addSubview(removeBtn)
+        sampleIV.addSubview(removeBtn)
         removeBtn.setImage(.init(named: "remove"), for: .normal)
         removeBtn.snp.makeConstraints { make in
             make.size.equalTo(24)
