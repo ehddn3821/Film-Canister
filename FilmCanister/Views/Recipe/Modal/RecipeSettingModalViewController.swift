@@ -1,5 +1,5 @@
 //
-//  AddSettingModalViewController.swift
+//  RecipeSettingModalViewController.swift
 //  FilmCanister
 //
 //  Created by dwKang on 2021/12/25.
@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class AddSettingModalViewController: BaseViewController {
+class RecipeSettingModalViewController: BaseViewController {
     let bag = DisposeBag()
     let tapGesture = UITapGestureRecognizer()
     
@@ -34,7 +34,7 @@ class AddSettingModalViewController: BaseViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(AddSettingModalTableViewCell.classForCoder(), forCellReuseIdentifier: "modalCell")
+        tableView.register(RecipeSettingModalTableViewCell.classForCoder(), forCellReuseIdentifier: "modalCell")
     }
     
     func setupUI() {
@@ -93,13 +93,13 @@ class AddSettingModalViewController: BaseViewController {
     }
 }
 
-extension AddSettingModalViewController: UITableViewDelegate, UITableViewDataSource {
+extension RecipeSettingModalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "modalCell", for: indexPath) as! AddSettingModalTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "modalCell", for: indexPath) as! RecipeSettingModalTableViewCell
         cell.nameLB.text = settingList[indexPath.row]
         return cell
     }

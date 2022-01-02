@@ -1,5 +1,5 @@
 //
-//  AddSampleTableViewCell.swift
+//  RecipeSampleTableViewCell.swift
 //  FilmCanister
 //
 //  Created by dwKang on 2021/12/24.
@@ -7,9 +7,14 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
-class AddSampleTableViewCell: UITableViewCell {
+class RecipeSampleTableViewCell: UITableViewCell {
     let bag = DisposeBag()
+    var viewType: ViewType = .add
+    var recipeID = 0
+    var sampleImageCount = 0
+    var realm = try! Realm()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,7 +34,7 @@ class AddSampleTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(AddSampleCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cvCell")
+        collectionView.register(RecipeSampleCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cvCell")
         
         photoPicker.delegate = self
         photoPicker.sourceType = .photoLibrary
@@ -50,7 +55,7 @@ class AddSampleTableViewCell: UITableViewCell {
 
 
 //MARK: - Picker delegate
-extension AddSampleTableViewCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension RecipeSampleTableViewCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImageList.append(image)
@@ -62,24 +67,37 @@ extension AddSampleTableViewCell: UIImagePickerControllerDelegate, UINavigationC
 
 
 // MARK: - CollectionView delegate
-extension AddSampleTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedImageList.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvCell", for: indexPath) as! AddSampleCollectionViewCell
-        if indexPath.row == 0 {
-            cell.addIV.image = .init(named: "add_image")
-            cell.removeBtn.isHidden = true
-        } else {
-            if !selectedImageList.isEmpty {
-                cell.addIV.image = selectedImageList[indexPath.row - 1]
-                cell.removeBtn.isHidden = false
-                cell.removeBtn.tag = indexPath.row
-                cell.removeBtn.addTarget(self, action: #selector(deleteCell(sender:)), for: .touchUpInside)
-                
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvCell", for: indexPath) as! RecipeSampleCollectionViewCell
+        switch viewType {
+        case .add:
+            if indexPath.row == 0 {
+                cell.sampleIV.image = .init(named: "add_image")
+                cell.removeBtn.isHidden = true
+            } else {
+                if !selectedImageList.isEmpty {
+                    cell.sampleIV.image = selectedImageList[indexPath.row - 1]
+                    cell.removeBtn.isHidden = false
+                    cell.removeBtn.tag = indexPath.row
+                    cell.removeBtn.addTarget(self, action: #selector(deleteCell(sender:)), for: .touchUpInside)
+                }
             }
+        case .main:
+            if sampleImageCount == 0 {
+                cell.sampleIV.isHidden = true
+            } else {
+                for i in 0..<sampleImageCount {
+                    cell.sampleIV.image = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(i+1)")
+                }
+            }
+            cell.removeBtn.isHidden = true
+        case .update:
+            break
         }
         return cell
     }
@@ -90,10 +108,15 @@ extension AddSampleTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let topVC = UIApplication.topViewController()
-        if indexPath.row == 0 {  // Sample 추가 버튼
-            topVC?.present(photoPicker, animated: true, completion: nil)
-        } else {  // Detail image view
-            topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: selectedImageList[indexPath.row - 1]), animated: true)
+        if viewType == .main {
+            let sampleImage = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
+            topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage!), animated: true)
+        } else {
+            if indexPath.row == 0 {  // Sample 추가 버튼
+                topVC?.present(photoPicker, animated: true, completion: nil)
+            } else {  // Detail image view
+                topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: selectedImageList[indexPath.row - 1]), animated: true)
+            }
         }
     }
     

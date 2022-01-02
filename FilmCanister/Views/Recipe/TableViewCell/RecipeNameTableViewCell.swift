@@ -1,5 +1,5 @@
 //
-//  AddNameTableViewCell.swift
+//  RecipeNameTableViewCell.swift
 //  FilmCanister
 //
 //  Created by dwKang on 2021/12/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddNameTableViewCell: UITableViewCell {
+class RecipeNameTableViewCell: UITableViewCell {
     let nameTextField = UITextField()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -37,9 +37,9 @@ class AddNameTableViewCell: UITableViewCell {
     }
 }
 
-extension AddNameTableViewCell: UITextFieldDelegate {
+extension RecipeNameTableViewCell: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        let topVC = UIApplication.topViewController() as! AddViewController
+        let topVC = UIApplication.topViewController() as! RecipeViewController
         if textField.text != "" {
             topVC.customNavigationBar.rightBtn.isEnabled = true
         } else {

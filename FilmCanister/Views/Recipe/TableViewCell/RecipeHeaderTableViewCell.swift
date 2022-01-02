@@ -1,5 +1,5 @@
 //
-//  AddHeaderTableViewCell.swift
+//  RecipeHeaderTableViewCell.swift
 //  FilmCanister
 //
 //  Created by dwKang on 2021/12/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddHeaderTableViewCell: UITableViewCell {
+class RecipeHeaderTableViewCell: UITableViewCell {
     let titleLB = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
