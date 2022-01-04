@@ -10,6 +10,8 @@ import UIKit
 class RecipeMemoTableViewCell: UITableViewCell {
     let memoView = UIView()
     let memoTextView = UITextView()
+    let memoPlaceholder = UILabel()
+    var isSaveEnabled = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,13 +32,25 @@ class RecipeMemoTableViewCell: UITableViewCell {
         
         memoView.addSubview(memoTextView)
         memoTextView.font = .init(name: Constants.MAIN_FONT_REGULAR, size: 14)
-        memoTextView.text = "Please enter memo"
-        memoTextView.textColor = .init(named: Constants.COLOR_DISABLE)
+        memoTextView.textColor = .init(named: Constants.COLOR_MAIN_TEXT)
         memoTextView.snp.makeConstraints { make in
             make.leading.equalTo(14)
             make.top.equalTo(10)
             make.trailing.equalTo(-14)
             make.bottom.equalTo(-10)
+        }
+        
+        memoView.addSubview(memoPlaceholder)
+        memoPlaceholder.font = .init(name: Constants.MAIN_FONT_REGULAR, size: 14)
+        memoPlaceholder.text = "Please enter memo"
+        memoPlaceholder.textColor = .init(named: Constants.COLOR_DISABLE)
+        memoPlaceholder.snp.makeConstraints { make in
+            make.leading.equalTo(16)
+            make.top.equalTo(16)
+        }
+        
+        if memoTextView.text != "" {
+            memoPlaceholder.isHidden = true
         }
     }
     
@@ -47,29 +61,28 @@ class RecipeMemoTableViewCell: UITableViewCell {
 
 extension RecipeMemoTableViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        placeholderSetup()
+        let topVC = UIApplication.topViewController() as! RecipeViewController
+        if topVC.customNavigationBar.rightBtn.isEnabled {
+            isSaveEnabled = true
+            topVC.customNavigationBar.rightBtn.isEnabled = false
+        } else {
+            isSaveEnabled = false
+            topVC.customNavigationBar.rightBtn.isEnabled = false
+        }
+        memoPlaceholder.isHidden = true
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
+        let topVC = UIApplication.topViewController() as! RecipeViewController
+        
         if textView.text == "" {
-            placeholderSetup()
+            memoPlaceholder.isHidden = false
+        } else {
+            topVC.memoText.onNext(textView.text)
         }
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-        }
-        return true
-    }
-    
-    private func placeholderSetup() {
-        if memoTextView.text == "Please enter memo" {
-            memoTextView.text = ""
-            memoTextView.textColor = .init(named: Constants.COLOR_MAIN_TEXT)
-        } else if memoTextView.text == "" {
-            memoTextView.text = "Please enter memo"
-            memoTextView.textColor = .init(named: Constants.COLOR_DISABLE)
+        
+        if isSaveEnabled {
+            topVC.customNavigationBar.rightBtn.isEnabled = true
         }
     }
 }

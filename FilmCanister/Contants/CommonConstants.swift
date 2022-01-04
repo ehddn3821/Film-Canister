@@ -13,13 +13,13 @@ struct Constants {
     static let MAIN_FONT_SEMIBOLD = "Inter-SemiBold"
     
     // Color
-    static let COLOR_SECONDARY = "secondary"
-    static let COLOR_MAIN_TEXT = "main_text"
-    static let COLOR_MAIN_BACKGROUND = "main_background"
-    static let COLOR_DIVIDER = "divider"
-    static let COLOR_ENABLE = "enable"
-    static let COLOR_DISABLE = "disable"
-    static let COLOR_MEMO_BORDER = "memo_border"
+    static let COLOR_SECONDARY = "Secondary"
+    static let COLOR_MAIN_TEXT = "MainText"
+    static let COLOR_MAIN_BACKGROUND = "MainBackground"
+    static let COLOR_DIVIDER = "Divider"
+    static let COLOR_ENABLE = "Enable"
+    static let COLOR_DISABLE = "Disable"
+    static let COLOR_MEMO_BORDER = "MemoBorder"
     
     // Settings
     static let SETTING_LIST = [ "Film Simulation",
@@ -38,19 +38,19 @@ struct Constants {
                                 "Blue",
                                 "Exposure Compensation" ]
     
-    static let SETTING_IMAGE_LIST = [ "film_simulation",
-                                      "dynamic_range",
-                                      "highlight",
-                                      "shadow",
-                                      "color",
-                                      "noise_reduction",
-                                      "sharpening",
-                                      "clarity",
-                                      "grain_effect",
-                                      "color_chorme_effect",
-                                      "color_chorme_effect_blue",
-                                      "white_balance",
-                                      "exposure_compensation" ]
+    static let SETTING_IMAGE_LIST = [ "FilmSimulation",
+                                      "DynamicRange",
+                                      "Highlight",
+                                      "Shadow",
+                                      "Color",
+                                      "NoiseReduction",
+                                      "Sharpening",
+                                      "Clarity",
+                                      "GrainEffect",
+                                      "ColorChormeEffect",
+                                      "ColorChormeEffectBlue",
+                                      "WhiteBalance",
+                                      "ExposureCompensation" ]
 
     static let SIMULATION_LIST = [ "Provia","Velvia","Astia","Classic Chrome","PRO Neg.Hi","Pro Neg. Std",
                                    "Classic Neg.","Eterna","Eterna Blenach Bypass","Nostalgic Neg.",

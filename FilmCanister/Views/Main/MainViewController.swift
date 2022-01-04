@@ -89,7 +89,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
         cell.nameLB.text = realm.objects(RecipeModel.self)[indexPath.row].name
-        cell.simulNameLB.text = realm.objects(RecipeModel.self)[indexPath.row].simulName
+        cell.simulNameLB.text = realm.objects(RecipeModel.self)[indexPath.row].film_simulation
         let imageName = realm.objects(RecipeModel.self)[indexPath.row].id
         cell.sampleIV.image = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName)_1")
         
@@ -98,6 +98,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == lastRowIndex {
             cell.divideView.isHidden = true
+        } else {
+            cell.divideView.isHidden = false
         }
         
         return cell
@@ -107,8 +109,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let recipe = realm.objects(RecipeModel.self)[indexPath.row]
             try! realm.write {
-                if recipe.imageCount != 0 {
-                    for i in 0..<recipe.imageCount {
+                if recipe.image_count != 0 {
+                    for i in 0..<recipe.image_count {
                         RealmImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
                     }
                 }

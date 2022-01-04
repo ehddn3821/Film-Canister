@@ -78,7 +78,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
         switch viewType {
         case .add:
             if indexPath.row == 0 {
-                cell.sampleIV.image = .init(named: "add_image")
+                cell.sampleIV.image = .init(named: "AddImage")
                 cell.removeBtn.isHidden = true
             } else {
                 if !selectedImageList.isEmpty {
