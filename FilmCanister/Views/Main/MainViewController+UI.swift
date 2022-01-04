@@ -10,6 +10,8 @@ import UIKit
 extension MainViewController {
     
     func setupUI() {
+        view.backgroundColor = .systemBackground
+        
         //MARK: - Intro
         view.addSubview(introView)
         introView.backgroundColor = .systemBackground

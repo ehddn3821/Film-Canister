@@ -9,6 +9,8 @@ import UIKit
 
 extension RecipeViewController {
     func setupUI() {
+        view.backgroundColor = .systemBackground
+        
         //MARK: - Navigation Bar
         customNavigationBar.isEnablePopBtn = true
         if viewType == .add {

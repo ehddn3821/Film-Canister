@@ -13,131 +13,24 @@ class RecipeSettingTableViewCell: UITableViewCell {
     let bag = DisposeBag()
     
     var selectedSimul = "Provia"
+    var selectedDynamic = "Auto"
+    var selectedHighlight = "0"
+    var selectedShadow = "0"
+    var selectedColor = "0"
+    var selectedNoise = "0"
+    var selectedSharp = "0"
+    var selectedClarity = "0"
+    var selectedGrain = "Off"
+    var selectedColorChrome = "Off"
+    var selectedColorChromeBlue = "Off"
+    var selectedWhiteBalance = "Auto"
+    var selectedRed = "0"
+    var selectedBlue = "0"
+    var selectedExposure1 = "0"
+    var selectedExposure2 = "0"
     
-    let settingList = [ "Film Simulation",
-                        "Dynamic Range",
-                        "Highlight",
-                        "Shadow",
-                        "Color",
-                        "Noise Reduction",
-                        "Sharpening",
-                        "Clarity",
-                        "Grain Effect",
-                        "Color Chorme Effect",
-                        "Color Chorme Effect Blue",
-                        "White Balance",
-                        "Red",
-                        "Blue",
-                        "Exposure Compensation" ]
     
-    let filmSimulationList = [ "Provia","Velvia","Astia","Classic Chrome","PRO Neg.Hi","Pro Neg. Std",
-                               "Classic Neg.","Eterna","Eterna Blenach Bypass","Nostalgic Neg.",
-                               "Acros STD","Acros Ye","Acros R","Acros G","Monocrhome STD","Monocrhome Ye",
-                               "Monocrhome R","Monocrhome G","Sepia" ]
-    
-    let dynamicRangeList = [ "Auto",
-                             "DR400",
-                             "DR200",
-                             "DR100" ]
-    
-    let highlightShadowList = [ "+4",
-                                "+3.5",
-                                "+3",
-                                "+2.5",
-                                "+2",
-                                "+1.5",
-                                "+1",
-                                "+0.5",
-                                "0",
-                                "-0.5",
-                                "-1",
-                                "-1.5",
-                                "-2" ]
-    
-    let colorNoiseSharpList = [ "+4",
-                                "+3",
-                                "+2",
-                                "+1",
-                                "0",
-                                "-1",
-                                "-2",
-                                "-3",
-                                "-4" ]
-    
-    let clarityList = [ "+5",
-                        "+4",
-                        "+3",
-                        "+2",
-                        "+1",
-                        "0",
-                        "-1",
-                        "-2",
-                        "-3",
-                        "-4",
-                        "+5" ]
-    
-    let grainEfectList = [ "Off",
-                           "Weak / Small",
-                           "Weak / Large",
-                           "Strong / Small",
-                           "Strong / Large" ]
-    
-    let colorChromeEfectList = [ "Off",
-                                 "Weak",
-                                 "Strong" ]
-    
-    let whiteBalanceList = [ "Auto",
-                             "Auto White",
-                             "Auto Ambience",
-                             "K",
-                             "Daylight",
-                             "Shade",
-                             "Fluorescent 1",
-                             "Fluorescent 2",
-                             "Fluorescent 3",
-                             "Incandescent",
-                             "Under Water" ]
-    
-    let redBlueList = [ "+9",
-                        "+8",
-                        "+7",
-                        "+6",
-                        "+5",
-                        "+4",
-                        "+3",
-                        "+2",
-                        "+1",
-                        "0",
-                        "-1",
-                        "-2",
-                        "-3",
-                        "-4",
-                        "-5",
-                        "-6",
-                        "-7",
-                        "-8",
-                        "-9" ]
-    
-    let exposureList = [ "+3.0",
-                         "+2.6",
-                         "+2.3",
-                         "+2.0",
-                         "+1.6",
-                         "+1.3",
-                         "+1.0",
-                         "+2",
-                         "+0.6",
-                         "+0.3",
-                         "0",
-                         "-0.3",
-                         "-0.6",
-                         "-1",
-                         "-1.3",
-                         "-1.6",
-                         "-2",
-                         "-2.3",
-                         "-2.6",
-                         "-3.0" ]
+    let tableView = UITableView()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -145,324 +38,244 @@ class RecipeSettingTableViewCell: UITableViewCell {
         
         contentView.backgroundColor = .systemBackground
         
-        let filmSimulation = makeSetting(settingList[0], imageName: "film_simulation")
-        filmSimulation.snp.makeConstraints { make in
-            make.leading.top.trailing.equalToSuperview()
-        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SettingTableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
+        tableView.register(TwoSettingTableViewCell.classForCoder(), forCellReuseIdentifier: "twoCell")
+        tableView.allowsSelection = false
+        tableView.isUserInteractionEnabled = true
+        tableView.separatorStyle = .none
         
-        let dynamicRange = makeSetting(settingList[1], imageName: "dyanamic_range")
-        dynamicRange.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(filmSimulation.snp.bottom)
-        }
-        
-        let highlight = makeSetting(settingList[2], imageName: "highlight")
-        highlight.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(2)
-            make.leading.equalToSuperview()
-            make.top.equalTo(dynamicRange.snp.bottom)
-        }
-        
-        let shadow = makeSetting(settingList[3], imageName: "shadow")
-        shadow.snp.makeConstraints { make in
-            make.leading.equalTo(highlight.snp.trailing)
-            make.top.equalTo(highlight)
-            make.trailing.equalToSuperview()
-        }
-        
-        let color = makeSetting(settingList[4], imageName: "color")
-        color.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(shadow.snp.bottom)
-        }
-        
-        let noiseReduction = makeSetting(settingList[5], imageName: "noise_reduction")
-        noiseReduction.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(color.snp.bottom)
-        }
-        
-        let sharpening = makeSetting(settingList[6], imageName: "sharpening")
-        sharpening.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(noiseReduction.snp.bottom)
-        }
-        
-        let clarity = makeSetting(settingList[7], imageName: "clarity")
-        clarity.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(sharpening.snp.bottom)
-        }
-        
-        let grainEffect = makeSetting(settingList[8], imageName: "grain_effect")
-        grainEffect.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(clarity.snp.bottom)
-        }
-        
-        let colorChormeEffect = makeSetting(settingList[9], imageName: "color_chorme_effect")
-        colorChormeEffect.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(grainEffect.snp.bottom)
-        }
-        
-        let colorChormeEffectBlue = makeSetting(settingList[10], imageName: "color_chorme_effect_blue")
-        colorChormeEffectBlue.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(colorChormeEffect.snp.bottom)
-        }
-        
-        let whiteBalance = makeSetting(settingList[11], imageName: "white_balance", isDivider: false)
-        whiteBalance.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(colorChormeEffectBlue.snp.bottom)
-        }
-        
-        let red = makeSetting(settingList[12], isImage: false)
-        red.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(2)
-            make.leading.equalToSuperview()
-            make.top.equalTo(whiteBalance.snp.bottom)
-        }
-        
-        let blue = makeSetting(settingList[13], isImage: false)
-        blue.snp.makeConstraints { make in
-            make.leading.equalTo(red.snp.trailing)
-            make.top.equalTo(red)
-            make.trailing.equalToSuperview()
-        }
-        
-        let exposureCompensation = makeSetting(settingList[14], imageName: "exposure_compensation", isDivider: false)
-        exposureCompensation.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(blue.snp.bottom)
+        contentView.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    //MARK: - Make setting view
-    private func makeSetting(_ name: String, imageName: String = "", isImage: Bool = true, isDivider: Bool = true, simulName: String = "Provia") -> UIView {
-        let view = UIView()
-        
-        if isImage {
-            let iv = UIImageView()
-            view.addSubview(iv)
-            iv.image = UIImage(named: imageName)
-            iv.snp.makeConstraints { make in
-                make.size.equalTo(24)
-                make.leading.equalTo(view).offset(16)
-                make.centerY.equalToSuperview()
-            }
-            
-            let lb = UILabel()
-            view.addSubview(lb)
-            lb.text = name
-            lb.font = UIFont(name: Constants.MAIN_FONT_REGULAR, size: 12)
-            lb.textColor = UIColor(named: Constants.COLOR_MAIN_TEXT)
-            lb.snp.makeConstraints { make in
-                make.leading.equalTo(iv.snp.trailing).offset(6)
-                make.centerY.equalToSuperview()
-            }
-        } else {
-            let lb = UILabel()
-            view.addSubview(lb)
-            lb.text = name
-            lb.font = UIFont(name: Constants.MAIN_FONT_REGULAR, size: 12)
-            lb.textColor = UIColor(named: Constants.COLOR_MAIN_TEXT)
-            lb.snp.makeConstraints { make in
-                make.leading.equalTo(view).offset(16)
-                make.centerY.equalToSuperview()
-            }
-        }
-        
-        let valueLB = UILabel()
-        view.addSubview(valueLB)
-        valueLB.textColor = UIColor(named: Constants.COLOR_MAIN_TEXT)
-        valueLB.font = UIFont(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
-        valueLB.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        if name == settingList[0] {
-            valueLB.text = saveSimulName
-        } else if name == settingList[1] {
-            valueLB.text = "Auto"
-        } else if name == settingList[2] {
-            valueLB.text = "0"
-        } else if name == settingList[3] {
-            valueLB.text = "0"
-        } else if name == settingList[4] {
-            valueLB.text = "0"
-        } else if name == settingList[5] {
-            valueLB.text = "0"
-        } else if name == settingList[6] {
-            valueLB.text = "0"
-        } else if name == settingList[7] {
-            valueLB.text = "0"
-        } else if name == settingList[8] {
-            valueLB.text = "Off"
-        } else if name == settingList[9] {
-            valueLB.text = "Off"
-        } else if name == settingList[10] {
-            valueLB.text = "Off"
-        } else if name == settingList[11] {
-            valueLB.text = "Auto"
-        } else if name == settingList[12] {
-            valueLB.text = "0"
-        } else if name == settingList[13] {
-            valueLB.text = "0"
-        } else {
-            valueLB.text = "0"
-            
-            let toLB = UILabel()
-            view.addSubview(toLB)
-            toLB.textColor = UIColor(named: Constants.COLOR_MAIN_TEXT)
-            toLB.font = UIFont(name: Constants.MAIN_FONT_REGULAR, size: 12)
-            toLB.text = "to"
-            toLB.snp.makeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.trailing.equalToSuperview().offset(-65)
-            }
-            
-            let valueLB2 = UILabel()
-            view.addSubview(valueLB2)
-            valueLB2.textColor = UIColor(named: Constants.COLOR_MAIN_TEXT)
-            valueLB2.font = UIFont(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
-            valueLB2.text = "0"
-            valueLB2.snp.makeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.trailing.equalTo(toLB.snp.leading).offset(-8)
-            }
-        }
-        
-        let btn = UIButton()
-        view.addSubview(btn)
-        btn.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        if isDivider {
-            let divider = UIView()
-            view.addSubview(divider)
-            divider.backgroundColor = UIColor(named: Constants.COLOR_DIVIDER)
-            divider.snp.makeConstraints { make in
-                make.height.equalTo(1)
-                make.leading.equalToSuperview().offset(16)
-                make.bottom.equalToSuperview()
-                make.trailing.equalToSuperview().offset(-16)
-            }
-        }
-        
-        contentView.addSubview(view)
-        view.snp.makeConstraints { make in
-            make.height.equalTo(64)
-        }
-        
-        btn.rx.tap
-            .bind { [weak self] _ in
-                guard let this = self else { return }
-                
-                let topVC = UIApplication.topViewController()
-                
-                if name == this.settingList[0] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.filmSimulationList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                            this.selectedSimul = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[1] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.dynamicRangeList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[2] || name == this.settingList[3] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.highlightShadowList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[4] || name == this.settingList[5] || name == this.settingList[6] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.colorNoiseSharpList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[7] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.clarityList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[8] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.grainEfectList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[9] || name == this.settingList[10] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.colorChromeEfectList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[11] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.whiteBalanceList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                } else if name == this.settingList[12] || name == this.settingList[13] {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.redBlueList)
-                    modalVC.modalPresentationStyle = .overFullScreen
-                    topVC?.present(modalVC, animated: true)
-                    modalVC.selectedItem
-                        .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
+}
 
-                } else {
-                    let modalVC = RecipeSettingModalViewController(settingList: this.exposureList)
+extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 13
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var settingList: [String] = []
+        
+        switch indexPath.row {
+        case 0:
+            settingList = Constants.SIMULATION_LIST
+        case 1:
+            settingList = Constants.DYNAMIC_RANGE_LIST
+        case 2:
+            settingList = Constants.HIGHLIGHT_SHADOW_LIST
+        case 3...5:
+            settingList = Constants.COLOR_NOISE_SHARP_LIST
+        case 6:
+            settingList = Constants.CLARITY_LIST
+        case 7:
+            settingList = Constants.GRAIN_EFFECT_LIST
+        case 8, 9:
+            settingList = Constants.COLOR_CHROME_EFFECT_LIST
+        case 10:
+            settingList = Constants.WHITE_BALANCE_LIST
+        case 11:
+            settingList = Constants.RED_BLUE_LIST
+        case 12:
+            settingList = Constants.EXPOSURE_LIST
+        default:
+            break
+        }
+        
+        let topVC = UIApplication.topViewController()
+        
+        switch indexPath.row {
+        case 0, 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingTableViewCell
+            cell.iconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[indexPath.row])
+            cell.nameLB.text = Constants.SETTING_LIST[indexPath.row]
+            cell.valueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[indexPath.row], for: .normal)
+            
+            cell.valueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
                     modalVC.modalPresentationStyle = .overFullScreen
                     topVC?.present(modalVC, animated: true)
                     modalVC.selectedItem
                         .subscribe(onNext: { itemName in
-                            valueLB.text = itemName
-                    }).disposed(by: this.bag)
-                    
-                }
-            }.disposed(by: bag)
-        
-        return view
+                            cell.valueBtn.setTitle(itemName, for: .normal)
+                            if indexPath.row == 0 {
+                                this.selectedSimul = itemName
+                            } else {
+                                this.selectedDynamic = itemName
+                            }
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            return cell
+        case 2:
+            let twoCell = tableView.dequeueReusableCell(withIdentifier: "twoCell", for: indexPath) as! TwoSettingTableViewCell
+            twoCell.firstIconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[2])
+            twoCell.firstNameLB.text = Constants.SETTING_LIST[2]
+            twoCell.firstValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[2], for: .normal)
+            twoCell.secondIconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[3])
+            twoCell.secondNameLB.text = Constants.SETTING_LIST[3]
+            twoCell.secondValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[3], for: .normal)
+            twoCell.firstNameLBLeadingConstraint.isActive = true
+            twoCell.secondNameLBLeadingConstraint.isActive = true
+            
+            twoCell.firstValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.firstValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedHighlight = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            twoCell.secondValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.secondValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedShadow = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            return twoCell
+        case 3...10:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingTableViewCell
+            cell.iconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[indexPath.row + 1])
+            cell.nameLB.text = Constants.SETTING_LIST[indexPath.row + 1]
+            cell.valueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[indexPath.row + 1], for: .normal)
+            
+            if indexPath.row == 10 {
+                cell.divider.isHidden = true
+            }
+            
+            cell.valueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            cell.valueBtn.setTitle(itemName, for: .normal)
+                            if indexPath.row == 3 {
+                                this.selectedColor = itemName
+                            } else if indexPath.row == 4 {
+                                this.selectedNoise = itemName
+                            } else if indexPath.row == 5 {
+                                this.selectedSharp = itemName
+                            } else if indexPath.row == 6 {
+                                this.selectedClarity = itemName
+                            } else if indexPath.row == 7 {
+                                this.selectedGrain = itemName
+                            } else if indexPath.row == 8 {
+                                this.selectedColorChrome = itemName
+                            } else if indexPath.row == 9 {
+                                this.selectedColorChromeBlue = itemName
+                            } else {
+                                this.selectedWhiteBalance = itemName
+                            }
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            return cell
+        case 11:
+            let twoCell = tableView.dequeueReusableCell(withIdentifier: "twoCell", for: indexPath) as! TwoSettingTableViewCell
+            twoCell.firstNameLB.text = Constants.SETTING_LIST[12]
+            twoCell.firstValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[12], for: .normal)
+            twoCell.secondNameLB.text = Constants.SETTING_LIST[13]
+            twoCell.secondValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[13], for: .normal)
+            twoCell.firstNameLBLeadingConstraint = twoCell.firstNameLB.leadingAnchor.constraint(equalTo: twoCell.contentView.leadingAnchor, constant: 16)
+            twoCell.secondNameLBLeadingConstraint = twoCell.secondNameLB.leadingAnchor.constraint(equalTo: twoCell.contentView.leadingAnchor, constant: UIScreen.main.bounds.width/2 + 16)
+            twoCell.firstNameLBLeadingConstraint.isActive = true
+            twoCell.secondNameLBLeadingConstraint.isActive = true
+            
+            twoCell.firstValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.firstValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedRed = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            twoCell.secondValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.secondValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedBlue = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            return twoCell
+        case 12:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingTableViewCell
+            cell.iconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[12])
+            cell.nameLB.text = Constants.SETTING_LIST[14]
+            cell.valueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[14], for: .normal)
+            cell.exposureValueBtn.isHidden = false
+            cell.toLB.isHidden = false
+            cell.exposureValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[15], for: .normal)
+            cell.divider.isHidden = true
+            
+            cell.exposureValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            cell.exposureValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedExposure1 = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            cell.valueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            cell.valueBtn.setTitle(itemName, for: .normal)
+                            this.selectedExposure2 = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
     }
 }

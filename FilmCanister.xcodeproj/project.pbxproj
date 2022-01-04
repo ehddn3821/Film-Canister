@@ -46,6 +46,8 @@
 		35EDC14C277DCB59009436FD /* UINavigationController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14B277DCB59009436FD /* UINavigationController+Handler.swift */; };
 		35EDC14E277DE0D6009436FD /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14D277DE0D6009436FD /* SideMenuViewController.swift */; };
 		35EDC15227817ECF009436FD /* SideMenuViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC15127817ECF009436FD /* SideMenuViewController+UI.swift */; };
+		3D8594842783E55800E91F7E /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8594832783E55800E91F7E /* SettingTableViewCell.swift */; };
+		3D8594862784258400E91F7E /* TwoSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8594852784258400E91F7E /* TwoSettingTableViewCell.swift */; };
 		4980591E6E577DB9181A20DF /* Pods_FilmCanisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8C4EB975A3E8BDD956F578 /* Pods_FilmCanisterTests.framework */; };
 		5196727A7064E9AD32A09262 /* Pods_FilmCanister_FilmCanisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */; };
 		B163AA608B3356BE8D50CB76 /* Pods_FilmCanister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034E9ACCF263F935405B28AF /* Pods_FilmCanister.framework */; };
@@ -114,6 +116,8 @@
 		35EDC14B277DCB59009436FD /* UINavigationController+Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Handler.swift"; sourceTree = "<group>"; };
 		35EDC14D277DE0D6009436FD /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		35EDC15127817ECF009436FD /* SideMenuViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SideMenuViewController+UI.swift"; sourceTree = "<group>"; };
+		3D8594832783E55800E91F7E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		3D8594852784258400E91F7E /* TwoSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoSettingTableViewCell.swift; sourceTree = "<group>"; };
 		3FA0594AAA98EA079D7F413C /* Pods_FilmCanister_FilmCanisterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmCanister_FilmCanisterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F853F8941AC4479F3B74B5 /* Pods-FilmCanisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.release.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		7475A9073C58ED7CCBDA1F0C /* Pods-FilmCanisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmCanisterTests.debug.xcconfig"; path = "Target Support Files/Pods-FilmCanisterTests/Pods-FilmCanisterTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 				35EDC1242775F80B009436FD /* RecipeSampleTableViewCell.swift */,
 				35EDC12B2776C98C009436FD /* RecipeSettingTableViewCell.swift */,
 				35EDC135277707D1009436FD /* RecipeMemoTableViewCell.swift */,
+				3D8594832783E55800E91F7E /* SettingTableViewCell.swift */,
+				3D8594852784258400E91F7E /* TwoSettingTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -593,9 +599,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D8594842783E55800E91F7E /* SettingTableViewCell.swift in Sources */,
 				35EDC14427779FAC009436FD /* MainTableViewCell.swift in Sources */,
 				35EDC11127758E83009436FD /* RecipeViewController+UI.swift in Sources */,
 				35EDC10D27756DB6009436FD /* CommonConstants.swift in Sources */,
+				3D8594862784258400E91F7E /* TwoSettingTableViewCell.swift in Sources */,
 				35EDC14E277DE0D6009436FD /* SideMenuViewController.swift in Sources */,
 				35EDC0C127749C8E009436FD /* MainViewController.swift in Sources */,
 				35EDC14A277C863B009436FD /* RealmImageManager.swift in Sources */,

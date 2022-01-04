@@ -151,6 +151,8 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     return sampleCell
                 case 1:
                     let settingCell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
+                    let simulName = realm.object(ofType: RecipeModel.self, forPrimaryKey: recipeID)!.simulName
+//                    settingCell.simulationNameLB.text = simulName
                     return settingCell
                 case 2:
                     return tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
@@ -159,9 +161,44 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            
         default:
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if viewType == .main {
+            if indexPath.row == 1 {
+                switch indexPath.section {
+                case 0:
+                    return 120
+                case 1:
+                    return 832
+                case 2:
+                    return 272
+                default:
+                    return 120
+                }
+            } else {
+                return 56
+            }
+        } else {
+            if indexPath.row == 1 {
+                switch indexPath.section {
+                case 0:
+                    return 88
+                case 1:
+                    return 120
+                case 2:
+                    return 832
+                case 3:
+                    return 272
+                default:
+                    return 88
+                }
+            } else {
+                return 56
+            }
         }
     }
 }
