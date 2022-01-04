@@ -42,6 +42,7 @@ class RecipeSampleTableViewCell: UITableViewCell {
         contentView.backgroundColor = .systemBackground
         
         contentView.addSubview(collectionView)
+        collectionView.backgroundColor = .systemBackground
         collectionView.snp.makeConstraints { make in
             make.height.equalTo(120)
             make.edges.equalToSuperview()

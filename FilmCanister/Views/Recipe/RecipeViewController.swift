@@ -151,8 +151,6 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     return sampleCell
                 case 1:
                     let settingCell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
-                    settingCell.viewType = viewType
-                    settingCell.recipeID = recipeID
                     return settingCell
                 case 2:
                     return tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
