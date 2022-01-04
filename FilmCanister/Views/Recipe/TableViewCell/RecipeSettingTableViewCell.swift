@@ -97,7 +97,12 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingTableViewCell
             cell.iconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[indexPath.row])
             cell.nameLB.text = Constants.SETTING_LIST[indexPath.row]
-            cell.valueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[indexPath.row], for: .normal)
+            
+            if indexPath.row == 0 {
+                cell.valueBtn.setTitle(selectedSimul, for: .normal)
+            } else {
+                cell.valueBtn.setTitle(selectedDynamic, for: .normal)
+            }
             
             cell.valueBtn.rx.tap
                 .bind { [weak self] _ in
@@ -121,12 +126,13 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             let twoCell = tableView.dequeueReusableCell(withIdentifier: "twoCell", for: indexPath) as! TwoSettingTableViewCell
             twoCell.firstIconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[2])
             twoCell.firstNameLB.text = Constants.SETTING_LIST[2]
-            twoCell.firstValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[2], for: .normal)
             twoCell.secondIconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[3])
             twoCell.secondNameLB.text = Constants.SETTING_LIST[3]
-            twoCell.secondValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[3], for: .normal)
             twoCell.firstNameLBLeadingConstraint.isActive = true
             twoCell.secondNameLBLeadingConstraint.isActive = true
+            
+            twoCell.firstValueBtn.setTitle(selectedHighlight, for: .normal)
+            twoCell.secondValueBtn.setTitle(selectedShadow, for: .normal)
             
             twoCell.firstValueBtn.rx.tap
                 .bind { [weak self] _ in
@@ -159,10 +165,24 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingTableViewCell
             cell.iconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[indexPath.row + 1])
             cell.nameLB.text = Constants.SETTING_LIST[indexPath.row + 1]
-            cell.valueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[indexPath.row + 1], for: .normal)
             
-            if indexPath.row == 10 {
+            if indexPath.row == 3 {
+                cell.valueBtn.setTitle(selectedColor, for: .normal)
+            } else if indexPath.row == 4 {
+                cell.valueBtn.setTitle(selectedNoise, for: .normal)
+            } else if indexPath.row == 5 {
+                cell.valueBtn.setTitle(selectedSharp, for: .normal)
+            } else if indexPath.row == 6 {
+                cell.valueBtn.setTitle(selectedClarity, for: .normal)
+            } else if indexPath.row == 7 {
+                cell.valueBtn.setTitle(selectedGrain, for: .normal)
+            } else if indexPath.row == 8 {
+                cell.valueBtn.setTitle(selectedColorChrome, for: .normal)
+            } else if indexPath.row == 9 {
+                cell.valueBtn.setTitle(selectedColorChromeBlue, for: .normal)
+            } else {
                 cell.divider.isHidden = true
+                cell.valueBtn.setTitle(selectedWhiteBalance, for: .normal)
             }
             
             cell.valueBtn.rx.tap
@@ -198,13 +218,14 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
         case 11:
             let twoCell = tableView.dequeueReusableCell(withIdentifier: "twoCell", for: indexPath) as! TwoSettingTableViewCell
             twoCell.firstNameLB.text = Constants.SETTING_LIST[12]
-            twoCell.firstValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[12], for: .normal)
             twoCell.secondNameLB.text = Constants.SETTING_LIST[13]
-            twoCell.secondValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[13], for: .normal)
             twoCell.firstNameLBLeadingConstraint = twoCell.firstNameLB.leadingAnchor.constraint(equalTo: twoCell.contentView.leadingAnchor, constant: 16)
             twoCell.secondNameLBLeadingConstraint = twoCell.secondNameLB.leadingAnchor.constraint(equalTo: twoCell.contentView.leadingAnchor, constant: UIScreen.main.bounds.width/2 + 16)
             twoCell.firstNameLBLeadingConstraint.isActive = true
             twoCell.secondNameLBLeadingConstraint.isActive = true
+            
+            twoCell.firstValueBtn.setTitle(selectedRed, for: .normal)
+            twoCell.secondValueBtn.setTitle(selectedBlue, for: .normal)
             
             twoCell.firstValueBtn.rx.tap
                 .bind { [weak self] _ in
@@ -237,11 +258,12 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingTableViewCell
             cell.iconIV.image = .init(named: Constants.SETTING_IMAGE_LIST[12])
             cell.nameLB.text = Constants.SETTING_LIST[14]
-            cell.valueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[14], for: .normal)
             cell.exposureValueBtn.isHidden = false
             cell.toLB.isHidden = false
-            cell.exposureValueBtn.setTitle(Constants.SETTING_DEFAULT_VALUE[15], for: .normal)
             cell.divider.isHidden = true
+            
+            cell.exposureValueBtn.setTitle(selectedExposure1, for: .normal)
+            cell.valueBtn.setTitle(selectedExposure2, for: .normal)
             
             cell.exposureValueBtn.rx.tap
                 .bind { [weak self] _ in

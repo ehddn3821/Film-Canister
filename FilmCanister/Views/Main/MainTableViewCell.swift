@@ -49,7 +49,7 @@ class MainTableViewCell: UITableViewCell {
         }
         
         contentView.addSubview(nextIV)
-        nextIV.image = .init(named: "next")
+        nextIV.image = .init(named: "Next")
         nextIV.snp.makeConstraints { make in
             make.size.equalTo(24)
             make.trailing.equalTo(-16)

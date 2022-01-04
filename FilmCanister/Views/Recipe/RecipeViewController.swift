@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import RealmSwift
 import Toast_Swift
 
@@ -19,9 +20,11 @@ enum ViewType {
 class RecipeViewController: CustomNavigationBarViewController<UIView> {
     let bag = DisposeBag()
     var realm = try! Realm()
+    var recipeModel: RecipeModel!
     let headerList = ["Name", "Sample", "Setting", "Memo"]
     var viewType: ViewType = .add
     var recipeID = 0
+    var memoText = BehaviorSubject<String>(value: "")
     
     let tableView = UITableView()
     
@@ -38,6 +41,9 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if viewType != .add {
+            recipeModel = realm.object(ofType: RecipeModel.self, forPrimaryKey: recipeID)
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecipeHeaderTableViewCell.classForCoder(), forCellReuseIdentifier: "headerCell")
@@ -53,18 +59,35 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
         customNavigationBar.rightBtn.rx.tap
             .bind { [weak self] _ in
                 guard let this = self else { return }
-                let nameCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! RecipeNameTableViewCell
-                let simulCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as! RecipeSettingTableViewCell
+                guard let nameCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RecipeNameTableViewCell else { return }
+                guard let settingCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as? RecipeSettingTableViewCell else { return }
                 var selectedImageList: [UIImage] = []
                 if let sampleCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 1)) as? RecipeSampleTableViewCell {
                     selectedImageList = sampleCell.selectedImageList
                 }
                 
                 let id = UInt64((Date().timeIntervalSince1970) * 1000)
+                
                 let recipe = RecipeModel(id: Int(id),
                                          name: nameCell.nameTextField.text!,
-                                         simulName: simulCell.selectedSimul,
-                                         imageCount: selectedImageList.count)
+                                         film_simulation: settingCell.selectedSimul,
+                                         image_count: selectedImageList.count,
+                                         dynamic_range: settingCell.selectedDynamic,
+                                         highlight: settingCell.selectedHighlight,
+                                         shadow: settingCell.selectedShadow,
+                                         color: settingCell.selectedColor,
+                                         noise_reduction: settingCell.selectedNoise,
+                                         sharpening: settingCell.selectedSharp,
+                                         clarity: settingCell.selectedClarity,
+                                         grain_effect: settingCell.selectedGrain,
+                                         color_chrome_effect: settingCell.selectedColorChrome,
+                                         color_chrome_effect_blue: settingCell.selectedColorChromeBlue,
+                                         white_balance: settingCell.selectedWhiteBalance,
+                                         red: settingCell.selectedRed,
+                                         blue: settingCell.selectedBlue,
+                                         exposure_compensation_1: settingCell.selectedExposure1,
+                                         exposure_compensation_2: settingCell.selectedExposure2,
+                                         memo: try! this.memoText.value())
                 try! this.realm.write {
                     if !selectedImageList.isEmpty {
                         for i in 0..<selectedImageList.count {
@@ -81,7 +104,7 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                     toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
                     toastStyle.messageColor = .white
                     toastStyle.imageSize = .init(width: 24, height: 24)
-                    mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "check"), style: toastStyle)
+                    mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: toastStyle)
                 })
                 
             }.disposed(by: bag)
@@ -90,10 +113,10 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
 
 extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if viewType == .add {
-            return headerList.count
+        if viewType != .main {
+            return 4
         } else {
-            return headerList.count - 1
+            return 3
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,7 +130,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
             case .add:
                 if indexPath.section == 0 {
                     let imageAttachment = NSTextAttachment()
-                    imageAttachment.image = UIImage(named:"mandatory")
+                    imageAttachment.image = UIImage(named:"Mandatory")
                     imageAttachment.bounds = CGRect(x: 0, y: -4, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
                     let attachmentString = NSAttributedString(attachment: imageAttachment)
                     let completeText = NSMutableAttributedString(string: "")
@@ -147,15 +170,32 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     let sampleCell = tableView.dequeueReusableCell(withIdentifier: "sampleCell", for: indexPath) as! RecipeSampleTableViewCell
                     sampleCell.viewType = viewType
                     sampleCell.recipeID = recipeID
-                    sampleCell.sampleImageCount = realm.object(ofType: RecipeModel.self, forPrimaryKey: recipeID)!.imageCount
+                    sampleCell.sampleImageCount = recipeModel.image_count
                     return sampleCell
                 case 1:
                     let settingCell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
-                    let simulName = realm.object(ofType: RecipeModel.self, forPrimaryKey: recipeID)!.simulName
-//                    settingCell.simulationNameLB.text = simulName
+                    settingCell.selectedSimul = recipeModel.film_simulation
+                    settingCell.selectedDynamic = recipeModel.dynamic_range
+                    settingCell.selectedHighlight = recipeModel.highlight
+                    settingCell.selectedShadow = recipeModel.shadow
+                    settingCell.selectedColor = recipeModel.color
+                    settingCell.selectedNoise = recipeModel.noise_reduction
+                    settingCell.selectedSharp = recipeModel.sharpening
+                    settingCell.selectedClarity = recipeModel.clarity
+                    settingCell.selectedGrain = recipeModel.grain_effect
+                    settingCell.selectedColorChrome = recipeModel.color_chrome_effect
+                    settingCell.selectedColorChromeBlue = recipeModel.color_chrome_effect_blue
+                    settingCell.selectedWhiteBalance = recipeModel.white_balance
+                    settingCell.selectedRed = recipeModel.red
+                    settingCell.selectedBlue = recipeModel.blue
+                    settingCell.selectedExposure1 = recipeModel.exposure_compensation_1
+                    settingCell.selectedExposure2 = recipeModel.exposure_compensation_2
                     return settingCell
                 case 2:
-                    return tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
+                    let memoCell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
+                    memoCell.memoPlaceholder.isHidden = true
+                    memoCell.memoTextView.text = recipeModel.memo
+                    return memoCell
                 default:
                     return UITableViewCell()
                 }

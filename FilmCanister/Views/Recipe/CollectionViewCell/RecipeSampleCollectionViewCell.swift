@@ -19,7 +19,7 @@ class RecipeSampleCollectionViewCell: UICollectionViewCell {
         sampleIV.contentMode = .scaleAspectFill
         sampleIV.layer.cornerRadius = 12
         sampleIV.clipsToBounds = true
-        sampleIV.image = .init(named: "add_image")
+        sampleIV.image = .init(named: "AddImage")
         sampleIV.snp.makeConstraints { make in
             make.size.equalTo(88)
             make.top.equalTo(16)
