@@ -11,9 +11,6 @@ import RealmSwift
 
 class RecipeSettingTableViewCell: UITableViewCell {
     let bag = DisposeBag()
-    var realm = try! Realm()
-    var viewType: ViewType = .add
-    var recipeID = 0
     
     var selectedSimul = "Provia"
     
@@ -248,7 +245,7 @@ class RecipeSettingTableViewCell: UITableViewCell {
     
     
     //MARK: - Make setting view
-    private func makeSetting(_ name: String, imageName: String = "", isImage: Bool = true, isDivider: Bool = true) -> UIView {
+    private func makeSetting(_ name: String, imageName: String = "", isImage: Bool = true, isDivider: Bool = true, simulName: String = "Provia") -> UIView {
         let view = UIView()
         
         if isImage {
@@ -292,11 +289,7 @@ class RecipeSettingTableViewCell: UITableViewCell {
         }
         
         if name == settingList[0] {
-            if viewType == .add {
-                valueLB.text = "Provia"
-            } else {
-                valueLB.text = realm.object(ofType: RecipeModel.self, forPrimaryKey: recipeID)?.simulName
-            }
+            valueLB.text = saveSimulName
         } else if name == settingList[1] {
             valueLB.text = "Auto"
         } else if name == settingList[2] {

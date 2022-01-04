@@ -29,7 +29,7 @@ extension SideMenuViewController {
         settingsView.backgroundColor = .init(named: Constants.COLOR_MAIN_BACKGROUND)
         settingsView.snp.makeConstraints { make in
             make.height.equalTo(56)
-            make.top.equalTo(50)
+            make.bottom.equalTo(view.snp.top).offset(64 + UI.SAFE_AREA_TOP)
             make.leading.trailing.equalToSuperview()
         }
         
