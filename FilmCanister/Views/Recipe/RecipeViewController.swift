@@ -70,9 +70,14 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                     }
                     let settingCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as! RecipeSettingTableViewCell
                     
-                    let id = UInt64((Date().timeIntervalSince1970) * 1000)
+                    var id: Int!
+                    if this.viewType == .add {
+                        id = Int(UInt64((Date().timeIntervalSince1970) * 1000))
+                    } else {
+                        id = this.recipeModel.id
+                    }
                     
-                    let recipe = RecipeModel(id: Int(id),
+                    let recipe = RecipeModel(id: id,
                                              name: try! this.nameText.value(),
                                              film_simulation: settingCell.selectedSimul,
                                              image_count: selectedImageList.count,
@@ -95,10 +100,14 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                     try! this.realm.write {
                         if !selectedImageList.isEmpty {
                             for i in 0..<selectedImageList.count {
-                                RealmImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id)_\(i+1).png", image: selectedImageList[i])
+                                RealmImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id!)_\(i+1).png", image: selectedImageList[i])
                             }
                         }
-                        this.realm.add(recipe)
+                        if this.viewType == .add {
+                            this.realm.add(recipe)
+                        } else {
+                            this.realm.add(recipe, update: .modified)
+                        }
                         Log.info("Recipe [ \(try! this.nameText.value()) ] 추가 완료")
                     }
                     
@@ -121,6 +130,13 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                                 Log.info("Edit 전환")
                                 modalVC.dismiss(animated: true, completion: nil)
                                 this.viewType = .update
+                                this.customNavigationBar.barTitle.text = ""
+                                this.customNavigationBar.rightBtn.setImage(UIImage(), for: .normal)
+                                this.customNavigationBar.rightBtn.setTitle("Save", for: .normal)
+                                this.customNavigationBar.rightBtn.titleLabel?.font = UIFont(name: Constants.MAIN_FONT_BOLD, size: 16)
+                                this.customNavigationBar.rightBtn.setTitleColor(.init(named: Constants.COLOR_ENABLE), for: .normal)
+                                this.customNavigationBar.rightBtn.setTitleColor(.init(named: Constants.COLOR_DISABLE), for: .disabled)
+                                this.recipeModel = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID)
                                 this.tableView.reloadData()
                             } else {  // 삭제
                                 let alert = UIAlertController(title: "삭제하시겠습니까?", message: "", preferredStyle: .alert)
@@ -207,13 +223,12 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                 switch indexPath.section {
                 case 0:
                     let sampleCell = tableView.dequeueReusableCell(withIdentifier: "sampleCell", for: indexPath) as! RecipeSampleTableViewCell
-                    sampleCell.viewType = viewType
+                    sampleCell.viewType = .main
                     sampleCell.recipeID = recipeID
                     sampleCell.sampleImageCount = recipeModel.image_count
                     return sampleCell
                 case 1:
                     let settingCell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
-                    settingCell.viewType = viewType
                     settingCell.selectedSimul = recipeModel.film_simulation
                     settingCell.selectedDynamic = recipeModel.dynamic_range
                     settingCell.selectedHighlight = recipeModel.highlight
@@ -230,6 +245,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     settingCell.selectedBlue = recipeModel.blue
                     settingCell.selectedExposure1 = recipeModel.exposure_compensation_1
                     settingCell.selectedExposure2 = recipeModel.exposure_compensation_2
+                    settingCell.tableView.isUserInteractionEnabled = false
                     return settingCell
                 case 2:
                     let memoCell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
@@ -243,15 +259,59 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 switch indexPath.section {
                 case 0:
-                    return tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath) as! RecipeNameTableViewCell
+                    let nameCell = tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath) as! RecipeNameTableViewCell
+                    if !nameCell.nameChange {
+                        nameCell.nameTextField.text = recipeModel.name
+                        nameText.onNext(recipeModel.name)
+                        nameCell.nameChange = true
+                    }
+                    return nameCell
                 case 1:
                     let sampleCell = tableView.dequeueReusableCell(withIdentifier: "sampleCell", for: indexPath) as! RecipeSampleTableViewCell
-                    sampleCell.viewType = .add
+                    sampleCell.viewType = .update
+                    sampleCell.recipeID = recipeID
+                    if !sampleCell.isUpdateFirstCheck {
+                        sampleCell.sampleImageCount = recipeModel.image_count
+                        for i in 0..<recipeModel.image_count {
+                            sampleCell.selectedImageList.append(RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(i+1)")!)
+                        }
+                        sampleCell.isUpdateFirstCheck = true
+                    }
+                    sampleCell.collectionView.reloadData()
                     return sampleCell
                 case 2:
-                    return tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
+                    let settingCell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
+                    settingCell.selectedSimul = recipeModel.film_simulation
+                    settingCell.selectedDynamic = recipeModel.dynamic_range
+                    settingCell.selectedHighlight = recipeModel.highlight
+                    settingCell.selectedShadow = recipeModel.shadow
+                    settingCell.selectedColor = recipeModel.color
+                    settingCell.selectedNoise = recipeModel.noise_reduction
+                    settingCell.selectedSharp = recipeModel.sharpening
+                    settingCell.selectedClarity = recipeModel.clarity
+                    settingCell.selectedGrain = recipeModel.grain_effect
+                    settingCell.selectedColorChrome = recipeModel.color_chrome_effect
+                    settingCell.selectedColorChromeBlue = recipeModel.color_chrome_effect_blue
+                    settingCell.selectedWhiteBalance = recipeModel.white_balance
+                    settingCell.selectedRed = recipeModel.red
+                    settingCell.selectedBlue = recipeModel.blue
+                    settingCell.selectedExposure1 = recipeModel.exposure_compensation_1
+                    settingCell.selectedExposure2 = recipeModel.exposure_compensation_2
+                    settingCell.tableView.isUserInteractionEnabled = true
+                    return settingCell
                 case 3:
-                    return tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
+                    let memoCell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
+                    if recipeModel.memo != "" {
+                        memoCell.memoPlaceholder.isHidden = true
+                    }
+                    if !memoCell.memoChange {
+                        memoCell.memoTextView.isEditable = true
+                        memoCell.memoTextView.text = recipeModel.memo
+                        memoText.onNext(recipeModel.memo)
+                        memoCell.memoChange = true
+                    }
+
+                    return memoCell
                 default:
                     return UITableViewCell()
                 }
