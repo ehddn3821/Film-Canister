@@ -27,7 +27,7 @@ class RecipeSampleCollectionViewCell: UICollectionViewCell {
         }
         
         sampleIV.addSubview(removeBtn)
-        removeBtn.setImage(.init(named: "remove"), for: .normal)
+        removeBtn.setImage(.init(named: "Remove"), for: .normal)
         removeBtn.snp.makeConstraints { make in
             make.size.equalTo(24)
             make.top.equalTo(4)

@@ -12,6 +12,7 @@ class RecipeMemoTableViewCell: UITableViewCell {
     let memoTextView = UITextView()
     let memoPlaceholder = UILabel()
     var isSaveEnabled = false
+    var memoChange = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

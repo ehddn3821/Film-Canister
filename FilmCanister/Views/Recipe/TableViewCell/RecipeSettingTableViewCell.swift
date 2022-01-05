@@ -12,8 +12,6 @@ import RealmSwift
 class RecipeSettingTableViewCell: UITableViewCell {
     let bag = DisposeBag()
     
-    var viewType: ViewType = .add
-    
     var selectedSimul = "Provia"
     var selectedDynamic = "Auto"
     var selectedHighlight = "0"
@@ -110,24 +108,22 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
                 cell.valueBtn.setTitle(selectedDynamic, for: .normal)
             }
             
-            if viewType != .main {
-                cell.valueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                cell.valueBtn.setTitle(itemName, for: .normal)
-                                if indexPath.row == 0 {
-                                    this.selectedSimul = itemName
-                                } else {
-                                    this.selectedDynamic = itemName
-                                }
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-            }
+            cell.valueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            cell.valueBtn.setTitle(itemName, for: .normal)
+                            if indexPath.row == 0 {
+                                this.selectedSimul = itemName
+                            } else {
+                                this.selectedDynamic = itemName
+                            }
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
             
             return cell
         case 2:  // Highlight, Shadow
@@ -142,33 +138,31 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             twoCell.firstValueBtn.setTitle(selectedHighlight, for: .normal)
             twoCell.secondValueBtn.setTitle(selectedShadow, for: .normal)
             
-            if viewType != .main {
-                twoCell.firstValueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                twoCell.firstValueBtn.setTitle(itemName, for: .normal)
-                                this.selectedHighlight = itemName
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-                
-                twoCell.secondValueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                twoCell.secondValueBtn.setTitle(itemName, for: .normal)
-                                this.selectedShadow = itemName
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-            }
+            twoCell.firstValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.firstValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedHighlight = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            twoCell.secondValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.secondValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedShadow = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
             
             return twoCell
         case 3...10:  // Color ~ White Balance
@@ -195,36 +189,34 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
                 cell.valueBtn.setTitle(selectedWhiteBalance, for: .normal)
             }
             
-            if viewType != .main {
-                cell.valueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                cell.valueBtn.setTitle(itemName, for: .normal)
-                                if indexPath.row == 3 {
-                                    this.selectedColor = itemName
-                                } else if indexPath.row == 4 {
-                                    this.selectedNoise = itemName
-                                } else if indexPath.row == 5 {
-                                    this.selectedSharp = itemName
-                                } else if indexPath.row == 6 {
-                                    this.selectedClarity = itemName
-                                } else if indexPath.row == 7 {
-                                    this.selectedGrain = itemName
-                                } else if indexPath.row == 8 {
-                                    this.selectedColorChrome = itemName
-                                } else if indexPath.row == 9 {
-                                    this.selectedColorChromeBlue = itemName
-                                } else {
-                                    this.selectedWhiteBalance = itemName
-                                }
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-            }
+            cell.valueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            cell.valueBtn.setTitle(itemName, for: .normal)
+                            if indexPath.row == 3 {
+                                this.selectedColor = itemName
+                            } else if indexPath.row == 4 {
+                                this.selectedNoise = itemName
+                            } else if indexPath.row == 5 {
+                                this.selectedSharp = itemName
+                            } else if indexPath.row == 6 {
+                                this.selectedClarity = itemName
+                            } else if indexPath.row == 7 {
+                                this.selectedGrain = itemName
+                            } else if indexPath.row == 8 {
+                                this.selectedColorChrome = itemName
+                            } else if indexPath.row == 9 {
+                                this.selectedColorChromeBlue = itemName
+                            } else {
+                                this.selectedWhiteBalance = itemName
+                            }
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
             
             return cell
         case 11:  // Red, Blue
@@ -239,33 +231,31 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             twoCell.firstValueBtn.setTitle(selectedRed, for: .normal)
             twoCell.secondValueBtn.setTitle(selectedBlue, for: .normal)
             
-            if viewType != .main {
-                twoCell.firstValueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                twoCell.firstValueBtn.setTitle(itemName, for: .normal)
-                                this.selectedRed = itemName
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-                
-                twoCell.secondValueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                twoCell.secondValueBtn.setTitle(itemName, for: .normal)
-                                this.selectedBlue = itemName
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-            }
+            twoCell.firstValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.firstValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedRed = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            twoCell.secondValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            twoCell.secondValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedBlue = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
             
             return twoCell
         case 12:  // Exposure Compensation
@@ -279,33 +269,31 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             cell.exposureValueBtn.setTitle(selectedExposure1, for: .normal)
             cell.valueBtn.setTitle(selectedExposure2, for: .normal)
             
-            if viewType != .main {
-                cell.exposureValueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                cell.exposureValueBtn.setTitle(itemName, for: .normal)
-                                this.selectedExposure1 = itemName
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-                
-                cell.valueBtn.rx.tap
-                    .bind { [weak self] _ in
-                        guard let this = self else { return }
-                        let modalVC = RecipeSettingModalViewController(settingList: settingList)
-                        modalVC.modalPresentationStyle = .overFullScreen
-                        topVC?.present(modalVC, animated: true)
-                        modalVC.selectedItem
-                            .subscribe(onNext: { itemName in
-                                cell.valueBtn.setTitle(itemName, for: .normal)
-                                this.selectedExposure2 = itemName
-                            }).disposed(by: this.bag)
-                    }.disposed(by: bag)
-            }
+            cell.exposureValueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            cell.exposureValueBtn.setTitle(itemName, for: .normal)
+                            this.selectedExposure1 = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
+            
+            cell.valueBtn.rx.tap
+                .bind { [weak self] _ in
+                    guard let this = self else { return }
+                    let modalVC = RecipeSettingModalViewController(settingList: settingList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    topVC?.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            cell.valueBtn.setTitle(itemName, for: .normal)
+                            this.selectedExposure2 = itemName
+                        }).disposed(by: this.bag)
+                }.disposed(by: bag)
             
             return cell
         default:

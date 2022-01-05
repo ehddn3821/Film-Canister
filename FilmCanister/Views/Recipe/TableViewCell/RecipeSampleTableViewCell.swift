@@ -14,6 +14,7 @@ class RecipeSampleTableViewCell: UITableViewCell {
     var viewType: ViewType = .add
     var recipeID = 0
     var sampleImageCount = 0
+    var isUpdateFirstCheck = false
     var realm = try! Realm()
     
     let collectionView: UICollectionView = {
@@ -60,6 +61,7 @@ extension RecipeSampleTableViewCell: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImageList.append(image)
+            sampleImageCount += 1
             picker.dismiss(animated: true, completion: nil)
             collectionView.reloadData()
         }
@@ -70,13 +72,17 @@ extension RecipeSampleTableViewCell: UIImagePickerControllerDelegate, UINavigati
 // MARK: - CollectionView delegate
 extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedImageList.count + 1
+        if viewType == .main {
+            return sampleImageCount
+        } else {
+            return sampleImageCount + 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvCell", for: indexPath) as! RecipeSampleCollectionViewCell
         switch viewType {
-        case .add:
+        case .add, .update:
             if indexPath.row == 0 {
                 cell.sampleIV.image = .init(named: "AddImage")
                 cell.removeBtn.isHidden = true
@@ -92,13 +98,9 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
             if sampleImageCount == 0 {
                 cell.sampleIV.isHidden = true
             } else {
-                for i in 0..<sampleImageCount {
-                    cell.sampleIV.image = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(i+1)")
-                }
+                cell.sampleIV.image = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
             }
             cell.removeBtn.isHidden = true
-        case .update:
-            break
         }
         return cell
     }
@@ -123,6 +125,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     
     @objc func deleteCell(sender: UIButton) {
         selectedImageList.remove(at: sender.tag - 1)
+        sampleImageCount -= 1
         collectionView.deleteItems(at: [IndexPath(row: sender.tag, section: 0)])
     }
 }

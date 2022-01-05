@@ -13,7 +13,7 @@ extension RecipeViewController {
         
         //MARK: - Navigation Bar
         customNavigationBar.isEnablePopBtn = true
-        if viewType == .add {
+        if viewType == .add || viewType == .update {
             customNavigationBar.barTitle.text = ""
             customNavigationBar.rightBtn.setTitle("Save", for: .normal)
             customNavigationBar.rightBtn.titleLabel?.font = UIFont(name: Constants.MAIN_FONT_BOLD, size: 16)
