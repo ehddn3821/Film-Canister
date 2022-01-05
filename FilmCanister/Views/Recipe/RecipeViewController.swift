@@ -24,6 +24,7 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
     let headerList = ["Name", "Sample", "Setting", "Memo"]
     var viewType: ViewType = .add
     var recipeID = 0
+    var nameText = BehaviorSubject<String>(value: "")
     var memoText = BehaviorSubject<String>(value: "")
     
     let tableView = UITableView()
@@ -55,62 +56,102 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
         tableView.allowsSelection = false
     }
     
+    
+    //MARK: - Button Actions
     func btnActions() {
         customNavigationBar.rightBtn.rx.tap
             .bind { [weak self] _ in
                 guard let this = self else { return }
-                guard let nameCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RecipeNameTableViewCell else { return }
-                guard let settingCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as? RecipeSettingTableViewCell else { return }
-                var selectedImageList: [UIImage] = []
-                if let sampleCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 1)) as? RecipeSampleTableViewCell {
-                    selectedImageList = sampleCell.selectedImageList
-                }
-                
-                let id = UInt64((Date().timeIntervalSince1970) * 1000)
-                
-                let recipe = RecipeModel(id: Int(id),
-                                         name: nameCell.nameTextField.text!,
-                                         film_simulation: settingCell.selectedSimul,
-                                         image_count: selectedImageList.count,
-                                         dynamic_range: settingCell.selectedDynamic,
-                                         highlight: settingCell.selectedHighlight,
-                                         shadow: settingCell.selectedShadow,
-                                         color: settingCell.selectedColor,
-                                         noise_reduction: settingCell.selectedNoise,
-                                         sharpening: settingCell.selectedSharp,
-                                         clarity: settingCell.selectedClarity,
-                                         grain_effect: settingCell.selectedGrain,
-                                         color_chrome_effect: settingCell.selectedColorChrome,
-                                         color_chrome_effect_blue: settingCell.selectedColorChromeBlue,
-                                         white_balance: settingCell.selectedWhiteBalance,
-                                         red: settingCell.selectedRed,
-                                         blue: settingCell.selectedBlue,
-                                         exposure_compensation_1: settingCell.selectedExposure1,
-                                         exposure_compensation_2: settingCell.selectedExposure2,
-                                         memo: try! this.memoText.value())
-                try! this.realm.write {
-                    if !selectedImageList.isEmpty {
-                        for i in 0..<selectedImageList.count {
-                            RealmImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id)_\(i+1).png", image: selectedImageList[i])
-                        }
+                if this.viewType != .main {
+                    Log.info("Save Button Tap")
+                    var selectedImageList: [UIImage] = []
+                    if let sampleCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 1)) as? RecipeSampleTableViewCell {
+                        selectedImageList = sampleCell.selectedImageList
                     }
-                    this.realm.add(recipe)
-                    Log.info("Recipe [ \(nameCell.nameTextField.text!) ] 추가 완료")
+                    let settingCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as! RecipeSettingTableViewCell
+                    
+                    let id = UInt64((Date().timeIntervalSince1970) * 1000)
+                    
+                    let recipe = RecipeModel(id: Int(id),
+                                             name: try! this.nameText.value(),
+                                             film_simulation: settingCell.selectedSimul,
+                                             image_count: selectedImageList.count,
+                                             dynamic_range: settingCell.selectedDynamic,
+                                             highlight: settingCell.selectedHighlight,
+                                             shadow: settingCell.selectedShadow,
+                                             color: settingCell.selectedColor,
+                                             noise_reduction: settingCell.selectedNoise,
+                                             sharpening: settingCell.selectedSharp,
+                                             clarity: settingCell.selectedClarity,
+                                             grain_effect: settingCell.selectedGrain,
+                                             color_chrome_effect: settingCell.selectedColorChrome,
+                                             color_chrome_effect_blue: settingCell.selectedColorChromeBlue,
+                                             white_balance: settingCell.selectedWhiteBalance,
+                                             red: settingCell.selectedRed,
+                                             blue: settingCell.selectedBlue,
+                                             exposure_compensation_1: settingCell.selectedExposure1,
+                                             exposure_compensation_2: settingCell.selectedExposure2,
+                                             memo: try! this.memoText.value())
+                    try! this.realm.write {
+                        if !selectedImageList.isEmpty {
+                            for i in 0..<selectedImageList.count {
+                                RealmImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id)_\(i+1).png", image: selectedImageList[i])
+                            }
+                        }
+                        this.realm.add(recipe)
+                        Log.info("Recipe [ \(try! this.nameText.value()) ] 추가 완료")
+                    }
+                    
+                    this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
+                        let mainVC = UIApplication.topViewController() as! MainViewController
+                        var toastStyle = ToastStyle()
+                        toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
+                        toastStyle.messageColor = .white
+                        toastStyle.imageSize = .init(width: 24, height: 24)
+                        mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: toastStyle)
+                    })
+                } else {
+                    let moreList = ["Edit", "Delete"]
+                    let modalVC = RecipeSettingModalViewController(settingList: moreList)
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    this.present(modalVC, animated: true)
+                    modalVC.selectedItem
+                        .subscribe(onNext: { itemName in
+                            if itemName == "Edit" {  // 수정
+                                Log.info("Edit 전환")
+                                modalVC.dismiss(animated: true, completion: nil)
+                                this.viewType = .update
+                                this.tableView.reloadData()
+                            } else {  // 삭제
+                                let alert = UIAlertController(title: "삭제하시겠습니까?", message: "", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+                                    modalVC.dismiss(animated: true, completion: nil)
+                                    guard let recipe = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID) else { return }
+                                    try! this.realm.write {
+                                        if recipe.image_count != 0 {
+                                            for i in 0..<recipe.image_count {
+                                                RealmImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+                                            }
+                                        }
+                                        Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
+                                        this.realm.delete(recipe)
+                                        this.navigationController?.popViewController(animated: true)
+                                    }
+                                }
+                                let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+                                alert.addAction(okAction)
+                                alert.addAction(cancelAction)
+                                modalVC.present(alert, animated: true, completion: nil)
+                            }
+                        }).disposed(by: this.bag)
                 }
-                
-                this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
-                    let mainVC = UIApplication.topViewController() as! MainViewController
-                    var toastStyle = ToastStyle()
-                    toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
-                    toastStyle.messageColor = .white
-                    toastStyle.imageSize = .init(width: 24, height: 24)
-                    mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: toastStyle)
-                })
                 
             }.disposed(by: bag)
     }
 }
 
+
+//MARK: - UITableViewDelegate
 extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if viewType != .main {
@@ -127,7 +168,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! RecipeHeaderTableViewCell
             switch viewType {
-            case .add:
+            case .add, .update:
                 if indexPath.section == 0 {
                     let imageAttachment = NSTextAttachment()
                     imageAttachment.image = UIImage(named:"Mandatory")
@@ -143,8 +184,6 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             case .main:
                 cell.titleLB.text = headerList[indexPath.section + 1]
-            case .update:
-                break
             }
             
             return cell
@@ -155,7 +194,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     return tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath) as! RecipeNameTableViewCell
                 case 1:
                     let sampleCell = tableView.dequeueReusableCell(withIdentifier: "sampleCell", for: indexPath) as! RecipeSampleTableViewCell
-                    sampleCell.viewType = viewType
+                    sampleCell.viewType = .add
                     return sampleCell
                 case 2:
                     return tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
@@ -164,7 +203,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                 default:
                     return UITableViewCell()
                 }
-            } else {
+            } else if viewType == .main {
                 switch indexPath.section {
                 case 0:
                     let sampleCell = tableView.dequeueReusableCell(withIdentifier: "sampleCell", for: indexPath) as! RecipeSampleTableViewCell
@@ -174,6 +213,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     return sampleCell
                 case 1:
                     let settingCell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
+                    settingCell.viewType = viewType
                     settingCell.selectedSimul = recipeModel.film_simulation
                     settingCell.selectedDynamic = recipeModel.dynamic_range
                     settingCell.selectedHighlight = recipeModel.highlight
@@ -195,7 +235,23 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     let memoCell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
                     memoCell.memoPlaceholder.isHidden = true
                     memoCell.memoTextView.text = recipeModel.memo
+                    memoCell.memoTextView.isEditable = false
                     return memoCell
+                default:
+                    return UITableViewCell()
+                }
+            } else {
+                switch indexPath.section {
+                case 0:
+                    return tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath) as! RecipeNameTableViewCell
+                case 1:
+                    let sampleCell = tableView.dequeueReusableCell(withIdentifier: "sampleCell", for: indexPath) as! RecipeSampleTableViewCell
+                    sampleCell.viewType = .add
+                    return sampleCell
+                case 2:
+                    return tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! RecipeSettingTableViewCell
+                case 3:
+                    return tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath) as! RecipeMemoTableViewCell
                 default:
                     return UITableViewCell()
                 }

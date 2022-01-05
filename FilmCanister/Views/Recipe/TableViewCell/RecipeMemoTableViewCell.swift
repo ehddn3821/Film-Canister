@@ -48,10 +48,6 @@ class RecipeMemoTableViewCell: UITableViewCell {
             make.leading.equalTo(16)
             make.top.equalTo(16)
         }
-        
-        if memoTextView.text != "" {
-            memoPlaceholder.isHidden = true
-        }
     }
     
     required init?(coder: NSCoder) {

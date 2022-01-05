@@ -18,6 +18,7 @@ class RecipeSettingModalTableViewCell: UITableViewCell {
         nameLB.font = .init(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
         nameLB.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(32)
+            make.trailing.equalToSuperview().offset(-32)
             make.centerY.equalToSuperview()
         }
     }

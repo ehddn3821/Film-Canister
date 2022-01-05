@@ -54,6 +54,8 @@ class RecipeSettingModalViewController: BaseViewController {
                 make.height.equalTo(272)
             } else if settingList.count == 4 {
                 make.height.equalTo(340)
+            } else if settingList.count == 2 {
+                make.height.equalTo(212)
             } else {
                 make.height.equalToSuperview().dividedBy(2)
             }
@@ -101,6 +103,14 @@ extension RecipeSettingModalViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "modalCell", for: indexPath) as! RecipeSettingModalTableViewCell
         cell.nameLB.text = settingList[indexPath.row]
+        if settingList.count == 2 {
+            cell.nameLB.textAlignment = .center
+            if indexPath.row == 0 {
+                cell.nameLB.textColor = .init(named: Constants.COLOR_ENABLE)
+            } else {
+                cell.nameLB.textColor = .init(named: Constants.COLOR_DELETE)
+            }
+        }
         return cell
     }
     
@@ -110,6 +120,21 @@ extension RecipeSettingModalViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem.onNext(settingList[indexPath.row])
-        dismissView()
+        if settingList.count == 2 {
+//            if indexPath.row == 0 {
+//
+//            } else {
+//                let alert = UIAlertController(title: "삭제하시겠습니까?", message: "", preferredStyle: .alert)
+//                let okAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+//                    Log.info("삭제 완료")
+//                }
+//                let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+//                alert.addAction(okAction)
+//                alert.addAction(cancelAction)
+//                self.present(alert, animated: true, completion: nil)
+//            }
+        } else {
+            dismissView()
+        }
     }
 }

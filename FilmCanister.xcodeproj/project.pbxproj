@@ -256,9 +256,9 @@
 		35EDC1052775492B009436FD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35EDC1472779E8A9009436FD /* DetailImageViewController.swift */,
 				35EDC1122775914A009436FD /* Main */,
 				35EDC11E2775B6B6009436FD /* Recipe */,
-				35EDC1472779E8A9009436FD /* DetailImageViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

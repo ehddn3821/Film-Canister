@@ -38,9 +38,20 @@ class RecipeNameTableViewCell: UITableViewCell {
 }
 
 extension RecipeNameTableViewCell: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        let topVC = UIApplication.topViewController() as! RecipeViewController
+//        if textField.text != "" {
+//            topVC.customNavigationBar.rightBtn.isEnabled = true
+//        } else {
+//            topVC.customNavigationBar.rightBtn.isEnabled = false
+//        }
+//    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         let topVC = UIApplication.topViewController() as! RecipeViewController
         if textField.text != "" {
+            print(textField.text!)
+            topVC.nameText.onNext(textField.text!)
             topVC.customNavigationBar.rightBtn.isEnabled = true
         } else {
             topVC.customNavigationBar.rightBtn.isEnabled = false
