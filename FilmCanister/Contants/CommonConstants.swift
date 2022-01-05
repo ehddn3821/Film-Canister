@@ -20,6 +20,7 @@ struct Constants {
     static let COLOR_ENABLE = "Enable"
     static let COLOR_DISABLE = "Disable"
     static let COLOR_MEMO_BORDER = "MemoBorder"
+    static let COLOR_DELETE = "Delete"
     
     // Settings
     static let SETTING_LIST = [ "Film Simulation",
