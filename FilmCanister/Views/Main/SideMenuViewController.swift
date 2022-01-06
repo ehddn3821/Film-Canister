@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 
 class SideMenuViewController: BaseViewController {
+    
     let bag = DisposeBag()
     
     let settingsView = UIView()
@@ -41,6 +42,7 @@ class SideMenuViewController: BaseViewController {
     }
 
     
+    // 다크모드 상태 저장
     @objc func onClickDarkModeSwitch(sender: UISwitch) {
         if sender.isOn {
             UserDefaults.standard.set(true, forKey: "isDarkMode")

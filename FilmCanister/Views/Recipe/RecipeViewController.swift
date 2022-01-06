@@ -20,6 +20,8 @@ enum ViewType {
 class RecipeViewController: CustomNavigationBarViewController<UIView> {
     let bag = DisposeBag()
     var realm = try! Realm()
+    var toastStyle = ToastStyle()
+    
     var recipeModel: RecipeModel!
     let headerList = ["Name", "Sample", "Setting", "Memo"]
     var viewType: ViewType = .add
@@ -100,7 +102,7 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                     try! this.realm.write {
                         if !selectedImageList.isEmpty {
                             for i in 0..<selectedImageList.count {
-                                RealmImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id!)_\(i+1).png", image: selectedImageList[i])
+                                ImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id!)_\(i+1).png", image: selectedImageList[i])
                             }
                         }
                         if this.viewType == .add {
@@ -113,11 +115,12 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                     
                     this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
                         let mainVC = UIApplication.topViewController() as! MainViewController
-                        var toastStyle = ToastStyle()
-                        toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
-                        toastStyle.messageColor = .white
-                        toastStyle.imageSize = .init(width: 24, height: 24)
-                        mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: toastStyle)
+                        if this.viewType == .add {
+                            mainVC.view.makeToast("Recipe has been registered.", image: .init(named: "Check"), style: this.toastStyle)
+                        } else {
+                            mainVC.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
+                        }
+                        mainVC.tableView.reloadData()
                     })
                 } else {
                     let moreList = ["Edit", "Delete"]
@@ -139,22 +142,27 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                                 this.recipeModel = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID)
                                 this.tableView.reloadData()
                             } else {  // 삭제
-                                let alert = UIAlertController(title: "삭제하시겠습니까?", message: "", preferredStyle: .alert)
-                                let okAction = UIAlertAction(title: "확인", style: .destructive) { _ in
-                                    modalVC.dismiss(animated: true, completion: nil)
-                                    guard let recipe = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID) else { return }
-                                    try! this.realm.write {
-                                        if recipe.image_count != 0 {
-                                            for i in 0..<recipe.image_count {
-                                                RealmImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+                                let alert = UIAlertController(title: "Do you want to delete?", message: "", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "OK", style: .destructive) { _ in
+                                    modalVC.dismiss(animated: false) {
+                                        guard let recipe = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID) else { return }
+                                        try! this.realm.write {
+                                            if recipe.image_count != 0 {
+                                                for i in 0..<recipe.image_count {
+                                                    ImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+                                                }
+                                            }
+                                            Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
+                                            this.realm.delete(recipe)
+                                            this.navigationController?.popViewControllerWithHandler {
+                                                let mainVC = UIApplication.topViewController() as! MainViewController
+                                                mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: this.toastStyle)
+                                                mainVC.tableView.reloadData()
                                             }
                                         }
-                                        Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
-                                        this.realm.delete(recipe)
-                                        this.navigationController?.popViewController(animated: true)
                                     }
                                 }
-                                let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+                                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
                                 alert.addAction(okAction)
                                 alert.addAction(cancelAction)
                                 modalVC.present(alert, animated: true, completion: nil)
@@ -273,7 +281,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     if !sampleCell.isUpdateFirstCheck {
                         sampleCell.sampleImageCount = recipeModel.image_count
                         for i in 0..<recipeModel.image_count {
-                            sampleCell.selectedImageList.append(RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(i+1)")!)
+                            sampleCell.selectedImageList.append(ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(i+1)")!)
                         }
                         sampleCell.isUpdateFirstCheck = true
                     }

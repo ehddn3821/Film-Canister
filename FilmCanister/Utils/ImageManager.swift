@@ -1,5 +1,5 @@
 //
-//  RealmImageManager.swift
+//  ImageManager.swift
 //  FilmCanister
 //
 //  Created by dwKang on 2021/12/29.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class RealmImageManager {
+class ImageManager: NSObject {
     
-    static var shared = RealmImageManager()
+    static var shared = ImageManager()
     
     
     //MARK: - 이미지 document에 저장

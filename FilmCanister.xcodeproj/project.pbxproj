@@ -42,7 +42,7 @@
 		35EDC14427779FAC009436FD /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14327779FAC009436FD /* MainTableViewCell.swift */; };
 		35EDC1462777AEBB009436FD /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC1452777AEBB009436FD /* UITextField+Padding.swift */; };
 		35EDC1482779E8A9009436FD /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC1472779E8A9009436FD /* DetailImageViewController.swift */; };
-		35EDC14A277C863B009436FD /* RealmImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC149277C863B009436FD /* RealmImageManager.swift */; };
+		35EDC14A277C863B009436FD /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC149277C863B009436FD /* ImageManager.swift */; };
 		35EDC14C277DCB59009436FD /* UINavigationController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14B277DCB59009436FD /* UINavigationController+Handler.swift */; };
 		35EDC14E277DE0D6009436FD /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC14D277DE0D6009436FD /* SideMenuViewController.swift */; };
 		35EDC15227817ECF009436FD /* SideMenuViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EDC15127817ECF009436FD /* SideMenuViewController+UI.swift */; };
@@ -112,7 +112,7 @@
 		35EDC14327779FAC009436FD /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		35EDC1452777AEBB009436FD /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
 		35EDC1472779E8A9009436FD /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
-		35EDC149277C863B009436FD /* RealmImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmImageManager.swift; sourceTree = "<group>"; };
+		35EDC149277C863B009436FD /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		35EDC14B277DCB59009436FD /* UINavigationController+Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Handler.swift"; sourceTree = "<group>"; };
 		35EDC14D277DE0D6009436FD /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		35EDC15127817ECF009436FD /* SideMenuViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SideMenuViewController+UI.swift"; sourceTree = "<group>"; };
@@ -238,7 +238,7 @@
 				35EDC11527759F67009436FD /* Font */,
 				35EDC0FE2774B214009436FD /* OSLog.swift */,
 				35EDC0FF2774B214009436FD /* PreViews.swift */,
-				35EDC149277C863B009436FD /* RealmImageManager.swift */,
+				35EDC149277C863B009436FD /* ImageManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -606,7 +606,7 @@
 				3D8594862784258400E91F7E /* TwoSettingTableViewCell.swift in Sources */,
 				35EDC14E277DE0D6009436FD /* SideMenuViewController.swift in Sources */,
 				35EDC0C127749C8E009436FD /* MainViewController.swift in Sources */,
-				35EDC14A277C863B009436FD /* RealmImageManager.swift in Sources */,
+				35EDC14A277C863B009436FD /* ImageManager.swift in Sources */,
 				35EDC1462777AEBB009436FD /* UITextField+Padding.swift in Sources */,
 				35EDC1302776EB80009436FD /* RecipeSettingModalViewController.swift in Sources */,
 				35EDC10F27758E3C009436FD /* RecipeViewController.swift in Sources */,
@@ -792,7 +792,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = LT5ZADXQMP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;
@@ -825,7 +825,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = LT5ZADXQMP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;
