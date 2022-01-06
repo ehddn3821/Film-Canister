@@ -6,6 +6,7 @@
 
 import UIKit
 import SnapKit
+import JGProgressHUD
 
 @objc protocol BaseViewControllerCustomizable {
     @objc optional func setupUI()
@@ -13,6 +14,13 @@ import SnapKit
 }
 
 class BaseViewController: UIViewController {
+    lazy var hud: JGProgressHUD = {
+        let loader = JGProgressHUD(style: .dark)
+        loader.textLabel.text = "Loading"
+        loader.backgroundColor = .init(hexColor: .dimmed, alpha: 0.7)
+        return loader
+    }()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,6 +66,18 @@ class BaseViewController: UIViewController {
     }
     deinit {
         Log.info("\(type(of: self)): deinit")
+    }
+    
+    func showLoding() {
+        DispatchQueue.main.async {
+            self.hud.show(in: self.view, animated: true)
+        }
+    }
+    
+    func hideLoding() {
+        DispatchQueue.main.async {
+            self.hud.dismiss(animated: true)
+        }
     }
 }
 

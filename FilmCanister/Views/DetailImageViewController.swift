@@ -10,7 +10,6 @@ import UIKit
 class DetailImageViewController: CustomNavigationBarViewController<UIView> {
     
     var detailImg: UIImage!
-    
     let detailIV = UIImageView()
     
     

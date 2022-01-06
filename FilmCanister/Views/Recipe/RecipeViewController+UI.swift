@@ -30,6 +30,10 @@ extension RecipeViewController {
             make.trailing.equalToSuperview().offset(-16)
         }
         
+        toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
+        toastStyle.messageColor = .white
+        toastStyle.imageSize = .init(width: 24, height: 24)
+        
         
         //MARK: - TableView
         bodyView.addSubview(tableView)

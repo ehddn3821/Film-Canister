@@ -10,12 +10,13 @@ import RxSwift
 import RxCocoa
 import RealmSwift
 import SideMenu
+import Toast_Swift
 
 class MainViewController: CustomNavigationBarViewController<UIView> {
+    
     let bag = DisposeBag()
     var realm = try! Realm()
     
-    //MARK: - UI Propertys
     let introView = UIView()
     let introLogo = UIImageView()
     let introNameLB = UILabel()
@@ -44,11 +45,10 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
             tableView.isHidden = false
             filmIV.isHidden = true
             emptySimulLB.isHidden = true
-            tableView.reloadData()
         }
     }
     
-    
+
     private func hideIntro() {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
             UIView.animate(withDuration: 0.3, animations: {
@@ -59,6 +59,7 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
         }
     }
     
+    //MARK: - Button Actions
     func btnActions() {
         // 사이드메뉴
         customNavigationBar.leftBtn.rx.tap
@@ -72,7 +73,7 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
                 this.present(sideMenu, animated: true)
             }.disposed(by: bag)
         
-        // 시뮬레이션 추가 화면
+        // 시뮬레이션 추가 버튼
         customNavigationBar.rightBtn.rx.tap
             .bind { [weak self] _ in
                 guard let this = self else { return }
@@ -81,18 +82,23 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
     }
 }
 
+
+//MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return realm.objects(RecipeModel.self).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
         cell.nameLB.text = realm.objects(RecipeModel.self)[indexPath.row].name
         cell.simulNameLB.text = realm.objects(RecipeModel.self)[indexPath.row].film_simulation
         let imageName = realm.objects(RecipeModel.self)[indexPath.row].id
-        cell.sampleIV.image = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName)_1")
+        cell.sampleIV.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName)_1")
         
+        // 마지막 인덱스 divide line 숨기기
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         
@@ -106,21 +112,42 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // 스와이프 삭제
         if editingStyle == .delete {
-            let recipe = realm.objects(RecipeModel.self)[indexPath.row]
-            try! realm.write {
-                if recipe.image_count != 0 {
-                    for i in 0..<recipe.image_count {
-                        RealmImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+            // Alert로 한번 더 확인하기
+            let alert = UIAlertController(title: "Do you want to delete?", message: "", preferredStyle: .alert)
+            // 확인
+            let okAction = UIAlertAction(title: "OK", style: .destructive) { [weak self] _ in
+                guard let this = self else { return }
+                let recipe = this.realm.objects(RecipeModel.self)[indexPath.row]
+                try! this.realm.write {
+                    // 이미지 개수 체크해서 지워주기
+                    if recipe.image_count != 0 {
+                        for i in 0..<recipe.image_count {
+                            ImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+                        }
+                    }
+                    Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
+                    
+                    this.realm.delete(recipe)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        this.viewWillAppear(false)  // 레시피가 하나도 없는 경우 때문에
+                        
+                        // Toast
+                        var toastStyle = ToastStyle()
+                        toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
+                        toastStyle.messageColor = .white
+                        toastStyle.imageSize = .init(width: 24, height: 24)
+                        this.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: toastStyle)
                     }
                 }
-                Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
-                realm.delete(recipe)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.viewWillAppear(false)
-                }
             }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -129,6 +156,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 선택한 레시피 상세 화면 이동
         let recipeID = realm.objects(RecipeModel.self)[indexPath.row].id
         let recipeVC = RecipeViewController(viewType: .main, recipeID: recipeID)
         navigationController?.pushViewController(recipeVC, animated: true)
@@ -138,7 +166,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: - SideMenu delegate
 extension MainViewController: SideMenuNavigationControllerDelegate {
-
+    // 사이드 메뉴 상태에 따라 메인화면 dim 처리
     func sideMenuWillAppear(menu: SideMenuNavigationController, animated: Bool) {
         dimmedView.isHidden = false
         DispatchQueue.main.async {

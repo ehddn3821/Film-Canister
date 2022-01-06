@@ -68,7 +68,6 @@ extension MainViewController {
         bodyView.addSubview(emptySimulLB)
         
         // Empty list
-        // Empty film image view
         filmIV.image = UIImage(named: "Film")
         filmIV.snp.makeConstraints { make in
             make.size.equalTo(48)
@@ -76,7 +75,6 @@ extension MainViewController {
             make.centerY.equalToSuperview().offset(-14)
         }
         
-        // Empty description label
         emptySimulLB.text = "There is no registered film simulation."
         emptySimulLB.textColor = .init(named: Constants.COLOR_SECONDARY)
         emptySimulLB.font = UIFont(name: Constants.MAIN_FONT_REGULAR, size: 12)

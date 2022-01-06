@@ -98,7 +98,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
             if sampleImageCount == 0 {
                 cell.sampleIV.isHidden = true
             } else {
-                cell.sampleIV.image = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
+                cell.sampleIV.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
             }
             cell.removeBtn.isHidden = true
         }
@@ -112,7 +112,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let topVC = UIApplication.topViewController()
         if viewType == .main {
-            let sampleImage = RealmImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
+            let sampleImage = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
             topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage!), animated: true)
         } else {
             if indexPath.row == 0 {  // Sample 추가 버튼

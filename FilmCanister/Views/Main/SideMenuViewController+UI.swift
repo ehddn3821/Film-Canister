@@ -10,7 +10,9 @@ import UIKit
 extension SideMenuViewController {
     
     func setupUI() {
+        
         view.backgroundColor = .systemBackground
+        
         view.addSubview(settingsView)
         settingsView.addSubview(settingsLB)
         view.addSubview(iCloudLB)

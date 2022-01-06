@@ -1,5 +1,6 @@
 PODS:
   - IQKeyboardManagerSwift (6.5.9)
+  - JGProgressHUD (2.2)
   - Realm (10.20.1):
     - Realm/Headers (= 10.20.1)
   - Realm/Headers (10.20.1)
@@ -17,6 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
+  - JGProgressHUD
   - RealmSwift (~> 10)
   - RxCocoa (= 6.2.0)
   - RxSwift (= 6.2.0)
@@ -27,6 +29,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - IQKeyboardManagerSwift
+    - JGProgressHUD
     - Realm
     - RealmSwift
     - RxCocoa
@@ -38,6 +41,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   Realm: fac5ecd031fcb81171627b74944c885662d4b266
   RealmSwift: 9b02d25acb46a14756bde9893abb99e2e3675923
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
@@ -47,6 +51,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 159aa69f7f587049456a01d51faf5b89f51852c2
+PODFILE CHECKSUM: 163b55d4b83e0366a0b824ee05f0f057051d8ef1
 
 COCOAPODS: 1.11.2

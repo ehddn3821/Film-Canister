@@ -13,6 +13,7 @@ target 'FilmCanister' do
 	pod 'RealmSwift', '~>10'
 	pod 'Toast-Swift', '~> 5.0.1'
 	pod 'SideMenu', '~> 6.0'
+	pod 'JGProgressHUD'
 
   target 'FilmCanisterTests' do
     inherit! :search_paths

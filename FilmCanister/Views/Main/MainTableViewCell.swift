@@ -8,11 +8,13 @@
 import UIKit
 
 class MainTableViewCell: UITableViewCell {
+    
     let nameLB = UILabel()
     let simulNameLB = UILabel()
     let sampleIV = UIImageView()
     let nextIV = UIImageView()
     let divideView = UIView()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
