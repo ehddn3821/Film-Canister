@@ -66,62 +66,66 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                 guard let this = self else { return }
                 if this.viewType != .main {
                     Log.info("Save Button Tap")
-                    var selectedImageList: [UIImage] = []
-                    if let sampleCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 1)) as? RecipeSampleTableViewCell {
-                        selectedImageList = sampleCell.selectedImageList
-                    }
-                    let settingCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as! RecipeSettingTableViewCell
-                    
-                    var id: Int!
-                    if this.viewType == .add {
-                        id = Int(UInt64((Date().timeIntervalSince1970) * 1000))
-                    } else {
-                        id = this.recipeModel.id
-                    }
-                    
-                    let recipe = RecipeModel(id: id,
-                                             name: try! this.nameText.value(),
-                                             film_simulation: settingCell.selectedSimul,
-                                             image_count: selectedImageList.count,
-                                             dynamic_range: settingCell.selectedDynamic,
-                                             highlight: settingCell.selectedHighlight,
-                                             shadow: settingCell.selectedShadow,
-                                             color: settingCell.selectedColor,
-                                             noise_reduction: settingCell.selectedNoise,
-                                             sharpening: settingCell.selectedSharp,
-                                             clarity: settingCell.selectedClarity,
-                                             grain_effect: settingCell.selectedGrain,
-                                             color_chrome_effect: settingCell.selectedColorChrome,
-                                             color_chrome_effect_blue: settingCell.selectedColorChromeBlue,
-                                             white_balance: settingCell.selectedWhiteBalance,
-                                             red: settingCell.selectedRed,
-                                             blue: settingCell.selectedBlue,
-                                             exposure_compensation_1: settingCell.selectedExposure1,
-                                             exposure_compensation_2: settingCell.selectedExposure2,
-                                             memo: try! this.memoText.value())
-                    try! this.realm.write {
-                        if !selectedImageList.isEmpty {
-                            for i in 0..<selectedImageList.count {
-                                ImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id!)_\(i+1).png", image: selectedImageList[i])
+                    this.showLoding()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        var selectedImageList: [UIImage] = []
+                        if let sampleCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 1)) as? RecipeSampleTableViewCell {
+                            selectedImageList = sampleCell.selectedImageList
+                        }
+                        let settingCell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 2)) as! RecipeSettingTableViewCell
+
+                        var id: Int!
+                        if this.viewType == .add {
+                            id = Int(UInt64((Date().timeIntervalSince1970) * 1000))
+                        } else {
+                            id = this.recipeModel.id
+                        }
+
+                        let recipe = RecipeModel(id: id,
+                                                 name: try! this.nameText.value(),
+                                                 film_simulation: settingCell.selectedSimul,
+                                                 image_count: selectedImageList.count,
+                                                 dynamic_range: settingCell.selectedDynamic,
+                                                 highlight: settingCell.selectedHighlight,
+                                                 shadow: settingCell.selectedShadow,
+                                                 color: settingCell.selectedColor,
+                                                 noise_reduction: settingCell.selectedNoise,
+                                                 sharpening: settingCell.selectedSharp,
+                                                 clarity: settingCell.selectedClarity,
+                                                 grain_effect: settingCell.selectedGrain,
+                                                 color_chrome_effect: settingCell.selectedColorChrome,
+                                                 color_chrome_effect_blue: settingCell.selectedColorChromeBlue,
+                                                 white_balance: settingCell.selectedWhiteBalance,
+                                                 red: settingCell.selectedRed,
+                                                 blue: settingCell.selectedBlue,
+                                                 exposure_compensation_1: settingCell.selectedExposure1,
+                                                 exposure_compensation_2: settingCell.selectedExposure2,
+                                                 memo: try! this.memoText.value())
+                        try! this.realm.write {
+                            if !selectedImageList.isEmpty {
+                                for i in 0..<selectedImageList.count {
+                                    ImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id!)_\(i+1).png", image: selectedImageList[i])
+                                }
                             }
+                            if this.viewType == .add {
+                                this.realm.add(recipe)
+                            } else {
+                                this.realm.add(recipe, update: .modified)
+                            }
+                            Log.info("Recipe [ \(try! this.nameText.value()) ] 추가 완료")
                         }
-                        if this.viewType == .add {
-                            this.realm.add(recipe)
-                        } else {
-                            this.realm.add(recipe, update: .modified)
-                        }
-                        Log.info("Recipe [ \(try! this.nameText.value()) ] 추가 완료")
+
+                        this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
+                            this.hideLoding()
+                            let mainVC = UIApplication.topViewController() as! MainViewController
+                            if this.viewType == .add {
+                                mainVC.view.makeToast("Recipe has been registered.", image: .init(named: "Check"), style: this.toastStyle)
+                            } else {
+                                mainVC.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
+                            }
+                            mainVC.tableView.reloadData()
+                        })
                     }
-                    
-                    this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
-                        let mainVC = UIApplication.topViewController() as! MainViewController
-                        if this.viewType == .add {
-                            mainVC.view.makeToast("Recipe has been registered.", image: .init(named: "Check"), style: this.toastStyle)
-                        } else {
-                            mainVC.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
-                        }
-                        mainVC.tableView.reloadData()
-                    })
                 } else {
                     let moreList = ["Edit", "Delete"]
                     let modalVC = RecipeSettingModalViewController(settingList: moreList)
@@ -142,30 +146,36 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                                 this.recipeModel = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID)
                                 this.tableView.reloadData()
                             } else {  // 삭제
-                                let alert = UIAlertController(title: "Do you want to delete?", message: "", preferredStyle: .alert)
-                                let okAction = UIAlertAction(title: "OK", style: .destructive) { _ in
-                                    modalVC.dismiss(animated: false) {
-                                        guard let recipe = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID) else { return }
-                                        try! this.realm.write {
-                                            if recipe.image_count != 0 {
-                                                for i in 0..<recipe.image_count {
-                                                    ImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+                                let alertVC = PopupViewController()
+                                alertVC.modalPresentationStyle = .overFullScreen
+                                
+                                // 삭제
+                                alertVC.okBtn.rx.tap
+                                    .bind { [weak self] _ in
+                                        guard let this = self else { return }
+                                        alertVC.dismissView()
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            modalVC.dismiss(animated: false) {
+                                                guard let recipe = this.realm.object(ofType: RecipeModel.self, forPrimaryKey: this.recipeID) else { return }
+                                                try! this.realm.write {
+                                                    if recipe.image_count != 0 {
+                                                        for i in 0..<recipe.image_count {
+                                                            ImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(recipe.id)_\(i+1).png")
+                                                        }
+                                                    }
+                                                    Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
+                                                    this.realm.delete(recipe)
+                                                    this.navigationController?.popViewControllerWithHandler {
+                                                        let mainVC = UIApplication.topViewController() as! MainViewController
+                                                        mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: this.toastStyle)
+                                                        mainVC.tableView.reloadData()
+                                                    }
                                                 }
                                             }
-                                            Log.info("Recipe [ \(recipe.name) ] 삭제 완료")
-                                            this.realm.delete(recipe)
-                                            this.navigationController?.popViewControllerWithHandler {
-                                                let mainVC = UIApplication.topViewController() as! MainViewController
-                                                mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: this.toastStyle)
-                                                mainVC.tableView.reloadData()
-                                            }
                                         }
-                                    }
-                                }
-                                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-                                alert.addAction(okAction)
-                                alert.addAction(cancelAction)
-                                modalVC.present(alert, animated: true, completion: nil)
+                                    }.disposed(by: this.bag)
+                                
+                                modalVC.present(alertVC, animated: false)
                             }
                         }).disposed(by: this.bag)
                 }
