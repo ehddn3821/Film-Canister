@@ -5,7 +5,7 @@
 //  Created by dwKang on 2021/12/24.
 //
 
-import Foundation
+import UIKit
 
 struct Constants {
     static let MAIN_FONT_BOLD = "Inter-Bold"
@@ -14,6 +14,7 @@ struct Constants {
     
     // Color
     static let COLOR_SECONDARY = "Secondary"
+    static let COLOR_SIDE = "Secondary2"
     static let COLOR_MAIN_TEXT = "MainText"
     static let COLOR_MAIN_BACKGROUND = "MainBackground"
     static let COLOR_DIVIDER = "Divider"
@@ -163,4 +164,26 @@ struct Constants {
                                  "-3.0" ]
     
     static let SETTING_DEFAULT_VALUE = [ "Provia", "Auto", "0", "0", "0", "0", "0", "0", "Off", "Off", "Off", "Auto", "0", "0", "0", "0" ]
+    
+    // 초기 데이터
+    static let SAMPLE_IMAGES = [SAMPLE_IMAGE_1, SAMPLE_IMAGE_2, SAMPLE_IMAGE_3]
+    static let SAMPLE_IMAGE_1: [UIImage] = [.init(named: "Sample1_1")!, .init(named: "Sample1_2")!, .init(named: "Sample1_3")!]
+    static let SAMPLE_IMAGE_2: [UIImage] = [.init(named: "Sample2_1")!, .init(named: "Sample2_2")!]
+    static let SAMPLE_IMAGE_3: [UIImage] = [.init(named: "Sample3_1")!, .init(named: "Sample3_2")!, .init(named: "Sample3_3")!]
+    
+    static let SAMPLE_SIMUL_LIST: [String] = ["Eterna", "Classic Neg.", "Classic Chrome"]
+    static let SAMPLE_HIGHLIGHT_LIST: [String] = ["0", "-1", "+2"]
+    static let SAMPLE_SHADOW_LIST: [String] = ["+2", "0", "-2"]
+    static let SAMPLE_COLOR_LIST: [String] = ["+2", "+4", "+2"]
+    static let SAMPLE_NOISE_LIST: [String] = ["-1", "-3", "-3"]
+    static let SAMPLE_SHARP_LIST: [String] = ["-3", "0", "0"]
+    static let SAMPLE_CLARITY_LIST: [String] = ["+2", "-5", "+2"]
+    static let SAMPLE_GRAIN_LIST: [String] = ["Weak / Small", "Weak / Small", "Weak / Large"]
+    static let SAMPLE_CHROME_LIST: [String] = ["Off", "Off", "Weak"]
+    static let SAMPLE_CHROME_BLUE_LIST: [String] = ["Off", "Strong", "Weak"]
+    static let SAMPLE_WHITE_LIST: [String] = ["Fluorescent 2", "Auto", "Auto"]
+    static let SAMPLE_RED_LIST: [String] = ["-1", "+3", "+4"]
+    static let SAMPLE_BLUE_LIST: [String] = ["+1", "-5", "-4"]
+    static let SAMPLE_EXPOSURE_1_LIST: [String] = ["-0.6", "-0.3", "-0.3"]
+    static let SAMPLE_IMAGE_COUNT: [Int] = [3, 2, 3]
 }

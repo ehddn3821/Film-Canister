@@ -14,6 +14,7 @@ target 'FilmCanister' do
 	pod 'Toast-Swift', '~> 5.0.1'
 	pod 'SideMenu', '~> 6.0'
 	pod 'JGProgressHUD'
+	pod "BSImagePicker", "~> 3.1"
 
   target 'FilmCanisterTests' do
     inherit! :search_paths

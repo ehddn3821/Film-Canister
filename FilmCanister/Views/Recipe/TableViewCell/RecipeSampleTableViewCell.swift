@@ -8,6 +8,9 @@
 import UIKit
 import RxSwift
 import RealmSwift
+import Toast_Swift
+import BSImagePicker
+import Photos
 
 class RecipeSampleTableViewCell: UITableViewCell {
     let bag = DisposeBag()
@@ -26,8 +29,7 @@ class RecipeSampleTableViewCell: UITableViewCell {
         return cv
     }()
     
-    let photoPicker = UIImagePickerController()
-    
+    var selectedAssets: [PHAsset] = []
     var selectedImageList: [UIImage] = []
     
 
@@ -36,9 +38,6 @@ class RecipeSampleTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(RecipeSampleCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cvCell")
-        
-        photoPicker.delegate = self
-        photoPicker.sourceType = .photoLibrary
         
         contentView.backgroundColor = .systemBackground
         
@@ -52,19 +51,6 @@ class RecipeSampleTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-//MARK: - Picker delegate
-extension RecipeSampleTableViewCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            selectedImageList.append(image)
-            sampleImageCount += 1
-            picker.dismiss(animated: true, completion: nil)
-            collectionView.reloadData()
-        }
     }
 }
 
@@ -110,13 +96,79 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let topVC = UIApplication.topViewController()
+        let topVC = UIApplication.topViewController() as? BaseViewController
         if viewType == .main {
             let sampleImage = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
             topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage!), animated: true)
         } else {
             if indexPath.row == 0 {  // Sample 추가 버튼
-                topVC?.present(photoPicker, animated: true, completion: nil)
+                if sampleImageCount < 10 {  // 10장 제한
+                    //                    topVC?.present(photoPicker, animated: true, completion: nil)
+                    selectedAssets = []
+                    print("sampleImageCount = \(sampleImageCount)")
+                    let imagePicker = ImagePickerController()
+                    imagePicker.settings.selection.max = 10 - sampleImageCount
+                    imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+                    
+                    let tempSampleImageCount = sampleImageCount
+                    
+                    topVC?.presentImagePicker(imagePicker, select: { (asset) in
+                        
+                        self.sampleImageCount += 1
+                        print("sampleImageCount(select) = \(self.sampleImageCount)")
+                        
+                    }, deselect: { (asset) in
+                        
+                        self.sampleImageCount -= 1
+                        print("sampleImageCount(deselect) = \(self.sampleImageCount)")
+                        
+                    }, cancel: { (assets) in
+                        
+                        self.sampleImageCount = tempSampleImageCount
+                        
+                    }, finish: { (assets) in
+                        DispatchQueue.global().async {
+                            let imageManager = PHImageManager.default()
+                            let option = PHImageRequestOptions()
+                            option.isSynchronous = true
+                            option.isNetworkAccessAllowed = true
+                            
+                            topVC?.showLoding()
+                            
+                            for i in 0..<assets.count {
+                                
+                                var thumbnail = UIImage()
+                                
+                                imageManager.requestImage(for: assets[i],
+                                                             targetSize: CGSize(width: assets[i].pixelWidth, height: assets[i].pixelHeight),
+                                                             contentMode: .aspectFit,
+                                                             options: option) { (result, info) in
+                                    thumbnail = result!
+                                }
+                                
+                                let data = thumbnail.pngData()! as CFData
+                                let imageSource = CGImageSourceCreateWithData(data, nil)!
+                                let maxPixel = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * UIScreen.main.scale
+                                let downSampleOptions = [ kCGImageSourceCreateThumbnailFromImageAlways: true, kCGImageSourceShouldCacheImmediately: true, kCGImageSourceCreateThumbnailWithTransform: true, kCGImageSourceThumbnailMaxPixelSize: maxPixel ] as CFDictionary
+                                let downSampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downSampleOptions)!
+                                let newImage = UIImage(cgImage: downSampledImage)
+                                
+                                self.selectedImageList.append(newImage as UIImage)
+                            }
+                            
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadData()
+                                topVC?.hideLoding()
+                            }
+                        }
+                    })
+                } else {
+                    var toastStyle = ToastStyle()
+                    toastStyle.backgroundColor = .init(named: Constants.COLOR_DELETE)!
+                    toastStyle.messageColor = .white
+                    toastStyle.imageSize = .init(width: 24, height: 24)
+                    topVC?.view.makeToast("Up to 10 pictures can be attached.", image: .init(named: "Error"), style: toastStyle)
+                }
             } else {  // Detail image view
                 topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: selectedImageList[indexPath.row - 1]), animated: true)
             }

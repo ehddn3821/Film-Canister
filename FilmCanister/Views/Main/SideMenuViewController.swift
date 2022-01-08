@@ -14,8 +14,8 @@ class SideMenuViewController: BaseViewController {
     
     let settingsView = UIView()
     let settingsLB = UILabel()
-    let iCloudLB = UILabel()
-    let iCloudSwitch = UISwitch()
+//    let iCloudLB = UILabel()
+//    let iCloudSwitch = UISwitch()
     let darkModeLB = UILabel()
     let darkModeSwitch = UISwitch()
     let aboutAsView = UIView()
@@ -26,6 +26,8 @@ class SideMenuViewController: BaseViewController {
     let devLB = UILabel()
     let developerNameLB = UILabel()
     let devInstaBtn = UIButton()
+    let serviceInfoBtn = UIButton()
+    let privacyPolicyBtn = UIButton()
     
     
     override func viewDidLoad() {
@@ -64,6 +66,18 @@ class SideMenuViewController: BaseViewController {
             .bind { [weak self] _ in
                 guard let this = self else { return }
                 this.instagramAction(userName: "pleasureofphoto")
+            }.disposed(by: bag)
+        
+        serviceInfoBtn.rx.tap
+            .bind { _ in
+                let webURL = URL(string: "https://url.kr/7vqoaj")!
+                UIApplication.shared.open(webURL)
+            }.disposed(by: bag)
+        
+        privacyPolicyBtn.rx.tap
+            .bind { _ in
+                let webURL = URL(string: "https://url.kr/3fj9s6")!
+                UIApplication.shared.open(webURL)
             }.disposed(by: bag)
     }
     

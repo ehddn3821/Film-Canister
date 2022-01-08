@@ -40,5 +40,7 @@ extension RecipeViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        view.addSubview(hud)
     }
 }
