@@ -116,58 +116,70 @@ extension SideMenuViewController {
             make.centerY.equalToSuperview()
         }
         
-        serviceInfoBtn.setTitle("Service Information", for: .normal)
-        serviceInfoBtn.titleLabel?.font = .init(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
-        serviceInfoBtn.setTitleColor(.init(named: Constants.COLOR_SIDE), for: .normal)
         serviceInfoBtn.snp.makeConstraints { make in
+            make.height.equalTo(64)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(aboutAsView.snp.bottom)
+        }
+        
+        serviceInfoBtn.addSubview(serviceInfoLB)
+        serviceInfoLB.text = "Service Information"
+        serviceInfoLB.font = .init(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
+        serviceInfoLB.textColor = .init(named: Constants.COLOR_SIDE)
+        serviceInfoLB.snp.makeConstraints { make in
             make.height.equalTo(22)
             make.leading.equalTo(16)
-            make.top.equalTo(aboutAsView.snp.bottom).offset(21)
+            make.centerY.equalToSuperview()
         }
         
         let nextIV1 = UIImageView()
-        view.addSubview(nextIV1)
+        serviceInfoBtn.addSubview(nextIV1)
         nextIV1.image = .init(named: "Next")
         nextIV1.snp.makeConstraints { make in
             make.size.equalTo(24)
-            make.top.equalTo(aboutAsView.snp.bottom).offset(20)
+            make.centerY.equalToSuperview()
             make.trailing.equalTo(-24)
         }
         
         let divider1 = UIView()
-        view.addSubview(divider1)
+        serviceInfoBtn.addSubview(divider1)
         divider1.backgroundColor = .init(named: Constants.COLOR_DIVIDER)
         divider1.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.top.equalTo(serviceInfoBtn.snp.bottom).offset(21)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
         }
         
-        privacyPolicyBtn.setTitle("Privacy Policy", for: .normal)
-        privacyPolicyBtn.titleLabel?.font = .init(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
-        privacyPolicyBtn.setTitleColor(.init(named: Constants.COLOR_SIDE), for: .normal)
         privacyPolicyBtn.snp.makeConstraints { make in
+            make.height.equalTo(64)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(serviceInfoBtn.snp.bottom)
+        }
+        
+        privacyPolicyBtn.addSubview(privacyPolicyLB)
+        privacyPolicyLB.text = "Privacy Policy"
+        privacyPolicyLB.font = .init(name: Constants.MAIN_FONT_SEMIBOLD, size: 14)
+        privacyPolicyLB.textColor = .init(named: Constants.COLOR_SIDE)
+        privacyPolicyLB.snp.makeConstraints { make in
             make.height.equalTo(22)
             make.leading.equalTo(16)
-            make.top.equalTo(divider1.snp.bottom).offset(21)
+            make.centerY.equalToSuperview()
         }
         
         let nextIV2 = UIImageView()
-        view.addSubview(nextIV2)
+        privacyPolicyBtn.addSubview(nextIV2)
         nextIV2.image = .init(named: "Next")
         nextIV2.snp.makeConstraints { make in
             make.size.equalTo(24)
-            make.top.equalTo(divider1.snp.bottom).offset(20)
+            make.centerY.equalToSuperview()
             make.trailing.equalTo(-24)
         }
         
         let divider5 = UIView()
-        view.addSubview(divider5)
+        privacyPolicyBtn.addSubview(divider5)
         divider5.backgroundColor = .init(named: Constants.COLOR_DIVIDER)
         divider5.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.top.equalTo(privacyPolicyBtn.snp.bottom).offset(21)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
         }
         
         designLB.text = "Design by "
@@ -176,7 +188,7 @@ extension SideMenuViewController {
         designLB.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.leading.equalTo(18)
-            make.top.equalTo(divider5.snp.bottom).offset(16)
+            make.top.equalTo(privacyPolicyBtn.snp.bottom).offset(16)
         }
         
         designerNameLB.text = "Roh Juyoung"

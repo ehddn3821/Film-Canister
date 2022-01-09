@@ -103,12 +103,12 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
             topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage!), animated: true)
         } else {
             if indexPath.row == 0 {  // Sample 추가 버튼
-                if sampleImageCount < 10 {  // 10장 제한
+                if sampleImageCount < 5 {  // 5장 제한
                     //                    topVC?.present(photoPicker, animated: true, completion: nil)
                     selectedAssets = []
                     print("sampleImageCount = \(sampleImageCount)")
                     let imagePicker = ImagePickerController()
-                    imagePicker.settings.selection.max = 10 - sampleImageCount
+                    imagePicker.settings.selection.max = 5 - sampleImageCount
                     imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
                     
                     let tempSampleImageCount = sampleImageCount
@@ -168,7 +168,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
                     toastStyle.backgroundColor = .init(named: Constants.COLOR_DELETE)!
                     toastStyle.messageColor = .white
                     toastStyle.imageSize = .init(width: 24, height: 24)
-                    topVC?.view.makeToast("Up to 10 pictures can be attached.", image: .init(named: "Error"), style: toastStyle)
+                    topVC?.view.makeToast("Up to 5 pictures can be attached.", image: .init(named: "Error"), style: toastStyle)
                 }
             } else {  // Detail image view
                 topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: selectedImageList[indexPath.row - 1]), animated: true)
