@@ -176,6 +176,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     }
     
     @objc func deleteCell(sender: UIButton) {
+        print("delete sender.tag: ")
         selectedImageList.remove(at: sender.tag - 1)
         sampleImageCount -= 1
         collectionView.deleteItems(at: [IndexPath(row: sender.tag, section: 0)])
