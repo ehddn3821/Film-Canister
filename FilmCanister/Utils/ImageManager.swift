@@ -21,7 +21,7 @@ class ImageManager: NSObject {
         let imageUrl = documentDirectory.appendingPathComponent(imageName)
         
         // 이미지 압축
-        guard let data = image.pngData() else {
+        guard let data = image.png() else {
             Log.error("이미지 압축 실패")
             return
         }
@@ -76,5 +76,15 @@ class ImageManager: NSObject {
                 Log.error("이미지 삭제 실패")
             }
         }
+    }
+}
+
+extension UIImage {
+    func png(isOpaque: Bool = true) -> Data? { flattened(isOpaque: isOpaque).pngData() }
+    func flattened(isOpaque: Bool = true) -> UIImage {
+        if imageOrientation == .up { return self }
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: size, format: format).image { _ in draw(at: .zero) }
     }
 }

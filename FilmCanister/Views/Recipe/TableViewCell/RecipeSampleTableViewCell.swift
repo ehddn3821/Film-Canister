@@ -59,7 +59,7 @@ class RecipeSampleTableViewCell: UITableViewCell {
 extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if viewType == .main {
-            return sampleImageCount
+            return sampleImageCount == 0 ? 1 : sampleImageCount
         } else {
             return sampleImageCount + 1
         }
@@ -83,7 +83,8 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
             }
         case .main:
             if sampleImageCount == 0 {
-                cell.sampleIV.isHidden = true
+//                cell.sampleIV.isHidden = true
+                cell.sampleIV.image = .init(named: "NoImage")
             } else {
                 cell.sampleIV.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
             }
@@ -99,8 +100,8 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let topVC = UIApplication.topViewController() as? BaseViewController
         if viewType == .main {
-            let sampleImage = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
-            topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage!), animated: true)
+            guard let sampleImage = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)") else { return }
+            topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage), animated: true)
         } else {
             if indexPath.row == 0 {  // Sample 추가 버튼
                 if sampleImageCount < 5 {  // 5장 제한
