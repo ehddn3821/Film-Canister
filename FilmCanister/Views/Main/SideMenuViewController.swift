@@ -27,7 +27,9 @@ class SideMenuViewController: BaseViewController {
     let developerNameLB = UILabel()
     let devInstaBtn = UIButton()
     let serviceInfoBtn = UIButton()
+    let serviceInfoLB = UILabel()
     let privacyPolicyBtn = UIButton()
+    let privacyPolicyLB = UILabel()
     
     
     override func viewDidLoad() {
