@@ -75,6 +75,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
             } else {
                 if !selectedImageList.isEmpty {
                     cell.sampleIV.image = selectedImageList[indexPath.row - 1]
+                    cell.sampleIV.tag = indexPath.row
                     cell.removeBtn.isHidden = false
                     cell.removeBtn.tag = indexPath.row
                     cell.removeBtn.addTarget(self, action: #selector(deleteCell(sender:)), for: .touchUpInside)
@@ -176,9 +177,16 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     }
     
     @objc func deleteCell(sender: UIButton) {
-        print("delete sender.tag: ")
-        selectedImageList.remove(at: sender.tag - 1)
-        sampleImageCount -= 1
-        collectionView.deleteItems(at: [IndexPath(row: sender.tag, section: 0)])
+        print("delete sender.tag: \(sender.tag)")
+        
+        for i in 0 ... sampleImageCount {
+            let cell = collectionView.cellForItem(at: IndexPath(row: i, section: 0)) as? RecipeSampleCollectionViewCell
+            if cell?.sampleIV.tag == sender.tag {
+                collectionView.deleteItems(at: [IndexPath(row: i, section: 0)])
+                selectedImageList.remove(at: i - 1)
+                print("delete item: \(i)")
+                sampleImageCount -= 1
+            }
+        }
     }
 }
