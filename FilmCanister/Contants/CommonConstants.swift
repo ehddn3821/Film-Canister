@@ -55,9 +55,9 @@ struct Constants {
                                       "ExposureCompensation" ]
 
     static let SIMULATION_LIST = [ "Provia","Velvia","Astia","Classic Chrome","PRO Neg.Hi","Pro Neg. Std",
-                                   "Classic Neg.","Eterna","Eterna Blenach Bypass","Nostalgic Neg.",
-                                   "Acros STD","Acros Ye","Acros R","Acros G","Monocrhome STD","Monocrhome Ye",
-                                   "Monocrhome R","Monocrhome G","Sepia" ]
+                                   "Classic Neg.","Eterna","Eterna Bleach Bypass","Nostalgic Neg.",
+                                   "Acros STD","Acros Ye","Acros R","Acros G","Monochrome STD","Monochrome Ye",
+                                   "Monochrome R","Monochrome G","Sepia" ]
     
     static let DYNAMIC_RANGE_LIST = [ "Auto",
                                       "DR400",

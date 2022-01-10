@@ -70,7 +70,7 @@ extension RecipeMemoTableViewCell: UITextViewDelegate {
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
-        let topVC = UIApplication.topViewController() as! RecipeViewController
+        guard let topVC = UIApplication.topViewController() as? RecipeViewController else { return }
         
         if textView.text == "" {
             memoPlaceholder.isHidden = false

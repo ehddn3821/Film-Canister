@@ -19,7 +19,7 @@ class RecipeNameTableViewCell: UITableViewCell {
         nameTextField.delegate = self
         nameTextField.textColor = .init(named: Constants.COLOR_MAIN_TEXT)
         nameTextField.font = UIFont(name: Constants.MAIN_FONT_REGULAR, size: 14)
-        nameTextField.placeholder = "Please enter recipe name"
+        nameTextField.attributedPlaceholder = NSAttributedString(string: "Please enter recipe name", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(named: Constants.COLOR_DISABLE)!])
         nameTextField.layer.cornerRadius = 4
         nameTextField.layer.borderColor = UIColor.init(named: Constants.COLOR_MEMO_BORDER)?.cgColor
         nameTextField.layer.borderWidth = 1

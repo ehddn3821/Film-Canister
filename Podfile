@@ -15,6 +15,7 @@ target 'FilmCanister' do
 	pod 'SideMenu', '~> 6.0'
 	pod 'JGProgressHUD'
 	pod "BSImagePicker", "~> 3.1"
+	pod 'ImageScrollView'
 
   target 'FilmCanisterTests' do
     inherit! :search_paths

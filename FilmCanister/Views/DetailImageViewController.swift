@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import ImageScrollView
 
 class DetailImageViewController: CustomNavigationBarViewController<UIView> {
     
     var detailImg: UIImage!
-    let detailIV = UIImageView()
+    let scrollView = ImageScrollView()
     
     
     init(detailImg: UIImage) {
@@ -24,6 +25,7 @@ class DetailImageViewController: CustomNavigationBarViewController<UIView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.setup()
     }
     
     
@@ -32,11 +34,13 @@ class DetailImageViewController: CustomNavigationBarViewController<UIView> {
         
         bodyView.backgroundColor = .black
         
-        detailIV.image = detailImg
-        detailIV.contentMode = .scaleAspectFit
-        bodyView.addSubview(detailIV)
-        detailIV.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        bodyView.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview()
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view).offset(-UI.SAFE_AREA_BOTTOM)
         }
+        
+        scrollView.display(image: detailImg)
     }
 }
