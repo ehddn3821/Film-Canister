@@ -48,24 +48,4 @@ extension RecipeNameTableViewCell: UITextFieldDelegate {
             topVC.customNavigationBar.rightBtn.isEnabled = false
         }
     }
-    
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        let topVC = UIApplication.topViewController() as! RecipeViewController
-//        if textField.text != "" {
-//            topVC.nameText.onNext(textField.text!)
-//            topVC.customNavigationBar.rightBtn.isEnabled = true
-//        } else {
-//            topVC.customNavigationBar.rightBtn.isEnabled = false
-//        }
-//    }
-//
-//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-//        let topVC = UIApplication.topViewController() as! RecipeViewController
-//        if textField.text != "" {
-//            topVC.nameText.onNext(textField.text!)
-//            topVC.customNavigationBar.rightBtn.isEnabled = true
-//        } else {
-//            topVC.customNavigationBar.rightBtn.isEnabled = false
-//        }
-//    }
 }

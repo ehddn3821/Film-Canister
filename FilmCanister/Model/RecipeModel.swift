@@ -29,11 +29,12 @@ class RecipeModel: Object {
     @objc dynamic var exposure_compensation_1: String = ""
     @objc dynamic var exposure_compensation_2: String = ""
     @objc dynamic var memo: String = ""
+    @objc dynamic var kValue: String = ""
     
     convenience init(id: Int, name: String, film_simulation: String, image_count: Int, dynamic_range: String, highlight: String,
                      shadow: String, color: String, noise_reduction: String, sharpening: String, clarity: String, grain_effect: String,
                      color_chrome_effect: String, color_chrome_effect_blue: String, white_balance: String, red: String, blue: String,
-                     exposure_compensation_1: String, exposure_compensation_2: String, memo: String) {
+                     exposure_compensation_1: String, exposure_compensation_2: String, memo: String, kValue: String) {
         self.init()
         self.id = id
         self.name = name
@@ -55,6 +56,7 @@ class RecipeModel: Object {
         self.exposure_compensation_1 = exposure_compensation_1
         self.exposure_compensation_2 = exposure_compensation_2
         self.memo = memo
+        self.kValue = kValue
     }
     
     override class func primaryKey() -> String? {
