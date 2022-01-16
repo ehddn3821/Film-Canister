@@ -110,6 +110,11 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
                     let imagePicker = ImagePickerController()
                     imagePicker.settings.selection.max = 5 - sampleImageCount
                     imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+                    let options = imagePicker.settings.fetch.album.options
+                    imagePicker.settings.fetch.album.fetchResults = [
+                        PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: options),
+                        PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: options),
+                    ]
                     
                     let tempSampleImageCount = sampleImageCount
                     
