@@ -54,7 +54,9 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
                                          blue: Constants.SAMPLE_BLUE_LIST[i],
                                          exposure_compensation_1: Constants.SAMPLE_EXPOSURE_1_LIST[i],
                                          exposure_compensation_2: "+1",
-                                         memo: "")
+                                         memo: "",
+                                         kValue: ""
+                )
                 try! realm.write {
                     for j in 0..<Constants.SAMPLE_IMAGE_COUNT[i] {
                         ImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id)_\(j+1).png", image: Constants.SAMPLE_IMAGES[i][j])

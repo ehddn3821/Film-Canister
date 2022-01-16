@@ -28,6 +28,7 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
     var recipeID = 0
     var nameText = BehaviorSubject<String>(value: "")
     var memoText = BehaviorSubject<String>(value: "")
+    var kValueText = BehaviorSubject<String>(value: "")
     
     let tableView = UITableView()
     
@@ -66,6 +67,11 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                 guard let this = self else { return }
                 if this.viewType != .main {
                     Log.info("Save Button Tap")
+                    
+                    this.tableView.scrollToRow(at: IndexPath(row: 0, section: 0),
+                                               at: .top,
+                                               animated: false)
+                    
                     this.showLoding()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         var selectedImageList: [UIImage] = []
@@ -100,7 +106,9 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                                                  blue: settingCell.selectedBlue,
                                                  exposure_compensation_1: settingCell.selectedExposure1,
                                                  exposure_compensation_2: settingCell.selectedExposure2,
-                                                 memo: try! this.memoText.value())
+                                                 memo: try! this.memoText.value(),
+                                                 kValue: try! this.kValueText.value()
+                        )
                         try! this.realm.write {
                             if !selectedImageList.isEmpty {
                                 for i in 0..<selectedImageList.count {
@@ -114,17 +122,28 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                             }
                             Log.info("Recipe [ \(try! this.nameText.value()) ] 추가 완료")
                         }
-
-                        this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
-                            this.hideLoding()
-                            let mainVC = UIApplication.topViewController() as! MainViewController
-                            if this.viewType == .add {
+                        
+//                        if this.viewType == .add {
+                            this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
+                                this.hideLoding()
+                                let mainVC = UIApplication.topViewController() as! MainViewController
                                 mainVC.view.makeToast("Recipe has been registered.", image: .init(named: "Check"), style: this.toastStyle)
-                            } else {
-                                mainVC.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
-                            }
-                            mainVC.tableView.reloadData()
-                        })
+                                mainVC.tableView.reloadData()
+                            })
+//                        } else {
+//                            this.hideLoding()
+//
+//                            this.viewType = .main
+//                            this.customNavigationBar.barTitle.text = this.recipeModel.name
+//                            this.customNavigationBar.rightBtn.setImage(.init(named: "More"), for: .normal)
+//                            this.customNavigationBar.rightBtn.setTitle("", for: .normal)
+//                            this.tableView.reloadData()
+//                            let cell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RecipeSampleTableViewCell
+//                            cell?.viewType = .main
+//                            cell?.collectionView.reloadData()
+//
+//                            this.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
+//                        }
                     }
                 } else {
                     let moreList = ["Edit", "Delete"]
@@ -263,6 +282,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     settingCell.selectedBlue = recipeModel.blue
                     settingCell.selectedExposure1 = recipeModel.exposure_compensation_1
                     settingCell.selectedExposure2 = recipeModel.exposure_compensation_2
+                    settingCell.kValue = recipeModel.kValue
                     settingCell.tableView.isUserInteractionEnabled = false
                     return settingCell
                 case 2:
@@ -315,6 +335,9 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
                     settingCell.selectedBlue = recipeModel.blue
                     settingCell.selectedExposure1 = recipeModel.exposure_compensation_1
                     settingCell.selectedExposure2 = recipeModel.exposure_compensation_2
+                    settingCell.kValue = recipeModel.kValue
+                    settingCell.viewType = .update
+                    settingCell.editChange.onNext(true)
                     settingCell.tableView.isUserInteractionEnabled = true
                     return settingCell
                 case 3:

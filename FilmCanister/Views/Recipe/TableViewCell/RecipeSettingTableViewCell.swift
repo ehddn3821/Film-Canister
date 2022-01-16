@@ -12,6 +12,9 @@ import RealmSwift
 class RecipeSettingTableViewCell: UITableViewCell {
     let bag = DisposeBag()
     
+    var viewType: ViewType = .main
+    var editChange = BehaviorSubject<Bool>(value: false)
+    
     var selectedSimul = "Provia"
     var selectedDynamic = "Auto"
     var selectedHighlight = "0"
@@ -28,6 +31,7 @@ class RecipeSettingTableViewCell: UITableViewCell {
     var selectedBlue = "0"
     var selectedExposure1 = "0"
     var selectedExposure2 = "0"
+    var kValue = ""
     
     
     let tableView = UITableView()
@@ -50,6 +54,14 @@ class RecipeSettingTableViewCell: UITableViewCell {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        editChange.subscribe(onNext: { isChange in
+            if isChange {
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 10, section: 0)) as! SettingTableViewCell
+                cell.whiteBalanceValueLB.isHidden = true
+                cell.whiteBalanceValueTF.isHidden = false
+            }
+        }).disposed(by: bag)
     }
     
     required init?(coder: NSCoder) {
@@ -187,6 +199,22 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
             } else {
                 cell.divider.isHidden = true
                 cell.valueBtn.setTitle(selectedWhiteBalance, for: .normal)
+                self.editChange.subscribe(onNext: { isChange in
+                    if cell.valueBtn.titleLabel?.text == "K" {
+                        if self.viewType == .main {
+                            cell.whiteBalanceValueTF.isHidden = true
+                            cell.whiteBalanceValueLB.isHidden = false
+                        } else {
+                            cell.whiteBalanceValueTF.isHidden = false
+                            cell.whiteBalanceValueLB.isHidden = true
+                        }
+                        cell.whiteBalanceValueLB.text = self.kValue
+                        cell.whiteBalanceValueTF.text = self.kValue
+                    } else {
+                        cell.whiteBalanceValueTF.isHidden = true
+                        cell.whiteBalanceValueLB.isHidden = true
+                    }
+                }).disposed(by: self.bag)
             }
             
             cell.valueBtn.rx.tap
@@ -214,6 +242,13 @@ extension RecipeSettingTableViewCell: UITableViewDelegate, UITableViewDataSource
                                 this.selectedColorChromeBlue = itemName
                             } else {
                                 this.selectedWhiteBalance = itemName
+                                if itemName == "K" {
+                                    cell.whiteBalanceValueLB.isHidden = true
+                                    cell.whiteBalanceValueTF.isHidden = false
+                                } else {
+                                    cell.whiteBalanceValueTF.isHidden = true
+                                    cell.whiteBalanceValueLB.isHidden = true
+                                }
                             }
                         }).disposed(by: this.bag)
                 }.disposed(by: bag)

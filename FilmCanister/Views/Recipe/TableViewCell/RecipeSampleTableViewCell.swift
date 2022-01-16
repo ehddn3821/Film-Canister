@@ -83,7 +83,6 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
             }
         case .main:
             if sampleImageCount == 0 {
-//                cell.sampleIV.isHidden = true
                 cell.sampleIV.image = .init(named: "NoImage")
             } else {
                 cell.sampleIV.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
