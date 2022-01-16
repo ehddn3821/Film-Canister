@@ -123,27 +123,16 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                             Log.info("Recipe [ \(try! this.nameText.value()) ] 추가 완료")
                         }
                         
-//                        if this.viewType == .add {
-                            this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
-                                this.hideLoding()
-                                let mainVC = UIApplication.topViewController() as! MainViewController
+                        this.navigationController?.popViewControllerWithHandler(animated: true, completion: {
+                            this.hideLoding()
+                            let mainVC = UIApplication.topViewController() as! MainViewController
+                            if this.viewType == .add {
                                 mainVC.view.makeToast("Recipe has been registered.", image: .init(named: "Check"), style: this.toastStyle)
-                                mainVC.tableView.reloadData()
-                            })
-//                        } else {
-//                            this.hideLoding()
-//
-//                            this.viewType = .main
-//                            this.customNavigationBar.barTitle.text = this.recipeModel.name
-//                            this.customNavigationBar.rightBtn.setImage(.init(named: "More"), for: .normal)
-//                            this.customNavigationBar.rightBtn.setTitle("", for: .normal)
-//                            this.tableView.reloadData()
-//                            let cell = this.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RecipeSampleTableViewCell
-//                            cell?.viewType = .main
-//                            cell?.collectionView.reloadData()
-//
-//                            this.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
-//                        }
+                            } else {
+                                mainVC.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
+                            }
+                            mainVC.tableView.reloadData()
+                        })
                     }
                 } else {
                     let moreList = ["Edit", "Delete"]
