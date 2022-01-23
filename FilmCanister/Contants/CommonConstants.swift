@@ -98,7 +98,7 @@ struct Constants {
                                 "-2",
                                 "-3",
                                 "-4",
-                                "+5" ]
+                                "-5" ]
     
     static let GRAIN_EFFECT_LIST = [ "Off",
                                      "Weak / Small",
