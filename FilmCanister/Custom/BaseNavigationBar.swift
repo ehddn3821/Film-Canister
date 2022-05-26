@@ -20,7 +20,7 @@ class BaseNavigationBar: UIView {
         didSet {
             if isEnablePopBtn {
                 self.addSubview(leftBtn)
-                leftBtn.setImage(UIImage(named: "Back"), for: .normal)
+                leftBtn.setImage(UIImage(named: "back"), for: .normal)
                 leftBtn.snp.makeConstraints { make in
                     make.size.equalTo(40)
                     make.leading.equalTo(16)
