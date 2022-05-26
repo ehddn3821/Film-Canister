@@ -13,13 +13,13 @@ struct Constants {
     static let MAIN_FONT_SEMIBOLD = "Inter-SemiBold"
     
     // Color
-    static let COLOR_SECONDARY = "Secondary"
+    static let COLOR_SECONDARY = "secondary"
     static let COLOR_SIDE = "Secondary2"
     static let COLOR_MAIN_TEXT = "MainText"
     static let COLOR_MAIN_BACKGROUND = "MainBackground"
-    static let COLOR_DIVIDER = "Divider"
-    static let COLOR_ENABLE = "Enable"
-    static let COLOR_DISABLE = "Disable"
+    static let COLOR_DIVIDER = "divider"
+    static let COLOR_ENABLE = "enable"
+    static let COLOR_DISABLE = "disable"
     static let COLOR_MEMO_BORDER = "MemoBorder"
     static let COLOR_DELETE = "Delete"
     

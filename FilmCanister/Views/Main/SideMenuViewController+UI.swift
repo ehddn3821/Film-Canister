@@ -134,7 +134,7 @@ extension SideMenuViewController {
         
         let nextIV1 = UIImageView()
         serviceInfoBtn.addSubview(nextIV1)
-        nextIV1.image = .init(named: "Next")
+        nextIV1.image = .init(named: "next")
         nextIV1.snp.makeConstraints { make in
             make.size.equalTo(24)
             make.centerY.equalToSuperview()
@@ -167,7 +167,7 @@ extension SideMenuViewController {
         
         let nextIV2 = UIImageView()
         privacyPolicyBtn.addSubview(nextIV2)
-        nextIV2.image = .init(named: "Next")
+        nextIV2.image = .init(named: "next")
         nextIV2.snp.makeConstraints { make in
             make.size.equalTo(24)
             make.centerY.equalToSuperview()

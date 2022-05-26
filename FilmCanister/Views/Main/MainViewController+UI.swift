@@ -20,7 +20,7 @@ extension MainViewController {
         }
         
         introView.addSubview(introLogo)
-        introLogo.image = UIImage(named: "Film")
+        introLogo.image = UIImage(named: "film")
         introLogo.snp.makeConstraints { make in
             make.size.equalTo(48)
             make.centerX.equalToSuperview()
@@ -43,14 +43,14 @@ extension MainViewController {
         
         customNavigationBar.setTitle(title: "Recipe List")
         
-        customNavigationBar.leftBtn.setImage(UIImage(named: "Hamburger"), for: .normal)
+        customNavigationBar.leftBtn.setImage(UIImage(named: "hamburger"), for: .normal)
         customNavigationBar.leftBtn.snp.makeConstraints { make in
             make.size.equalTo(40)
             make.centerY.equalTo(customNavigationBar).offset(UI.SAFE_AREA_TOP/2)
             make.leading.equalToSuperview().offset(16)
         }
         
-        customNavigationBar.rightBtn.setImage(UIImage(named: "Plus"), for: .normal)
+        customNavigationBar.rightBtn.setImage(UIImage(named: "plus"), for: .normal)
         customNavigationBar.rightBtn.snp.makeConstraints { make in
             make.size.centerY.equalTo(customNavigationBar.leftBtn)
             make.trailing.equalToSuperview().offset(-16)
@@ -68,7 +68,7 @@ extension MainViewController {
         bodyView.addSubview(emptySimulLB)
         
         // Empty list
-        filmIV.image = UIImage(named: "Film")
+        filmIV.image = UIImage(named: "film")
         filmIV.snp.makeConstraints { make in
             make.size.equalTo(48)
             make.centerX.equalToSuperview()
