@@ -16,6 +16,8 @@ target 'FilmCanister' do
 	pod 'JGProgressHUD'
 	pod "BSImagePicker", "~> 3.1"
 	pod 'ImageScrollView'
+	pod 'Firebase/Analytics'
+	pod 'Firebase/Crashlytics'
 
   target 'FilmCanisterTests' do
     inherit! :search_paths

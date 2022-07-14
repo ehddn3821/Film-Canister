@@ -104,21 +104,19 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
     func btnActions() {
         // 사이드메뉴
         customNavigationBar.leftBtn.rx.tap
-            .bind { [weak self] _ in
-                guard let this = self else { return }
+            .bind(with: self) { owner, _ in
                 let sideMenu = SideMenuNavigationController(rootViewController: SideMenuViewController())
                 sideMenu.leftSide = true
                 sideMenu.menuWidth = 303
                 sideMenu.presentationStyle = .menuSlideIn
                 sideMenu.dismissOnPresent = true
-                this.present(sideMenu, animated: true)
+                owner.present(sideMenu, animated: true)
             }.disposed(by: bag)
         
         // 시뮬레이션 추가 버튼
         customNavigationBar.rightBtn.rx.tap
-            .bind { [weak self] _ in
-                guard let this = self else { return }
-                this.navigationController?.pushViewController(RecipeViewController(viewType: .add), animated: true)
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.pushViewController(RecipeViewController(viewType: .add), animated: true)
             }.disposed(by: bag)
     }
 }

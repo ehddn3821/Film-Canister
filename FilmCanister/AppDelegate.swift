@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import RealmSwift
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         Realm.Configuration.defaultConfiguration = realmConfig
+        
+        FirebaseApp.configure()
         
         return true
     }
