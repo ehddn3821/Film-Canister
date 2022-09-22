@@ -236,7 +236,7 @@ extension SideMenuViewController {
             make.top.equalTo(devLB)
         }
         
-        devInstaBtn.setTitle("@pleasureofphoto", for: .normal)
+        devInstaBtn.setTitle("@rkdehddn93", for: .normal)
         devInstaBtn.setTitleColor(.init(named: Constants.COLOR_ENABLE), for: .normal)
         devInstaBtn.titleLabel?.font = UIFont(name: Constants.MAIN_FONT_REGULAR, size: 11)
         devInstaBtn.snp.makeConstraints { make in

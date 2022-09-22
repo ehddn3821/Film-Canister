@@ -29,8 +29,6 @@ class MainViewController: CustomNavigationBarViewController<UIView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         // 초기 샘플 데이터 삽입
         if !UserDefaults.standard.bool(forKey: "isFirstRun") {
             for i in 0...2 {

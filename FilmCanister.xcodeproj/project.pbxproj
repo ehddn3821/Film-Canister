@@ -826,6 +826,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Film Canister";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for sample image registration.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Access to the photo library is required for sample image registration.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access to the photo library is required for sample image registration.";
@@ -860,6 +861,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmCanister/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Film Canister";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for sample image registration.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Access to the photo library is required for sample image registration.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access to the photo library is required for sample image registration.";
