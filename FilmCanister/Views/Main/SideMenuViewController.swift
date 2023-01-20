@@ -67,7 +67,7 @@ class SideMenuViewController: BaseViewController {
         devInstaBtn.rx.tap
             .bind { [weak self] _ in
                 guard let this = self else { return }
-                this.instagramAction(userName: "rkdehddn93")
+                this.instagramAction(userName: "gnocchinyom")
             }.disposed(by: bag)
         
         serviceInfoBtn.rx.tap
