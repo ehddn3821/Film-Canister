@@ -10,6 +10,7 @@ import RxSwift
 import RealmSwift
 import Toast_Swift
 import BSImagePicker
+import PhotosUI
 import Photos
 
 class RecipeSampleTableViewCell: UITableViewCell {
@@ -70,7 +71,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
         switch viewType {
         case .add, .update:
             if indexPath.row == 0 {
-                cell.sampleIV.image = .init(named: "AddImage")
+                cell.sampleIV.image = .init(named: "add_image")
                 cell.removeBtn.isHidden = true
             } else {
                 if !selectedImageList.isEmpty {
@@ -83,7 +84,7 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
             }
         case .main:
             if sampleImageCount == 0 {
-                cell.sampleIV.image = .init(named: "NoImage")
+                cell.sampleIV.image = .init(named: "no_image")
             } else {
                 cell.sampleIV.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)")
             }
@@ -97,86 +98,96 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let topVC = UIApplication.topViewController() as? BaseViewController
+        guard let topVC = UIApplication.topViewController() as? BaseViewController else { return }
         if viewType == .main {
             guard let sampleImage = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(recipeID)_\(indexPath.row+1)") else { return }
-            topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage), animated: true)
+            topVC.navigationController?.pushViewController(DetailImageViewController(detailImg: sampleImage), animated: true)
         } else {
             if indexPath.row == 0 {  // Sample 추가 버튼
                 if sampleImageCount < 5 {  // 5장 제한
                     //                    topVC?.present(photoPicker, animated: true, completion: nil)
                     selectedAssets = []
                     print("sampleImageCount = \(sampleImageCount)")
-                    let imagePicker = ImagePickerController()
-                    imagePicker.settings.selection.max = 5 - sampleImageCount
-                    imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
-                    let options = imagePicker.settings.fetch.album.options
-                    imagePicker.settings.fetch.album.fetchResults = [
-                        PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: options),
-                        PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: options),
-                    ]
                     
-                    let tempSampleImageCount = sampleImageCount
-                    
-                    topVC?.presentImagePicker(imagePicker, select: { (asset) in
+                    if #available(iOS 14.0, *) {
+                        var configuration = PHPickerConfiguration()
+                        configuration.selectionLimit = 5 - sampleImageCount
+                        configuration.filter = .images
+                        let picker = PHPickerViewController(configuration: configuration)
+                        picker.delegate = self
+                        topVC.present(picker, animated: true)
+                    } else {
+                        let imagePicker = ImagePickerController()
+                        imagePicker.settings.selection.max = 5 - sampleImageCount
+                        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+                        let options = imagePicker.settings.fetch.album.options
+                        imagePicker.settings.fetch.album.fetchResults = [
+                            PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: options),
+                            PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: options),
+                        ]
                         
-                        self.sampleImageCount += 1
-                        print("sampleImageCount(select) = \(self.sampleImageCount)")
+                        let tempSampleImageCount = sampleImageCount
                         
-                    }, deselect: { (asset) in
-                        
-                        self.sampleImageCount -= 1
-                        print("sampleImageCount(deselect) = \(self.sampleImageCount)")
-                        
-                    }, cancel: { (assets) in
-                        
-                        self.sampleImageCount = tempSampleImageCount
-                        
-                    }, finish: { (assets) in
-                        DispatchQueue.global().async {
-                            let imageManager = PHImageManager.default()
-                            let option = PHImageRequestOptions()
-                            option.isSynchronous = true
-                            option.isNetworkAccessAllowed = true
+                        topVC.presentImagePicker(imagePicker, select: { (asset) in
                             
-                            topVC?.showLoding()
+                            self.sampleImageCount += 1
+                            print("sampleImageCount(select) = \(self.sampleImageCount)")
                             
-                            for i in 0..<assets.count {
+                        }, deselect: { (asset) in
+                            
+                            self.sampleImageCount -= 1
+                            print("sampleImageCount(deselect) = \(self.sampleImageCount)")
+                            
+                        }, cancel: { (assets) in
+                            
+                            self.sampleImageCount = tempSampleImageCount
+                            
+                        }, finish: { (assets) in
+                            DispatchQueue.global().async {
+                                let imageManager = PHImageManager.default()
+                                let option = PHImageRequestOptions()
+                                option.isSynchronous = true
+                                option.isNetworkAccessAllowed = true
                                 
-                                var thumbnail = UIImage()
+                                topVC.showLoding()
                                 
-                                imageManager.requestImage(for: assets[i],
-                                                             targetSize: CGSize(width: assets[i].pixelWidth, height: assets[i].pixelHeight),
-                                                             contentMode: .aspectFit,
-                                                             options: option) { (result, info) in
-                                    thumbnail = result!
+                                for i in 0..<assets.count {
+                                    
+                                    var thumbnail = UIImage()
+                                    
+                                    imageManager.requestImage(for: assets[i],
+                                                                 targetSize: CGSize(width: assets[i].pixelWidth, height: assets[i].pixelHeight),
+                                                                 contentMode: .aspectFit,
+                                                                 options: option) { (result, info) in
+                                        thumbnail = result!
+                                    }
+                                    
+                                    let data = thumbnail.pngData()! as CFData
+                                    let imageSource = CGImageSourceCreateWithData(data, nil)!
+                                    let maxPixel = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * UIScreen.main.scale
+                                    let downSampleOptions = [ kCGImageSourceCreateThumbnailFromImageAlways: true, kCGImageSourceShouldCacheImmediately: true, kCGImageSourceCreateThumbnailWithTransform: true, kCGImageSourceThumbnailMaxPixelSize: maxPixel ] as CFDictionary
+                                    let downSampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downSampleOptions)!
+                                    let newImage = UIImage(cgImage: downSampledImage)
+                                    
+                                    self.selectedImageList.append(newImage as UIImage)
                                 }
                                 
-                                let data = thumbnail.pngData()! as CFData
-                                let imageSource = CGImageSourceCreateWithData(data, nil)!
-                                let maxPixel = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * UIScreen.main.scale
-                                let downSampleOptions = [ kCGImageSourceCreateThumbnailFromImageAlways: true, kCGImageSourceShouldCacheImmediately: true, kCGImageSourceCreateThumbnailWithTransform: true, kCGImageSourceThumbnailMaxPixelSize: maxPixel ] as CFDictionary
-                                let downSampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downSampleOptions)!
-                                let newImage = UIImage(cgImage: downSampledImage)
-                                
-                                self.selectedImageList.append(newImage as UIImage)
+                                DispatchQueue.main.async {
+                                    self.collectionView.reloadData()
+                                    topVC.hideLoding()
+                                }
                             }
-                            
-                            DispatchQueue.main.async {
-                                self.collectionView.reloadData()
-                                topVC?.hideLoding()
-                            }
-                        }
-                    })
+                        })
+                    }
                 } else {
                     var toastStyle = ToastStyle()
                     toastStyle.backgroundColor = .init(named: Constants.COLOR_DELETE)!
                     toastStyle.messageColor = .white
                     toastStyle.imageSize = .init(width: 24, height: 24)
-                    topVC?.view.makeToast("Up to 5 pictures can be attached.", image: .init(named: "Error"), style: toastStyle)
+                    topVC.view.makeToast("Up to 5 pictures can be attached.", image: .init(named: "error"), style: toastStyle)
                 }
             } else {  // Detail image view
-                topVC?.navigationController?.pushViewController(DetailImageViewController(detailImg: selectedImageList[indexPath.row - 1]), animated: true)
+                topVC.navigationController?.pushViewController(DetailImageViewController(detailImg: selectedImageList[indexPath.row - 1]), animated: true)
             }
         }
     }
@@ -191,6 +202,29 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
                 selectedImageList.remove(at: i - 1)
                 print("delete item: \(i)")
                 sampleImageCount -= 1
+            }
+        }
+    }
+}
+
+@available(iOS 14, *)
+extension RecipeSampleTableViewCell: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        for i in 0..<results.count {
+            let result = results[i]
+            let itemProvider = result.itemProvider
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                    guard let image = image as? UIImage else { return }
+                    self.selectedImageList.append(image)
+                    self.sampleImageCount += 1
+                    if results.count - 1 == i {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                }
             }
         }
     }

@@ -19,7 +19,7 @@ class RecipeSampleCollectionViewCell: UICollectionViewCell {
         sampleIV.contentMode = .scaleAspectFill
         sampleIV.layer.cornerRadius = 12
         sampleIV.clipsToBounds = true
-        sampleIV.image = .init(named: "AddImage")
+        sampleIV.image = .init(named: "add_image")
         sampleIV.snp.makeConstraints { make in
             make.size.equalTo(88)
             make.top.equalTo(16)
@@ -27,7 +27,7 @@ class RecipeSampleCollectionViewCell: UICollectionViewCell {
         }
         
         sampleIV.addSubview(removeBtn)
-        removeBtn.setImage(.init(named: "Remove"), for: .normal)
+        removeBtn.setImage(.init(named: "remove"), for: .normal)
         removeBtn.snp.makeConstraints { make in
             make.size.equalTo(24)
             make.top.equalTo(4)

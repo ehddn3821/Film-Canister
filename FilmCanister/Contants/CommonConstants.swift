@@ -14,14 +14,14 @@ struct Constants {
     
     // Color
     static let COLOR_SECONDARY = "secondary"
-    static let COLOR_SIDE = "Secondary2"
-    static let COLOR_MAIN_TEXT = "MainText"
-    static let COLOR_MAIN_BACKGROUND = "MainBackground"
+    static let COLOR_SIDE = "secondary2"
+    static let COLOR_MAIN_TEXT = "main_text"
+    static let COLOR_MAIN_BACKGROUND = "main_background"
     static let COLOR_DIVIDER = "divider"
     static let COLOR_ENABLE = "enable"
     static let COLOR_DISABLE = "disable"
-    static let COLOR_MEMO_BORDER = "MemoBorder"
-    static let COLOR_DELETE = "Delete"
+    static let COLOR_MEMO_BORDER = "memo_border"
+    static let COLOR_DELETE = "delete"
     
     // Settings
     static let SETTING_LIST = [ "Film Simulation",
@@ -40,19 +40,19 @@ struct Constants {
                                 "Blue",
                                 "Exposure Compensation" ]
     
-    static let SETTING_IMAGE_LIST = [ "FilmSimulation",
-                                      "DynamicRange",
-                                      "Highlight",
-                                      "Shadow",
-                                      "Color",
-                                      "NoiseReduction",
-                                      "Sharpening",
-                                      "Clarity",
-                                      "GrainEffect",
-                                      "ColorChormeEffect",
-                                      "ColorChormeEffectBlue",
-                                      "WhiteBalance",
-                                      "ExposureCompensation" ]
+    static let SETTING_IMAGE_LIST = [ "film_simulation",
+                                      "dynamic_range",
+                                      "highlight",
+                                      "shadow",
+                                      "color",
+                                      "noise_reduction",
+                                      "sharpening",
+                                      "clarity",
+                                      "grain_effect",
+                                      "color_chorme_effect",
+                                      "color_chorme_effect_blue",
+                                      "white_balance",
+                                      "exposure_compensation" ]
 
     static let SIMULATION_LIST = [ "Provia","Velvia","Astia","Classic Chrome","PRO Neg.Hi","Pro Neg. Std",
                                    "Classic Neg.","Eterna","Eterna Bleach Bypass","Nostalgic Neg.",
@@ -166,9 +166,9 @@ struct Constants {
     
     // 초기 데이터
     static let SAMPLE_IMAGES = [SAMPLE_IMAGE_1, SAMPLE_IMAGE_2, SAMPLE_IMAGE_3]
-    static let SAMPLE_IMAGE_1: [UIImage] = [.init(named: "Sample1_1")!, .init(named: "Sample1_2")!, .init(named: "Sample1_3")!]
-    static let SAMPLE_IMAGE_2: [UIImage] = [.init(named: "Sample2_1")!, .init(named: "Sample2_2")!]
-    static let SAMPLE_IMAGE_3: [UIImage] = [.init(named: "Sample3_1")!, .init(named: "Sample3_2")!, .init(named: "Sample3_3")!]
+    static let SAMPLE_IMAGE_1: [UIImage] = [.init(named: "sample1_1")!, .init(named: "sample1_2")!, .init(named: "sample1_3")!]
+    static let SAMPLE_IMAGE_2: [UIImage] = [.init(named: "sample2_1")!, .init(named: "sample2_2")!]
+    static let SAMPLE_IMAGE_3: [UIImage] = [.init(named: "sample3_1")!, .init(named: "sample3_2")!, .init(named: "sample3_3")!]
     
     static let SAMPLE_SIMUL_LIST: [String] = ["Eterna", "Classic Neg.", "Classic Chrome"]
     static let SAMPLE_HIGHLIGHT_LIST: [String] = ["0", "-1", "+2"]

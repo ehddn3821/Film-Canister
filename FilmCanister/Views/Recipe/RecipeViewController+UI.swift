@@ -22,7 +22,7 @@ extension RecipeViewController {
             customNavigationBar.rightBtn.isEnabled = false
         } else {
             customNavigationBar.barTitle.text = realm.object(ofType: RecipeModel.self, forPrimaryKey: recipeID)?.name
-            customNavigationBar.rightBtn.setImage(.init(named: "More"), for: .normal)
+            customNavigationBar.rightBtn.setImage(.init(named: "more"), for: .normal)
         }
         customNavigationBar.addSubview(customNavigationBar.rightBtn)
         customNavigationBar.rightBtn.snp.makeConstraints { make in

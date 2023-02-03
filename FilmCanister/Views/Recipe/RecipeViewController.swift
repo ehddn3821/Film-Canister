@@ -213,7 +213,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
             case .add, .update:
                 if indexPath.section == 0 {
                     let imageAttachment = NSTextAttachment()
-                    imageAttachment.image = UIImage(named:"Mandatory")
+                    imageAttachment.image = UIImage(named:"mandatory")
                     imageAttachment.bounds = CGRect(x: 0, y: -4, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
                     let attachmentString = NSAttributedString(attachment: imageAttachment)
                     let completeText = NSMutableAttributedString(string: "")
