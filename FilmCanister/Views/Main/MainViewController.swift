@@ -182,7 +182,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                             toastStyle.backgroundColor = .init(named: Constants.COLOR_ENABLE)!
                             toastStyle.messageColor = .white
                             toastStyle.imageSize = .init(width: 24, height: 24)
-                            this.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: toastStyle)
+                            this.view.makeToast("Recipe has been deleted.", image: .init(named: "check"), style: toastStyle)
                         }
                     }
                 }.disposed(by: bag)

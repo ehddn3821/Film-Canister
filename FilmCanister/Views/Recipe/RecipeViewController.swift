@@ -30,7 +30,11 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
     var memoText = BehaviorSubject<String>(value: "")
     var kValueText = BehaviorSubject<String>(value: "")
     
-    let tableView = UITableView()
+    let tableView: UITableView = {
+        let tv = UITableView()
+        tv.showsVerticalScrollIndicator = false
+        return tv
+    }()
     
     
     init(viewType: ViewType, recipeID: Int = 0) {
@@ -114,6 +118,10 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                                 for i in 0..<selectedImageList.count {
                                     ImageManager.shared.saveImageToDocumentDirectory(imageName: "\(id!)_\(i+1).png", image: selectedImageList[i])
                                 }
+                            } else if selectedImageList.isEmpty && this.viewType == .update && this.recipeModel.image_count != 0 {
+                                for i in 0..<this.recipeModel.image_count {
+                                    ImageManager.shared.deleteImageFromDocumentDirectory(imageName: "\(this.recipeID)_\(i+1).png")
+                                }
                             }
                             if this.viewType == .add {
                                 this.realm.add(recipe)
@@ -127,9 +135,9 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                             this.hideLoding()
                             let mainVC = UIApplication.topViewController() as! MainViewController
                             if this.viewType == .add {
-                                mainVC.view.makeToast("Recipe has been registered.", image: .init(named: "Check"), style: this.toastStyle)
+                                mainVC.view.makeToast("Recipe has been registered.", image: .init(named: "check"), style: this.toastStyle)
                             } else {
-                                mainVC.view.makeToast("Recipe has been edited.", image: .init(named: "Check"), style: this.toastStyle)
+                                mainVC.view.makeToast("Recipe has been edited.", image: .init(named: "check"), style: this.toastStyle)
                             }
                             mainVC.tableView.reloadData()
                         })
@@ -175,7 +183,7 @@ class RecipeViewController: CustomNavigationBarViewController<UIView> {
                                                     this.realm.delete(recipe)
                                                     this.navigationController?.popViewControllerWithHandler {
                                                         let mainVC = UIApplication.topViewController() as! MainViewController
-                                                        mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "Check"), style: this.toastStyle)
+                                                        mainVC.view.makeToast("Recipe has been deleted.", image: .init(named: "check"), style: this.toastStyle)
                                                         mainVC.tableView.reloadData()
                                                     }
                                                 }

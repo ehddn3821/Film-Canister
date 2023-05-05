@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/macos,swift,cocoapods,fastlane,xcode
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,swift,cocoapods,fastlane,xcode
 
@@ -157,5 +156,3 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
-
-# End of https://www.toptal.com/developers/gitignore/api/macos,swift,cocoapods,fastlane,xcode

@@ -195,15 +195,10 @@ extension RecipeSampleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     @objc func deleteCell(sender: UIButton) {
         print("delete sender.tag: \(sender.tag)")
         
-        for i in 0 ... sampleImageCount {
-            let cell = collectionView.cellForItem(at: IndexPath(row: i, section: 0)) as? RecipeSampleCollectionViewCell
-            if cell?.sampleIV.tag == sender.tag {
-                collectionView.deleteItems(at: [IndexPath(row: i, section: 0)])
-                selectedImageList.remove(at: i - 1)
-                print("delete item: \(i)")
-                sampleImageCount -= 1
-            }
-        }
+        selectedImageList.remove(at: sender.tag - 1)
+        print("delete item: \(sender.tag)")
+        sampleImageCount -= 1
+        self.collectionView.reloadData()
     }
 }
 
