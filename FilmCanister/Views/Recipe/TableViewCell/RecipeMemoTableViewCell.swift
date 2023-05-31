@@ -58,7 +58,7 @@ class RecipeMemoTableViewCell: UITableViewCell {
 
 extension RecipeMemoTableViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        let topVC = UIApplication.topViewController() as! RecipeViewController
+        guard let topVC = UIApplication.topViewController() as? RecipeViewController else { return }
         if topVC.customNavigationBar.rightBtn.isEnabled {
             isSaveEnabled = true
             topVC.customNavigationBar.rightBtn.isEnabled = false

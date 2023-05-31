@@ -2,7 +2,7 @@
 //  SettingTableViewCell.swift
 //  FilmCanister
 //
-//  Created by 앱지 Appg on 2022/01/04.
+//  Created by dwKang on 2022/01/04.
 //
 
 import UIKit
